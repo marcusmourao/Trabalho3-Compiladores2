@@ -1,0 +1,14 @@
+Construção de Compiladores 2 - Trabalho 1
+
+Grupo 2:
+Bruno Afonso Teixeira dos Santos - 379387
+Eduardo Fernando Stenico - 379352
+Fernando Messias da Silva - 489450
+Marcus Marangon Mourão - 551740
+
+Execute o CorretorTrabalho1.jar por linha de comando passando os parâmetros adequados, o arquivo T1.jar (nosso programa) está localizado em T1\dist\T1.jar. Os casos de testes estao localizados em casosDeTesteT1.
+
+
+Utilizamos o NetBeans 7.4 como ambiente de desenvolvimento e a biblioteca antlr 4.5.1.complete.
+Este .zip é um projeto do NetBeans,  para compila-lo você pode gerar os arquivos "LA.tokens", "LABaseListener.java", "LALexer.java", "LALexer.tokens", "LAListener.java", "LAParser.java" por meio de um plugin do ANTLR no próprio NetBeans ou utilizar a ferramenta ANTLR Works (todos os arquivos devem pertencer ao "package t1").
+

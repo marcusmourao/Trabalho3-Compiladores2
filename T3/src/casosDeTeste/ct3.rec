@@ -1,0 +1,36 @@
+"Caipirinha"
+iniciante
+
+ingredientes :
+
+10 limoes
+5 colheres(sopa) acucar
+1 litro cachaca
+8 cubo gelo
+ 
+fim_ingredientes
+
+utensilios :
+
+copo
+espremedor
+colher
+jarra
+
+fim_utensilios
+
+modo_preparo :
+
+espremer(10, unidades, limoes)
+adicionar(5, colheres(sopa), acucar)
+adicionar(1, litro, cachaca)
+adicionar(8, cubo, gelo)
+mexer(mistura)
+
+fim_modo_preparo
+
+rendimento : 
+
+5
+
+fim_rendimento

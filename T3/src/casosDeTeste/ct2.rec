@@ -1,0 +1,38 @@
+"Omelete"
+iniciante
+
+ingredientes :
+
+2 ovos
+0.5 colher(cha) sal
+100 gramas presunto
+100 gramas mussarela
+0.5 colher(cha) oregano
+ 
+fim_ingredientes
+
+utensilios :
+
+colher
+frigideira
+fogo
+
+fim_utensilios
+
+modo_preparo :
+
+bater(2, unidades, ovos) 
+untar(frigideira)
+adicionar(0.5, colher(cha), sal)
+fatiar(100, gramas, presunto)
+fatiar(100, gramas, mussarela)
+adicionar(mistura, frigideira)
+fritar(mistura)
+
+fim_modo_preparo
+
+rendimento : 
+
+1
+
+fim_rendimento
