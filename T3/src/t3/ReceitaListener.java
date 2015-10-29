@@ -1,4 +1,4 @@
-// Generated from C:\Users\Marcus\Downloads\Trabalho1-Compiladores2-Grupo2\T1\src\t3\Receita.g4 by ANTLR 4.2.2
+// Generated from C:\Users\Marcus\Documents\GitHub\Trabalho3-Compiladores2\T3\src\t3\Receita.g4 by ANTLR 4.2.2
 package t3;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;

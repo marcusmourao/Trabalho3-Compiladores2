@@ -28,7 +28,7 @@ nivel
 
 corpo_receita: ingredientes utensilios preparo ;
 
-rendimento: 'rendimento' numero 'fim_rendimento' ;
+rendimento: 'rendimento' ':' numero 'fim_rendimento' ;
 
 numero: INTEIRO
       | REAL
@@ -36,7 +36,7 @@ numero: INTEIRO
 
 ingredientes: 'ingredientes' ':' lista_ingredientes 'fim_ingredientes' ;
 
-utensilios: 'utensilios' lista_utensilios 'fim_utensilios' ;
+utensilios: 'utensilios' ':' lista_utensilios 'fim_utensilios' ;
 
 preparo: 'modo_preparo' ':' procedimento 'fim_modo_preparo' ;
            
@@ -57,12 +57,13 @@ unidade_de_medida:
                      'g'|
                      'lata'|
                      'xicara(cha)'|
-                     'xicara(cha)'|
+                     'xicaras(cha)'|
                      'colher(sopa)'|
                      'colheres(sopa)'|
                      'copo(americano)'|
                      'copos(americano)'|
                      'unidade' |
+                     'unidades' |
                      'cubo'
 ;
 
@@ -71,8 +72,9 @@ verbo:
      | 'adicionar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
      | 'assar' '(' ID ',' numero ',' unidade_de_tempo ')' '.'
      | 'bater' '(' numero ',' unidade_de_medida  ',' ID mais_id ')' '.'
-     | 'colocar' '(' ID ',' ID ',' ')' '.'
+     | 'colocar' '(' ID ',' ID ')' '.'
      | 'cortar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
+     | 'espremer' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
      | 'ferver' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
      | 'fatiar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
      | 'peneirar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
@@ -86,7 +88,7 @@ verbo:
      | 'fogo' '(' ID ',' numero  ',' unidade_de_tempo ')' '.'
 ;
 
-mais_id: ',' numero ',' unidade_de_medida ID mais_id
+mais_id: ',' numero ',' unidade_de_medida ',' ID mais_id
        |
        ;
 

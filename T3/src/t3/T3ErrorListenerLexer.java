@@ -12,10 +12,10 @@ import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 
 
-public class T1ErrorListenerLexer implements ANTLRErrorListener{
+public class T3ErrorListenerLexer implements ANTLRErrorListener{
     SaidaParser sp;
     
-    public T1ErrorListenerLexer(SaidaParser sp){
+    public T3ErrorListenerLexer(SaidaParser sp){
         this.sp=sp;
     }
     
