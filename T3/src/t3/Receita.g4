@@ -20,89 +20,149 @@ grammar Receita;
 receita: TITULO nivel corpo_receita rendimento ;
 
 nivel
-     : 'iniciante'
-     | 'intermediario'
-     | 'experiente'
-     | 'master_chef'
+     : INICIANTE
+     | INTERMEDIARIO
+     | EXPERIENTE
+     | MASTER_CHEF
      ;
+
+INICIANTE: 'iniciante';
+INTERMEDIARIO: 'intermediario';
+EXPERIENTE: 'experiente';
+MASTER_CHEF: 'master_chef';
+RENDIMENTO: 'rendimento';
+FIM_RENDIMENTO: 'fim_rendimento';
+DOIS_PONTOS: ':';
+INGREDIENTES: 'ingredientes';
+FIM_INGREDIENTES: 'fim_ingredientes';
+UTENSILIOS: 'utensilios';
+FIM_UTENSILIOS: 'fim_utensilios';
+MODO_PREPARO: 'modo_preparo';
+FIM_MODO_PREPARO: 'fim_modo_preparo';
+PONTO: '.';
+DE: 'de';
+KILO: 'kg';
+GRAMA: 'g';
+LATA: 'lata';
+XICARA: 'xicara(cha)';
+XICARAS: 'xicaraS(cha)';
+COLHER_SOPA: 'colher(sopa)';
+COLHER_CHA: 'colher(cha)';
+COLHERES_SOPA: 'colheres(sopa)';
+COLHERES_CHA: 'colheres(cha)';
+COPO_AMERICANO: 'copo(americano)';
+COPOS_AMERICANO: 'copos(americano)';
+UNIDADE: 'unidade';
+UNIDADES: 'unidades';
+CUBO: 'cubo';
+MILI_LITRO: 'ml';
+LITRO: 'l';
+VIRGULA: ',';
+ABRE_PARENTESE: '(';
+FECHA_PARENTESE: ')';
+POR: 'por';
+SEGUNDO: 'seg';
+MINUTO: 'min';
+HORA: 'hr';
+ACRESCENTAR: 'acrescentar';
+ADICIONAR: 'adicionar';
+ASSAR: 'assar';
+BATER: 'bater';
+COLOCAR: 'colocar';
+ESPREMER: 'espremer';
+CORTAR: 'cortar';
+FERVER: 'ferver';
+FATIAR: 'fatiar';
+PENEIRAR: 'peneirar';
+PICAR: 'picar';
+SEPARAR: 'separar';
+TEMPERAR: 'temperar';
+UNTAR: 'untar';
+MEXER: 'mexer';
+FRITAR: 'fritar';
+MISTURAR: 'misturar';
+FOGO: 'fogo';
 
 corpo_receita: ingredientes utensilios preparo ;
 
-rendimento: 'rendimento' ':' numero 'fim_rendimento' ;
+rendimento: RENDIMENTO DOIS_PONTOS numero FIM_RENDIMENTO ;
 
 numero: INTEIRO
       | REAL
 ;
 
-ingredientes: 'ingredientes' ':' lista_ingredientes 'fim_ingredientes' ;
+ingredientes: INGREDIENTES DOIS_PONTOS lista_ingredientes FIM_INGREDIENTES ;
 
-utensilios: 'utensilios' ':' lista_utensilios 'fim_utensilios' ;
+utensilios: UTENSILIOS DOIS_PONTOS lista_utensilios FIM_UTENSILIOS ;
 
-preparo: 'modo_preparo' ':' procedimento 'fim_modo_preparo' ;
+preparo: MODO_PREPARO DOIS_PONTOS procedimento FIM_MODO_PREPARO ;
            
-lista_ingredientes: (quantidade ID '.')+ ;           
+lista_ingredientes: (quantidade ID PONTO)+ ;           
 
-lista_utensilios: (ID '.')+ ;
+lista_utensilios: (ID PONTO)+ ;
 
 procedimento: (verbo)+ ;
 
-quantidade: numero unidade_de_medida ('de')? ;
+quantidade: numero unidade_de_medida (DE)? ;
 
 /*ordem:
-         verbo (artigo|preposicao)? quantidade? ID (maid_ID)* tempo '.'
+         verbo (artigo|preposicao)? quantidade? ID (maid_ID)* tempo PONTO
 ;*/
 
+
+
 unidade_de_medida:
-                     'kg'|
-                     'g'|
-                     'lata'|
-                     'xicara(cha)'|
-                     'xicaras(cha)'|
-                     'colher(cha)'|
-                     'colher(sopa)'|
-                     'colheres(sopa)'|
-                     'copo(americano)'|
-                     'copos(americano)'|
-                     'unidade' |
-                     'unidades' |
-                     'cubo'|
-                     'ml'|
-                     'l'
+                     KILO|
+                     GRAMA|
+                     LATA|
+                     XICARA|
+                     XICARAS|
+                     COLHER_CHA|
+                     COLHERES_CHA|
+                     COLHER_SOPA|
+                     COLHERES_SOPA|
+                     COPO_AMERICANO|
+                     COPOS_AMERICANO|
+                     UNIDADE |
+                     UNIDADES |
+                     CUBO|
+                     MILI_LITRO|
+                     LITRO
 ;
 
 verbo:
-       'acrescentar' '(' numero ',' unidade_de_medida ',' ID ')' '.'
-     | 'adicionar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'assar' '(' ID ',' numero ',' unidade_de_tempo ')' '.'
-     | 'bater' '(' numero ',' unidade_de_medida  ',' ID mais_id ')' '.'
-     | 'colocar' '(' ID ',' ID ')' '.'
-     | 'cortar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'espremer' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'ferver' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'fatiar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'peneirar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'picar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'separar' '(' numero ',' unidade_de_medida  ',' ID mais_id')' '.'
-     | 'temperar' '(' numero ',' unidade_de_medida  ',' ID ')' '.'
-     | 'untar' '(' ID ')' '.'
-     | 'fritar' '(' ID ')' '.'
-     | 'mexer' '(' ID ')' '.'
-     | 'misturar' '(' numero ',' unidade_de_medida  ',' ID mais_id ')' '.'
-     | 'fogo' '(' ID ',' numero  ',' unidade_de_tempo ')' '.'
+       ACRESCENTAR ABRE_PARENTESE numero VIRGULA unidade_de_medida VIRGULA ID FECHA_PARENTESE PONTO
+     | ADICIONAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | ASSAR ABRE_PARENTESE ID VIRGULA numero VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
+     | BATER ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO
+     | COLOCAR ABRE_PARENTESE ID VIRGULA ID FECHA_PARENTESE PONTO
+     | CORTAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | ESPREMER ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | FERVER ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | FATIAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | PENEIRAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | PICAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | SEPARAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO
+     | TEMPERAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID FECHA_PARENTESE PONTO
+     | UNTAR ABRE_PARENTESE ID FECHA_PARENTESE PONTO
+     | FRITAR ABRE_PARENTESE ID FECHA_PARENTESE PONTO
+     | MEXER ABRE_PARENTESE ID FECHA_PARENTESE PONTO
+     | MISTURAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO
+     | FOGO ABRE_PARENTESE ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
 ;
 
-mais_id: ',' numero ',' unidade_de_medida ',' ID mais_id
+mais_id: VIRGULA numero VIRGULA unidade_de_medida VIRGULA ID mais_id
        |
        ;
 
 tempo:
-         'por' numero unidade_de_tempo |
+         POR numero unidade_de_tempo |
 ;
 
 unidade_de_tempo:
-                    'seg'|
-                    'min'|
-                    'hr'
+                    SEGUNDO|
+                    MINUTO|
+                    HORA
 ;
 
 // Sequencia de caracteres entre aspas dupla de apenas uma linha
@@ -115,7 +175,7 @@ ID : ('_'|'a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'_')* | 'todos_ingredientes' | 'm
 INTEIRO : ('0'..'9')+;
 
 // Pelo menos um digito seguido de um ponto decimal e de uma sequencia de um ou mais digitos
-REAL : ('0'..'9')+ '.' ('0'..'9')+;
+REAL : ('0'..'9')+ PONTO ('0'..'9')+;
 
 //Espacos em branco, tabulacao e quebra de linha ignorados pelo analisador lexico.
 WS : ( ' ' |'\t' | '\r' | '\n') {skip();}; 

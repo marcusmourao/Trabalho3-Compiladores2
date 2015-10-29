@@ -14,7 +14,7 @@ public class TestaAnalisador {
 
     public static void main(String args[]) throws IOException, RecognitionException {
         SaidaParser out = new SaidaParser();
-        ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct3.rec"));
+        ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct2.rec"));
         //ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(args[0]));
         ReceitaLexer lexer = new ReceitaLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
