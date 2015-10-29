@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/casosDeTeste/ct3.rec</file>
             <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/casosDeTeste/ct1.rec</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/GeradorDeCodigo.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/PilhaDeTabelas.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/casosDeTeste/ct2.rec</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/Saida.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/T3ErrorListener.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/Receita.g4</file>
+            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/T3ErrorListenerLexer.java</file>
             <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/TestaAnalisador.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/TabelaDeSimbolos.java</file>
-            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/EntradaTabelaDeSimbolos.java</file>
+            <file>file:/C:/Users/Marcus/Documents/GitHub/Trabalho3-Compiladores2/T3/src/t3/Receita.g4</file>
         </group>
     </open-files>
 </project-private>

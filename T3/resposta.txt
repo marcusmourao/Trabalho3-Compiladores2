@@ -1,0 +1,2 @@
+Linha 18: comentario nao fechado
+Fim da compilacao

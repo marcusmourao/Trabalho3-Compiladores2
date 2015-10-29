@@ -14,7 +14,7 @@ fim_ingredientes
 
 utensilios :
 
-colher.
+colher { 
 tigela.
 liquidificador.
 espremedor.

@@ -40,12 +40,12 @@ public class PilhaDeTabelas {
         return null;
     }//Retorna a tabela de simbolos que contém o simbolo passado como parâmetro
     
-    public String getTipoDoSimbolo(String nome){
+    /*public String getTipoDoSimbolo(String nome){
         TabelaDeSimbolos auxiliar = this.getTabelaDoSimbolo(nome);
         String tipo = auxiliar.GetTipoSimbolo(nome);
         return tipo;
     
-    }//Retorna o tipo do simbolo passado como parâmetro
+    }//Retorna o tipo do simbolo passado como parâmetro*/
     
 
     public TabelaDeSimbolos existeTabela(String nome) {

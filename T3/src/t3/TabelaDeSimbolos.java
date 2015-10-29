@@ -31,10 +31,10 @@ public class TabelaDeSimbolos {
         return atributos;
     }
     
-    public List<String> getSimbolos_tipos(){
+    public List<String> getSimbolos_unidades_medida(){
         List<String> atributos = new ArrayList<String>();
         for(int i=0; i< simbolos.size();i++){
-            atributos.add(simbolos.get(i).getTipo());
+            atributos.add(simbolos.get(i).getUnidade_medida());
         }
         return atributos;
     }//Retorna uma lista com tosos os tipos dos simbolos
@@ -70,10 +70,10 @@ public class TabelaDeSimbolos {
         return null;
     } //Retorna o simbolo de acordo com o nome passado como parâmetro se o simbolo existir na tabela
     
-    public String GetTipoSimbolo(String nome) {
+    public String GetUnidadeMedidaSimbolo(String nome) {
         for(EntradaTabelaDeSimbolos etds:simbolos) {
             if(etds.getNome().equals(nome)) {
-                return etds.getTipo();
+                return etds.getUnidade_medida();
             }
         }
         return "SEM_TIPO";
