@@ -35,7 +35,7 @@ public class ReceitaLexer extends Lexer {
 		"'iniciante'", "'intermediario'", "'experiente'", "'master_chef'", "'rendimento'", 
 		"'fim_rendimento'", "':'", "'ingredientes'", "'fim_ingredientes'", "'utensilios'", 
 		"'fim_utensilios'", "'modo_preparo'", "'fim_modo_preparo'", "'.'", "'de'", 
-		"'kg'", "'g'", "'lata'", "'xicara(cha)'", "'xicaraS(cha)'", "'colher(sopa)'", 
+		"'kg'", "'g'", "'lata'", "'xicara(cha)'", "'xicaras(cha)'", "'colher(sopa)'", 
 		"'colher(cha)'", "'colheres(sopa)'", "'colheres(cha)'", "'copo(americano)'", 
 		"'copos(americano)'", "'unidade'", "'unidades'", "'cubo'", "'ml'", "'l'", 
 		"','", "'('", "')'", "'por'", "'seg'", "'min'", "'hr'", "'acrescentar'", 
@@ -60,8 +60,9 @@ public class ReceitaLexer extends Lexer {
 
 	   public static String grupo="<<379387, 379352, 489450, 551740>>";
 	   PilhaDeTabelas pilhaDeTabelas = new PilhaDeTabelas();
-	   TabelaDeSimbolos TabelaDeTipos = new TabelaDeSimbolos("tipos");
-	   PilhaDeTabelas TabelasDeRegistros = new PilhaDeTabelas();
+	   TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
+	   TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
+	   TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
 	   String error="";
 
 
@@ -231,7 +232,7 @@ public class ReceitaLexer extends Lexer {
 		"\u0135\u0136\7*\2\2\u0136\u0137\7e\2\2\u0137\u0138\7j\2\2\u0138\u0139"+
 		"\7c\2\2\u0139\u013a\7+\2\2\u013a(\3\2\2\2\u013b\u013c\7z\2\2\u013c\u013d"+
 		"\7k\2\2\u013d\u013e\7e\2\2\u013e\u013f\7c\2\2\u013f\u0140\7t\2\2\u0140"+
-		"\u0141\7c\2\2\u0141\u0142\7U\2\2\u0142\u0143\7*\2\2\u0143\u0144\7e\2\2"+
+		"\u0141\7c\2\2\u0141\u0142\7u\2\2\u0142\u0143\7*\2\2\u0143\u0144\7e\2\2"+
 		"\u0144\u0145\7j\2\2\u0145\u0146\7c\2\2\u0146\u0147\7+\2\2\u0147*\3\2\2"+
 		"\2\u0148\u0149\7e\2\2\u0149\u014a\7q\2\2\u014a\u014b\7n\2\2\u014b\u014c"+
 		"\7j\2\2\u014c\u014d\7g\2\2\u014d\u014e\7t\2\2\u014e\u014f\7*\2\2\u014f"+

@@ -9,23 +9,13 @@ grammar Receita;
 @members {
    public static String grupo="<<379387, 379352, 489450, 551740>>";
    PilhaDeTabelas pilhaDeTabelas = new PilhaDeTabelas();
-   TabelaDeSimbolos TabelaDeTipos = new TabelaDeSimbolos("tipos");
-   PilhaDeTabelas TabelasDeRegistros = new PilhaDeTabelas();
+   TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
+   TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
+   TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
    String error="";
 }
 
 //A seguir declaramos todas as palavras e simbolos reservados da linguagem Receita como tokens do ANTLR
-
-//Raiz do programa
-receita: TITULO nivel corpo_receita rendimento ;
-
-nivel
-     : INICIANTE
-     | INTERMEDIARIO
-     | EXPERIENTE
-     | MASTER_CHEF
-     ;
-
 INICIANTE: 'iniciante';
 INTERMEDIARIO: 'intermediario';
 EXPERIENTE: 'experiente';
@@ -45,7 +35,7 @@ KILO: 'kg';
 GRAMA: 'g';
 LATA: 'lata';
 XICARA: 'xicara(cha)';
-XICARAS: 'xicaraS(cha)';
+XICARAS: 'xicaras(cha)';
 COLHER_SOPA: 'colher(sopa)';
 COLHER_CHA: 'colher(cha)';
 COLHERES_SOPA: 'colheres(sopa)';
@@ -83,12 +73,61 @@ FRITAR: 'fritar';
 MISTURAR: 'misturar';
 FOGO: 'fogo';
 
+// Sequencia de caracteres entre aspas dupla de apenas uma linha
+TITULO : '\'' ~('\n' | '\r' | '\'')* '\'' | '"' ~('\n' | '\r' | '"')* '"';
+
+// Sequencia de letras e underscore, comecando por letra e terminando por letra
+ID : ('_'|'a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'_')* | 'todos_ingredientes' | 'mistura';
+
+// Sequencia de digitos
+INTEIRO : ('0'..'9')+;
+
+// Pelo menos um digito seguido de um ponto decimal e de uma sequencia de um ou mais digitos
+REAL : ('0'..'9')+ PONTO ('0'..'9')+;
+
+//Espacos em branco, tabulacao e quebra de linha ignorados pelo analisador lexico.
+WS : ( ' ' |'\t' | '\r' | '\n') {skip();}; 
+
+//Comentarios curtos ignorados pelo analisador lexico.
+COMENTARIO : '{' ~('\n'|'\r'|'\t')* '\r'? '\n'? '}'('\n'('\n'|'\t'))* {skip();};
+
+//Raiz do programa
+receita:
+       {
+        TabelaMedidas.adicionarSimbolo("kg","kg");
+        TabelaMedidas.adicionarSimbolo("g","g");
+        TabelaMedidas.adicionarSimbolo("lata","lata");
+        TabelaMedidas.adicionarSimbolo("xicara(cha)","xicara(cha)");
+        TabelaMedidas.adicionarSimbolo("xicaras(cha)","xicaras(cha)");
+        TabelaMedidas.adicionarSimbolo("colher(sopa)","colher(sopa)");
+        TabelaMedidas.adicionarSimbolo("colheres(sopa)","colheres(sopa)");
+        TabelaMedidas.adicionarSimbolo("colheres(cha)","colheres(cha)");
+        TabelaMedidas.adicionarSimbolo("copo(americano)","copo(americano)");
+        TabelaMedidas.adicionarSimbolo("copos(americano)","copos(americano)");
+        TabelaMedidas.adicionarSimbolo("unidade","unidade");
+        TabelaMedidas.adicionarSimbolo("unidades","unidades");
+        TabelaMedidas.adicionarSimbolo("cubo","cubo");
+        TabelaMedidas.adicionarSimbolo("ml","ml");
+        TabelaMedidas.adicionarSimbolo("l","l");
+       }
+       TITULO nivel corpo_receita rendimento ;
+
+nivel returns[ String nome_nivel]
+@init{ $nome_nivel = "";}
+     : INICIANTE {$nome_nivel = "iniciante";}
+     | INTERMEDIARIO {$nome_nivel = "intermediario";}
+     | EXPERIENTE {$nome_nivel = "experiente";}
+     | MASTER_CHEF {$nome_nivel = "master_chef";}
+     ;
+
 corpo_receita: ingredientes utensilios preparo ;
 
 rendimento: RENDIMENTO DOIS_PONTOS numero FIM_RENDIMENTO ;
 
-numero: INTEIRO
-      | REAL
+numero returns[ float qnt_numero]
+@init{$qnt_numero = -1;}
+    : INTEIRO
+    | REAL
 ;
 
 ingredientes: INGREDIENTES DOIS_PONTOS lista_ingredientes FIM_INGREDIENTES ;
@@ -105,30 +144,25 @@ procedimento: (verbo)+ ;
 
 quantidade: numero unidade_de_medida (DE)? ;
 
-/*ordem:
-         verbo (artigo|preposicao)? quantidade? ID (maid_ID)* tempo PONTO
-;*/
-
-
-
-unidade_de_medida:
-                     KILO|
-                     GRAMA|
-                     LATA|
-                     XICARA|
-                     XICARAS|
-                     COLHER_CHA|
-                     COLHERES_CHA|
-                     COLHER_SOPA|
-                     COLHERES_SOPA|
-                     COPO_AMERICANO|
-                     COPOS_AMERICANO|
-                     UNIDADE |
-                     UNIDADES |
-                     CUBO|
-                     MILI_LITRO|
-                     LITRO
-;
+unidade_de_medida returns[ String unidade_medida]
+@init {$unidade_medida = "";}
+    : KILO {$unidade_medida = "kg";}
+    |GRAMA {$unidade_medida = "g";}
+    |LATA  {$unidade_medida = "lata";}
+    |XICARA {$unidade_medida = "xicara";}
+    |XICARAS {$unidade_medida = "xicaras";}
+    |COLHER_CHA {$unidade_medida = "colher(chá)";}
+    |COLHERES_CHA {$unidade_medida = "colheres(chá)";}
+    |COLHER_SOPA {$unidade_medida = "colher(sopa)";}
+    |COLHERES_SOPA {$unidade_medida = "colheres(sopa)";}
+    |COPO_AMERICANO {$unidade_medida = "copo(americano)";}
+    |COPOS_AMERICANO {$unidade_medida = "copos(americano)";}
+    |UNIDADE {$unidade_medida = "unidade";}
+    |UNIDADES {$unidade_medida = "unidades";}
+    |CUBO {$unidade_medida = "cubo";}
+    |MILI_LITRO {$unidade_medida = "mL";}
+    |LITRO {$unidade_medida = "L";}
+    ;
 
 verbo:
        ACRESCENTAR ABRE_PARENTESE numero VIRGULA unidade_de_medida VIRGULA ID FECHA_PARENTESE PONTO
@@ -159,27 +193,11 @@ tempo:
          POR numero unidade_de_tempo |
 ;
 
-unidade_de_tempo:
-                    SEGUNDO|
-                    MINUTO|
-                    HORA
+unidade_de_tempo returns [String unidade_tempo]
+@init {$unidade_tempo = "";}
+    : SEGUNDO {$unidade_tempo = "seg";}
+    | MINUTO {$unidade_tempo = "min";}
+    | HORA {$unidade_tempo = "hr";}
 ;
 
-// Sequencia de caracteres entre aspas dupla de apenas uma linha
-TITULO : '\'' ~('\n' | '\r' | '\'')* '\'' | '"' ~('\n' | '\r' | '"')* '"';
-
-// Sequencia de letras e underscore, comecando por letra e terminando por letra
-ID : ('_'|'a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'_')* | 'todos_ingredientes' | 'mistura';
-
-// Sequencia de digitos
-INTEIRO : ('0'..'9')+;
-
-// Pelo menos um digito seguido de um ponto decimal e de uma sequencia de um ou mais digitos
-REAL : ('0'..'9')+ PONTO ('0'..'9')+;
-
-//Espacos em branco, tabulacao e quebra de linha ignorados pelo analisador lexico.
-WS : ( ' ' |'\t' | '\r' | '\n') {skip();}; 
-
-//Comentarios curtos ignorados pelo analisador lexico.
-COMENTARIO : '{' ~('\n'|'\r'|'\t')* '\r'? '\n'? '}'('\n'('\n'|'\t'))* {skip();};
 

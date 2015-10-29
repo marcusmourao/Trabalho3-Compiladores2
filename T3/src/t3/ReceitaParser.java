@@ -30,7 +30,7 @@ public class ReceitaParser extends Parser {
 		"<INVALID>", "'iniciante'", "'intermediario'", "'experiente'", "'master_chef'", 
 		"'rendimento'", "'fim_rendimento'", "':'", "'ingredientes'", "'fim_ingredientes'", 
 		"'utensilios'", "'fim_utensilios'", "'modo_preparo'", "'fim_modo_preparo'", 
-		"'.'", "'de'", "'kg'", "'g'", "'lata'", "'xicara(cha)'", "'xicaraS(cha)'", 
+		"'.'", "'de'", "'kg'", "'g'", "'lata'", "'xicara(cha)'", "'xicaras(cha)'", 
 		"'colher(sopa)'", "'colher(cha)'", "'colheres(sopa)'", "'colheres(cha)'", 
 		"'copo(americano)'", "'copos(americano)'", "'unidade'", "'unidades'", 
 		"'cubo'", "'ml'", "'l'", "','", "'('", "')'", "'por'", "'seg'", "'min'", 
@@ -69,8 +69,9 @@ public class ReceitaParser extends Parser {
 
 	   public static String grupo="<<379387, 379352, 489450, 551740>>";
 	   PilhaDeTabelas pilhaDeTabelas = new PilhaDeTabelas();
-	   TabelaDeSimbolos TabelaDeTipos = new TabelaDeSimbolos("tipos");
-	   PilhaDeTabelas TabelasDeRegistros = new PilhaDeTabelas();
+	   TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
+	   TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
+	   TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
 	   String error="";
 
 	public ReceitaParser(TokenStream input) {
@@ -108,10 +109,27 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34); match(TITULO);
-			setState(35); nivel();
-			setState(36); corpo_receita();
-			setState(37); rendimento();
+
+			        TabelaMedidas.adicionarSimbolo("kg","kg");
+			        TabelaMedidas.adicionarSimbolo("g","g");
+			        TabelaMedidas.adicionarSimbolo("lata","lata");
+			        TabelaMedidas.adicionarSimbolo("xicara(cha)","xicara(cha)");
+			        TabelaMedidas.adicionarSimbolo("xicaras(cha)","xicaras(cha)");
+			        TabelaMedidas.adicionarSimbolo("colher(sopa)","colher(sopa)");
+			        TabelaMedidas.adicionarSimbolo("colheres(sopa)","colheres(sopa)");
+			        TabelaMedidas.adicionarSimbolo("colheres(cha)","colheres(cha)");
+			        TabelaMedidas.adicionarSimbolo("copo(americano)","copo(americano)");
+			        TabelaMedidas.adicionarSimbolo("copos(americano)","copos(americano)");
+			        TabelaMedidas.adicionarSimbolo("unidade","unidade");
+			        TabelaMedidas.adicionarSimbolo("unidades","unidades");
+			        TabelaMedidas.adicionarSimbolo("cubo","cubo");
+			        TabelaMedidas.adicionarSimbolo("ml","ml");
+			        TabelaMedidas.adicionarSimbolo("l","l");
+			       
+			setState(35); match(TITULO);
+			setState(36); nivel();
+			setState(37); corpo_receita();
+			setState(38); rendimento();
 			}
 		}
 		catch (RecognitionException re) {
@@ -126,6 +144,7 @@ public class ReceitaParser extends Parser {
 	}
 
 	public static class NivelContext extends ParserRuleContext {
+		public String nome_nivel;
 		public TerminalNode EXPERIENTE() { return getToken(ReceitaParser.EXPERIENTE, 0); }
 		public TerminalNode INICIANTE() { return getToken(ReceitaParser.INICIANTE, 0); }
 		public TerminalNode MASTER_CHEF() { return getToken(ReceitaParser.MASTER_CHEF, 0); }
@@ -147,16 +166,40 @@ public class ReceitaParser extends Parser {
 	public final NivelContext nivel() throws RecognitionException {
 		NivelContext _localctx = new NivelContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_nivel);
-		int _la;
+		 ((NivelContext)_localctx).nome_nivel =  "";
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(39);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INICIANTE) | (1L << INTERMEDIARIO) | (1L << EXPERIENTE) | (1L << MASTER_CHEF))) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			consume();
+			setState(48);
+			switch (_input.LA(1)) {
+			case INICIANTE:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(40); match(INICIANTE);
+				((NivelContext)_localctx).nome_nivel =  "iniciante";
+				}
+				break;
+			case INTERMEDIARIO:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(42); match(INTERMEDIARIO);
+				((NivelContext)_localctx).nome_nivel =  "intermediario";
+				}
+				break;
+			case EXPERIENTE:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(44); match(EXPERIENTE);
+				((NivelContext)_localctx).nome_nivel =  "experiente";
+				}
+				break;
+			case MASTER_CHEF:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(46); match(MASTER_CHEF);
+				((NivelContext)_localctx).nome_nivel =  "master_chef";
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -200,9 +243,9 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41); ingredientes();
-			setState(42); utensilios();
-			setState(43); preparo();
+			setState(50); ingredientes();
+			setState(51); utensilios();
+			setState(52); preparo();
 			}
 		}
 		catch (RecognitionException re) {
@@ -243,10 +286,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45); match(RENDIMENTO);
-			setState(46); match(DOIS_PONTOS);
-			setState(47); numero();
-			setState(48); match(FIM_RENDIMENTO);
+			setState(54); match(RENDIMENTO);
+			setState(55); match(DOIS_PONTOS);
+			setState(56); numero();
+			setState(57); match(FIM_RENDIMENTO);
 			}
 		}
 		catch (RecognitionException re) {
@@ -261,6 +304,7 @@ public class ReceitaParser extends Parser {
 	}
 
 	public static class NumeroContext extends ParserRuleContext {
+		public float qnt_numero;
 		public TerminalNode INTEIRO() { return getToken(ReceitaParser.INTEIRO, 0); }
 		public TerminalNode REAL() { return getToken(ReceitaParser.REAL, 0); }
 		public NumeroContext(ParserRuleContext parent, int invokingState) {
@@ -280,11 +324,12 @@ public class ReceitaParser extends Parser {
 	public final NumeroContext numero() throws RecognitionException {
 		NumeroContext _localctx = new NumeroContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_numero);
+		((NumeroContext)_localctx).qnt_numero =  -1;
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(59);
 			_la = _input.LA(1);
 			if ( !(_la==INTEIRO || _la==REAL) ) {
 			_errHandler.recoverInline(this);
@@ -330,10 +375,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52); match(INGREDIENTES);
-			setState(53); match(DOIS_PONTOS);
-			setState(54); lista_ingredientes();
-			setState(55); match(FIM_INGREDIENTES);
+			setState(61); match(INGREDIENTES);
+			setState(62); match(DOIS_PONTOS);
+			setState(63); lista_ingredientes();
+			setState(64); match(FIM_INGREDIENTES);
 			}
 		}
 		catch (RecognitionException re) {
@@ -374,10 +419,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(57); match(UTENSILIOS);
-			setState(58); match(DOIS_PONTOS);
-			setState(59); lista_utensilios();
-			setState(60); match(FIM_UTENSILIOS);
+			setState(66); match(UTENSILIOS);
+			setState(67); match(DOIS_PONTOS);
+			setState(68); lista_utensilios();
+			setState(69); match(FIM_UTENSILIOS);
 			}
 		}
 		catch (RecognitionException re) {
@@ -418,10 +463,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62); match(MODO_PREPARO);
-			setState(63); match(DOIS_PONTOS);
-			setState(64); procedimento();
-			setState(65); match(FIM_MODO_PREPARO);
+			setState(71); match(MODO_PREPARO);
+			setState(72); match(DOIS_PONTOS);
+			setState(73); procedimento();
+			setState(74); match(FIM_MODO_PREPARO);
 			}
 		}
 		catch (RecognitionException re) {
@@ -471,18 +516,18 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71); 
+			setState(80); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(67); quantidade();
-				setState(68); match(ID);
-				setState(69); match(PONTO);
+				setState(76); quantidade();
+				setState(77); match(ID);
+				setState(78); match(PONTO);
 				}
 				}
-				setState(73); 
+				setState(82); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==INTEIRO || _la==REAL );
@@ -529,17 +574,17 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77); 
+			setState(86); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(75); match(ID);
-				setState(76); match(PONTO);
+				setState(84); match(ID);
+				setState(85); match(PONTO);
 				}
 				}
-				setState(79); 
+				setState(88); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==ID );
@@ -584,16 +629,16 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82); 
+			setState(91); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(81); verbo();
+				setState(90); verbo();
 				}
 				}
-				setState(84); 
+				setState(93); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ACRESCENTAR) | (1L << ADICIONAR) | (1L << ASSAR) | (1L << BATER) | (1L << COLOCAR) | (1L << ESPREMER) | (1L << CORTAR) | (1L << FERVER) | (1L << FATIAR) | (1L << PENEIRAR) | (1L << PICAR) | (1L << SEPARAR) | (1L << TEMPERAR) | (1L << UNTAR) | (1L << MEXER) | (1L << FRITAR) | (1L << MISTURAR) | (1L << FOGO))) != 0) );
@@ -639,13 +684,13 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(86); numero();
-			setState(87); unidade_de_medida();
-			setState(89);
+			setState(95); numero();
+			setState(96); unidade_de_medida();
+			setState(98);
 			_la = _input.LA(1);
 			if (_la==DE) {
 				{
-				setState(88); match(DE);
+				setState(97); match(DE);
 				}
 			}
 
@@ -700,7 +745,7 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(100);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KILO) | (1L << GRAMA) | (1L << LATA) | (1L << XICARA) | (1L << XICARAS) | (1L << COLHER_SOPA) | (1L << COLHER_CHA) | (1L << COLHERES_SOPA) | (1L << COLHERES_CHA) | (1L << COPO_AMERICANO) | (1L << COPOS_AMERICANO) | (1L << UNIDADE) | (1L << UNIDADES) | (1L << CUBO) | (1L << MILI_LITRO) | (1L << LITRO))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -779,247 +824,247 @@ public class ReceitaParser extends Parser {
 		VerboContext _localctx = new VerboContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_verbo);
 		try {
-			setState(258);
+			setState(267);
 			switch (_input.LA(1)) {
 			case ACRESCENTAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(93); match(ACRESCENTAR);
-				setState(94); match(ABRE_PARENTESE);
-				setState(95); numero();
-				setState(96); match(VIRGULA);
-				setState(97); unidade_de_medida();
-				setState(98); match(VIRGULA);
-				setState(99); match(ID);
-				setState(100); match(FECHA_PARENTESE);
-				setState(101); match(PONTO);
+				setState(102); match(ACRESCENTAR);
+				setState(103); match(ABRE_PARENTESE);
+				setState(104); numero();
+				setState(105); match(VIRGULA);
+				setState(106); unidade_de_medida();
+				setState(107); match(VIRGULA);
+				setState(108); match(ID);
+				setState(109); match(FECHA_PARENTESE);
+				setState(110); match(PONTO);
 				}
 				break;
 			case ADICIONAR:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(103); match(ADICIONAR);
-				setState(104); match(ABRE_PARENTESE);
-				setState(105); numero();
-				setState(106); match(VIRGULA);
-				setState(107); unidade_de_medida();
-				setState(108); match(VIRGULA);
-				setState(109); match(ID);
-				setState(110); match(FECHA_PARENTESE);
-				setState(111); match(PONTO);
+				setState(112); match(ADICIONAR);
+				setState(113); match(ABRE_PARENTESE);
+				setState(114); numero();
+				setState(115); match(VIRGULA);
+				setState(116); unidade_de_medida();
+				setState(117); match(VIRGULA);
+				setState(118); match(ID);
+				setState(119); match(FECHA_PARENTESE);
+				setState(120); match(PONTO);
 				}
 				break;
 			case ASSAR:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(113); match(ASSAR);
-				setState(114); match(ABRE_PARENTESE);
-				setState(115); match(ID);
-				setState(116); match(VIRGULA);
-				setState(117); numero();
-				setState(118); match(VIRGULA);
-				setState(119); unidade_de_tempo();
-				setState(120); match(FECHA_PARENTESE);
-				setState(121); match(PONTO);
+				setState(122); match(ASSAR);
+				setState(123); match(ABRE_PARENTESE);
+				setState(124); match(ID);
+				setState(125); match(VIRGULA);
+				setState(126); numero();
+				setState(127); match(VIRGULA);
+				setState(128); unidade_de_tempo();
+				setState(129); match(FECHA_PARENTESE);
+				setState(130); match(PONTO);
 				}
 				break;
 			case BATER:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(123); match(BATER);
-				setState(124); match(ABRE_PARENTESE);
-				setState(125); numero();
-				setState(126); match(VIRGULA);
-				setState(127); unidade_de_medida();
-				setState(128); match(VIRGULA);
-				setState(129); match(ID);
-				setState(130); mais_id();
-				setState(131); match(FECHA_PARENTESE);
-				setState(132); match(PONTO);
+				setState(132); match(BATER);
+				setState(133); match(ABRE_PARENTESE);
+				setState(134); numero();
+				setState(135); match(VIRGULA);
+				setState(136); unidade_de_medida();
+				setState(137); match(VIRGULA);
+				setState(138); match(ID);
+				setState(139); mais_id();
+				setState(140); match(FECHA_PARENTESE);
+				setState(141); match(PONTO);
 				}
 				break;
 			case COLOCAR:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(134); match(COLOCAR);
-				setState(135); match(ABRE_PARENTESE);
-				setState(136); match(ID);
-				setState(137); match(VIRGULA);
-				setState(138); match(ID);
-				setState(139); match(FECHA_PARENTESE);
-				setState(140); match(PONTO);
-				}
-				break;
-			case CORTAR:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(141); match(CORTAR);
-				setState(142); match(ABRE_PARENTESE);
-				setState(143); numero();
-				setState(144); match(VIRGULA);
-				setState(145); unidade_de_medida();
+				setState(143); match(COLOCAR);
+				setState(144); match(ABRE_PARENTESE);
+				setState(145); match(ID);
 				setState(146); match(VIRGULA);
 				setState(147); match(ID);
 				setState(148); match(FECHA_PARENTESE);
 				setState(149); match(PONTO);
 				}
 				break;
+			case CORTAR:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(150); match(CORTAR);
+				setState(151); match(ABRE_PARENTESE);
+				setState(152); numero();
+				setState(153); match(VIRGULA);
+				setState(154); unidade_de_medida();
+				setState(155); match(VIRGULA);
+				setState(156); match(ID);
+				setState(157); match(FECHA_PARENTESE);
+				setState(158); match(PONTO);
+				}
+				break;
 			case ESPREMER:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(151); match(ESPREMER);
-				setState(152); match(ABRE_PARENTESE);
-				setState(153); numero();
-				setState(154); match(VIRGULA);
-				setState(155); unidade_de_medida();
-				setState(156); match(VIRGULA);
-				setState(157); match(ID);
-				setState(158); match(FECHA_PARENTESE);
-				setState(159); match(PONTO);
+				setState(160); match(ESPREMER);
+				setState(161); match(ABRE_PARENTESE);
+				setState(162); numero();
+				setState(163); match(VIRGULA);
+				setState(164); unidade_de_medida();
+				setState(165); match(VIRGULA);
+				setState(166); match(ID);
+				setState(167); match(FECHA_PARENTESE);
+				setState(168); match(PONTO);
 				}
 				break;
 			case FERVER:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(161); match(FERVER);
-				setState(162); match(ABRE_PARENTESE);
-				setState(163); numero();
-				setState(164); match(VIRGULA);
-				setState(165); unidade_de_medida();
-				setState(166); match(VIRGULA);
-				setState(167); match(ID);
-				setState(168); match(FECHA_PARENTESE);
-				setState(169); match(PONTO);
+				setState(170); match(FERVER);
+				setState(171); match(ABRE_PARENTESE);
+				setState(172); numero();
+				setState(173); match(VIRGULA);
+				setState(174); unidade_de_medida();
+				setState(175); match(VIRGULA);
+				setState(176); match(ID);
+				setState(177); match(FECHA_PARENTESE);
+				setState(178); match(PONTO);
 				}
 				break;
 			case FATIAR:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(171); match(FATIAR);
-				setState(172); match(ABRE_PARENTESE);
-				setState(173); numero();
-				setState(174); match(VIRGULA);
-				setState(175); unidade_de_medida();
-				setState(176); match(VIRGULA);
-				setState(177); match(ID);
-				setState(178); match(FECHA_PARENTESE);
-				setState(179); match(PONTO);
+				setState(180); match(FATIAR);
+				setState(181); match(ABRE_PARENTESE);
+				setState(182); numero();
+				setState(183); match(VIRGULA);
+				setState(184); unidade_de_medida();
+				setState(185); match(VIRGULA);
+				setState(186); match(ID);
+				setState(187); match(FECHA_PARENTESE);
+				setState(188); match(PONTO);
 				}
 				break;
 			case PENEIRAR:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(181); match(PENEIRAR);
-				setState(182); match(ABRE_PARENTESE);
-				setState(183); numero();
-				setState(184); match(VIRGULA);
-				setState(185); unidade_de_medida();
-				setState(186); match(VIRGULA);
-				setState(187); match(ID);
-				setState(188); match(FECHA_PARENTESE);
-				setState(189); match(PONTO);
+				setState(190); match(PENEIRAR);
+				setState(191); match(ABRE_PARENTESE);
+				setState(192); numero();
+				setState(193); match(VIRGULA);
+				setState(194); unidade_de_medida();
+				setState(195); match(VIRGULA);
+				setState(196); match(ID);
+				setState(197); match(FECHA_PARENTESE);
+				setState(198); match(PONTO);
 				}
 				break;
 			case PICAR:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(191); match(PICAR);
-				setState(192); match(ABRE_PARENTESE);
-				setState(193); numero();
-				setState(194); match(VIRGULA);
-				setState(195); unidade_de_medida();
-				setState(196); match(VIRGULA);
-				setState(197); match(ID);
-				setState(198); match(FECHA_PARENTESE);
-				setState(199); match(PONTO);
+				setState(200); match(PICAR);
+				setState(201); match(ABRE_PARENTESE);
+				setState(202); numero();
+				setState(203); match(VIRGULA);
+				setState(204); unidade_de_medida();
+				setState(205); match(VIRGULA);
+				setState(206); match(ID);
+				setState(207); match(FECHA_PARENTESE);
+				setState(208); match(PONTO);
 				}
 				break;
 			case SEPARAR:
 				enterOuterAlt(_localctx, 12);
 				{
-				setState(201); match(SEPARAR);
-				setState(202); match(ABRE_PARENTESE);
-				setState(203); numero();
-				setState(204); match(VIRGULA);
-				setState(205); unidade_de_medida();
-				setState(206); match(VIRGULA);
-				setState(207); match(ID);
-				setState(208); mais_id();
-				setState(209); match(FECHA_PARENTESE);
-				setState(210); match(PONTO);
+				setState(210); match(SEPARAR);
+				setState(211); match(ABRE_PARENTESE);
+				setState(212); numero();
+				setState(213); match(VIRGULA);
+				setState(214); unidade_de_medida();
+				setState(215); match(VIRGULA);
+				setState(216); match(ID);
+				setState(217); mais_id();
+				setState(218); match(FECHA_PARENTESE);
+				setState(219); match(PONTO);
 				}
 				break;
 			case TEMPERAR:
 				enterOuterAlt(_localctx, 13);
 				{
-				setState(212); match(TEMPERAR);
-				setState(213); match(ABRE_PARENTESE);
-				setState(214); numero();
-				setState(215); match(VIRGULA);
-				setState(216); unidade_de_medida();
-				setState(217); match(VIRGULA);
-				setState(218); match(ID);
-				setState(219); match(FECHA_PARENTESE);
-				setState(220); match(PONTO);
+				setState(221); match(TEMPERAR);
+				setState(222); match(ABRE_PARENTESE);
+				setState(223); numero();
+				setState(224); match(VIRGULA);
+				setState(225); unidade_de_medida();
+				setState(226); match(VIRGULA);
+				setState(227); match(ID);
+				setState(228); match(FECHA_PARENTESE);
+				setState(229); match(PONTO);
 				}
 				break;
 			case UNTAR:
 				enterOuterAlt(_localctx, 14);
 				{
-				setState(222); match(UNTAR);
-				setState(223); match(ABRE_PARENTESE);
-				setState(224); match(ID);
-				setState(225); match(FECHA_PARENTESE);
-				setState(226); match(PONTO);
+				setState(231); match(UNTAR);
+				setState(232); match(ABRE_PARENTESE);
+				setState(233); match(ID);
+				setState(234); match(FECHA_PARENTESE);
+				setState(235); match(PONTO);
 				}
 				break;
 			case FRITAR:
 				enterOuterAlt(_localctx, 15);
 				{
-				setState(227); match(FRITAR);
-				setState(228); match(ABRE_PARENTESE);
-				setState(229); match(ID);
-				setState(230); match(FECHA_PARENTESE);
-				setState(231); match(PONTO);
+				setState(236); match(FRITAR);
+				setState(237); match(ABRE_PARENTESE);
+				setState(238); match(ID);
+				setState(239); match(FECHA_PARENTESE);
+				setState(240); match(PONTO);
 				}
 				break;
 			case MEXER:
 				enterOuterAlt(_localctx, 16);
 				{
-				setState(232); match(MEXER);
-				setState(233); match(ABRE_PARENTESE);
-				setState(234); match(ID);
-				setState(235); match(FECHA_PARENTESE);
-				setState(236); match(PONTO);
+				setState(241); match(MEXER);
+				setState(242); match(ABRE_PARENTESE);
+				setState(243); match(ID);
+				setState(244); match(FECHA_PARENTESE);
+				setState(245); match(PONTO);
 				}
 				break;
 			case MISTURAR:
 				enterOuterAlt(_localctx, 17);
 				{
-				setState(237); match(MISTURAR);
-				setState(238); match(ABRE_PARENTESE);
-				setState(239); numero();
-				setState(240); match(VIRGULA);
-				setState(241); unidade_de_medida();
-				setState(242); match(VIRGULA);
-				setState(243); match(ID);
-				setState(244); mais_id();
-				setState(245); match(FECHA_PARENTESE);
-				setState(246); match(PONTO);
+				setState(246); match(MISTURAR);
+				setState(247); match(ABRE_PARENTESE);
+				setState(248); numero();
+				setState(249); match(VIRGULA);
+				setState(250); unidade_de_medida();
+				setState(251); match(VIRGULA);
+				setState(252); match(ID);
+				setState(253); mais_id();
+				setState(254); match(FECHA_PARENTESE);
+				setState(255); match(PONTO);
 				}
 				break;
 			case FOGO:
 				enterOuterAlt(_localctx, 18);
 				{
-				setState(248); match(FOGO);
-				setState(249); match(ABRE_PARENTESE);
-				setState(250); match(ID);
-				setState(251); match(VIRGULA);
-				setState(252); numero();
-				setState(253); match(VIRGULA);
-				setState(254); unidade_de_tempo();
-				setState(255); match(FECHA_PARENTESE);
-				setState(256); match(PONTO);
+				setState(257); match(FOGO);
+				setState(258); match(ABRE_PARENTESE);
+				setState(259); match(ID);
+				setState(260); match(VIRGULA);
+				setState(261); numero();
+				setState(262); match(VIRGULA);
+				setState(263); unidade_de_tempo();
+				setState(264); match(FECHA_PARENTESE);
+				setState(265); match(PONTO);
 				}
 				break;
 			default:
@@ -1070,18 +1115,18 @@ public class ReceitaParser extends Parser {
 		Mais_idContext _localctx = new Mais_idContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_mais_id);
 		try {
-			setState(269);
+			setState(278);
 			switch (_input.LA(1)) {
 			case VIRGULA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(260); match(VIRGULA);
-				setState(261); numero();
-				setState(262); match(VIRGULA);
-				setState(263); unidade_de_medida();
-				setState(264); match(VIRGULA);
-				setState(265); match(ID);
-				setState(266); mais_id();
+				setState(269); match(VIRGULA);
+				setState(270); numero();
+				setState(271); match(VIRGULA);
+				setState(272); unidade_de_medida();
+				setState(273); match(VIRGULA);
+				setState(274); match(ID);
+				setState(275); mais_id();
 				}
 				break;
 			case FECHA_PARENTESE:
@@ -1130,14 +1175,14 @@ public class ReceitaParser extends Parser {
 		TempoContext _localctx = new TempoContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_tempo);
 		try {
-			setState(276);
+			setState(285);
 			switch (_input.LA(1)) {
 			case POR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(271); match(POR);
-				setState(272); numero();
-				setState(273); unidade_de_tempo();
+				setState(280); match(POR);
+				setState(281); numero();
+				setState(282); unidade_de_tempo();
 				}
 				break;
 			case EOF:
@@ -1185,7 +1230,7 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(278);
+			setState(287);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SEGUNDO) | (1L << MINUTO) | (1L << HORA))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1205,13 +1250,14 @@ public class ReceitaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3@\u011b\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3@\u0124\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3"+
-		"\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3\n"+
-		"\3\n\3\n\6\nJ\n\n\r\n\16\nK\3\13\3\13\6\13P\n\13\r\13\16\13Q\3\f\6\fU"+
-		"\n\f\r\f\16\fV\3\r\3\r\3\r\5\r\\\n\r\3\16\3\16\3\17\3\17\3\17\3\17\3\17"+
+		"\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\63\n\3\3"+
+		"\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b"+
+		"\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\6\nS\n\n\r\n\16\nT\3"+
+		"\13\3\13\6\13Y\n\13\r\13\16\13Z\3\f\6\f^\n\f\r\f\16\f_\3\r\3\r\3\r\5\r"+
+		"e\n\r\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
@@ -1223,77 +1269,79 @@ public class ReceitaParser extends Parser {
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u0105\n\17\3\20\3\20\3\20\3\20\3\20"+
-		"\3\20\3\20\3\20\3\20\5\20\u0110\n\20\3\21\3\21\3\21\3\21\3\21\5\21\u0117"+
-		"\n\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
-		"\2\6\3\2\3\6\3\2=>\3\2\22!\3\2&(\u0120\2$\3\2\2\2\4)\3\2\2\2\6+\3\2\2"+
-		"\2\b/\3\2\2\2\n\64\3\2\2\2\f\66\3\2\2\2\16;\3\2\2\2\20@\3\2\2\2\22I\3"+
-		"\2\2\2\24O\3\2\2\2\26T\3\2\2\2\30X\3\2\2\2\32]\3\2\2\2\34\u0104\3\2\2"+
-		"\2\36\u010f\3\2\2\2 \u0116\3\2\2\2\"\u0118\3\2\2\2$%\7;\2\2%&\5\4\3\2"+
-		"&\'\5\6\4\2\'(\5\b\5\2(\3\3\2\2\2)*\t\2\2\2*\5\3\2\2\2+,\5\f\7\2,-\5\16"+
-		"\b\2-.\5\20\t\2.\7\3\2\2\2/\60\7\7\2\2\60\61\7\t\2\2\61\62\5\n\6\2\62"+
-		"\63\7\b\2\2\63\t\3\2\2\2\64\65\t\3\2\2\65\13\3\2\2\2\66\67\7\n\2\2\67"+
-		"8\7\t\2\289\5\22\n\29:\7\13\2\2:\r\3\2\2\2;<\7\f\2\2<=\7\t\2\2=>\5\24"+
-		"\13\2>?\7\r\2\2?\17\3\2\2\2@A\7\16\2\2AB\7\t\2\2BC\5\26\f\2CD\7\17\2\2"+
-		"D\21\3\2\2\2EF\5\30\r\2FG\7<\2\2GH\7\20\2\2HJ\3\2\2\2IE\3\2\2\2JK\3\2"+
-		"\2\2KI\3\2\2\2KL\3\2\2\2L\23\3\2\2\2MN\7<\2\2NP\7\20\2\2OM\3\2\2\2PQ\3"+
-		"\2\2\2QO\3\2\2\2QR\3\2\2\2R\25\3\2\2\2SU\5\34\17\2TS\3\2\2\2UV\3\2\2\2"+
-		"VT\3\2\2\2VW\3\2\2\2W\27\3\2\2\2XY\5\n\6\2Y[\5\32\16\2Z\\\7\21\2\2[Z\3"+
-		"\2\2\2[\\\3\2\2\2\\\31\3\2\2\2]^\t\4\2\2^\33\3\2\2\2_`\7)\2\2`a\7#\2\2"+
-		"ab\5\n\6\2bc\7\"\2\2cd\5\32\16\2de\7\"\2\2ef\7<\2\2fg\7$\2\2gh\7\20\2"+
-		"\2h\u0105\3\2\2\2ij\7*\2\2jk\7#\2\2kl\5\n\6\2lm\7\"\2\2mn\5\32\16\2no"+
-		"\7\"\2\2op\7<\2\2pq\7$\2\2qr\7\20\2\2r\u0105\3\2\2\2st\7+\2\2tu\7#\2\2"+
-		"uv\7<\2\2vw\7\"\2\2wx\5\n\6\2xy\7\"\2\2yz\5\"\22\2z{\7$\2\2{|\7\20\2\2"+
-		"|\u0105\3\2\2\2}~\7,\2\2~\177\7#\2\2\177\u0080\5\n\6\2\u0080\u0081\7\""+
-		"\2\2\u0081\u0082\5\32\16\2\u0082\u0083\7\"\2\2\u0083\u0084\7<\2\2\u0084"+
-		"\u0085\5\36\20\2\u0085\u0086\7$\2\2\u0086\u0087\7\20\2\2\u0087\u0105\3"+
-		"\2\2\2\u0088\u0089\7-\2\2\u0089\u008a\7#\2\2\u008a\u008b\7<\2\2\u008b"+
-		"\u008c\7\"\2\2\u008c\u008d\7<\2\2\u008d\u008e\7$\2\2\u008e\u0105\7\20"+
-		"\2\2\u008f\u0090\7/\2\2\u0090\u0091\7#\2\2\u0091\u0092\5\n\6\2\u0092\u0093"+
-		"\7\"\2\2\u0093\u0094\5\32\16\2\u0094\u0095\7\"\2\2\u0095\u0096\7<\2\2"+
-		"\u0096\u0097\7$\2\2\u0097\u0098\7\20\2\2\u0098\u0105\3\2\2\2\u0099\u009a"+
-		"\7.\2\2\u009a\u009b\7#\2\2\u009b\u009c\5\n\6\2\u009c\u009d\7\"\2\2\u009d"+
-		"\u009e\5\32\16\2\u009e\u009f\7\"\2\2\u009f\u00a0\7<\2\2\u00a0\u00a1\7"+
-		"$\2\2\u00a1\u00a2\7\20\2\2\u00a2\u0105\3\2\2\2\u00a3\u00a4\7\60\2\2\u00a4"+
-		"\u00a5\7#\2\2\u00a5\u00a6\5\n\6\2\u00a6\u00a7\7\"\2\2\u00a7\u00a8\5\32"+
-		"\16\2\u00a8\u00a9\7\"\2\2\u00a9\u00aa\7<\2\2\u00aa\u00ab\7$\2\2\u00ab"+
-		"\u00ac\7\20\2\2\u00ac\u0105\3\2\2\2\u00ad\u00ae\7\61\2\2\u00ae\u00af\7"+
-		"#\2\2\u00af\u00b0\5\n\6\2\u00b0\u00b1\7\"\2\2\u00b1\u00b2\5\32\16\2\u00b2"+
-		"\u00b3\7\"\2\2\u00b3\u00b4\7<\2\2\u00b4\u00b5\7$\2\2\u00b5\u00b6\7\20"+
-		"\2\2\u00b6\u0105\3\2\2\2\u00b7\u00b8\7\62\2\2\u00b8\u00b9\7#\2\2\u00b9"+
-		"\u00ba\5\n\6\2\u00ba\u00bb\7\"\2\2\u00bb\u00bc\5\32\16\2\u00bc\u00bd\7"+
-		"\"\2\2\u00bd\u00be\7<\2\2\u00be\u00bf\7$\2\2\u00bf\u00c0\7\20\2\2\u00c0"+
-		"\u0105\3\2\2\2\u00c1\u00c2\7\63\2\2\u00c2\u00c3\7#\2\2\u00c3\u00c4\5\n"+
-		"\6\2\u00c4\u00c5\7\"\2\2\u00c5\u00c6\5\32\16\2\u00c6\u00c7\7\"\2\2\u00c7"+
-		"\u00c8\7<\2\2\u00c8\u00c9\7$\2\2\u00c9\u00ca\7\20\2\2\u00ca\u0105\3\2"+
-		"\2\2\u00cb\u00cc\7\64\2\2\u00cc\u00cd\7#\2\2\u00cd\u00ce\5\n\6\2\u00ce"+
-		"\u00cf\7\"\2\2\u00cf\u00d0\5\32\16\2\u00d0\u00d1\7\"\2\2\u00d1\u00d2\7"+
-		"<\2\2\u00d2\u00d3\5\36\20\2\u00d3\u00d4\7$\2\2\u00d4\u00d5\7\20\2\2\u00d5"+
-		"\u0105\3\2\2\2\u00d6\u00d7\7\65\2\2\u00d7\u00d8\7#\2\2\u00d8\u00d9\5\n"+
-		"\6\2\u00d9\u00da\7\"\2\2\u00da\u00db\5\32\16\2\u00db\u00dc\7\"\2\2\u00dc"+
-		"\u00dd\7<\2\2\u00dd\u00de\7$\2\2\u00de\u00df\7\20\2\2\u00df\u0105\3\2"+
-		"\2\2\u00e0\u00e1\7\66\2\2\u00e1\u00e2\7#\2\2\u00e2\u00e3\7<\2\2\u00e3"+
-		"\u00e4\7$\2\2\u00e4\u0105\7\20\2\2\u00e5\u00e6\78\2\2\u00e6\u00e7\7#\2"+
-		"\2\u00e7\u00e8\7<\2\2\u00e8\u00e9\7$\2\2\u00e9\u0105\7\20\2\2\u00ea\u00eb"+
-		"\7\67\2\2\u00eb\u00ec\7#\2\2\u00ec\u00ed\7<\2\2\u00ed\u00ee\7$\2\2\u00ee"+
-		"\u0105\7\20\2\2\u00ef\u00f0\79\2\2\u00f0\u00f1\7#\2\2\u00f1\u00f2\5\n"+
-		"\6\2\u00f2\u00f3\7\"\2\2\u00f3\u00f4\5\32\16\2\u00f4\u00f5\7\"\2\2\u00f5"+
-		"\u00f6\7<\2\2\u00f6\u00f7\5\36\20\2\u00f7\u00f8\7$\2\2\u00f8\u00f9\7\20"+
-		"\2\2\u00f9\u0105\3\2\2\2\u00fa\u00fb\7:\2\2\u00fb\u00fc\7#\2\2\u00fc\u00fd"+
-		"\7<\2\2\u00fd\u00fe\7\"\2\2\u00fe\u00ff\5\n\6\2\u00ff\u0100\7\"\2\2\u0100"+
-		"\u0101\5\"\22\2\u0101\u0102\7$\2\2\u0102\u0103\7\20\2\2\u0103\u0105\3"+
-		"\2\2\2\u0104_\3\2\2\2\u0104i\3\2\2\2\u0104s\3\2\2\2\u0104}\3\2\2\2\u0104"+
-		"\u0088\3\2\2\2\u0104\u008f\3\2\2\2\u0104\u0099\3\2\2\2\u0104\u00a3\3\2"+
-		"\2\2\u0104\u00ad\3\2\2\2\u0104\u00b7\3\2\2\2\u0104\u00c1\3\2\2\2\u0104"+
-		"\u00cb\3\2\2\2\u0104\u00d6\3\2\2\2\u0104\u00e0\3\2\2\2\u0104\u00e5\3\2"+
-		"\2\2\u0104\u00ea\3\2\2\2\u0104\u00ef\3\2\2\2\u0104\u00fa\3\2\2\2\u0105"+
-		"\35\3\2\2\2\u0106\u0107\7\"\2\2\u0107\u0108\5\n\6\2\u0108\u0109\7\"\2"+
-		"\2\u0109\u010a\5\32\16\2\u010a\u010b\7\"\2\2\u010b\u010c\7<\2\2\u010c"+
-		"\u010d\5\36\20\2\u010d\u0110\3\2\2\2\u010e\u0110\3\2\2\2\u010f\u0106\3"+
-		"\2\2\2\u010f\u010e\3\2\2\2\u0110\37\3\2\2\2\u0111\u0112\7%\2\2\u0112\u0113"+
-		"\5\n\6\2\u0113\u0114\5\"\22\2\u0114\u0117\3\2\2\2\u0115\u0117\3\2\2\2"+
-		"\u0116\u0111\3\2\2\2\u0116\u0115\3\2\2\2\u0117!\3\2\2\2\u0118\u0119\t"+
-		"\5\2\2\u0119#\3\2\2\2\tKQV[\u0104\u010f\u0116";
+		"\5\17\u010e\n\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u0119"+
+		"\n\20\3\21\3\21\3\21\3\21\3\21\5\21\u0120\n\21\3\22\3\22\3\22\2\2\23\2"+
+		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\5\3\2=>\3\2\22!\3\2&(\u012c"+
+		"\2$\3\2\2\2\4\62\3\2\2\2\6\64\3\2\2\2\b8\3\2\2\2\n=\3\2\2\2\f?\3\2\2\2"+
+		"\16D\3\2\2\2\20I\3\2\2\2\22R\3\2\2\2\24X\3\2\2\2\26]\3\2\2\2\30a\3\2\2"+
+		"\2\32f\3\2\2\2\34\u010d\3\2\2\2\36\u0118\3\2\2\2 \u011f\3\2\2\2\"\u0121"+
+		"\3\2\2\2$%\b\2\1\2%&\7;\2\2&\'\5\4\3\2\'(\5\6\4\2()\5\b\5\2)\3\3\2\2\2"+
+		"*+\7\3\2\2+\63\b\3\1\2,-\7\4\2\2-\63\b\3\1\2./\7\5\2\2/\63\b\3\1\2\60"+
+		"\61\7\6\2\2\61\63\b\3\1\2\62*\3\2\2\2\62,\3\2\2\2\62.\3\2\2\2\62\60\3"+
+		"\2\2\2\63\5\3\2\2\2\64\65\5\f\7\2\65\66\5\16\b\2\66\67\5\20\t\2\67\7\3"+
+		"\2\2\289\7\7\2\29:\7\t\2\2:;\5\n\6\2;<\7\b\2\2<\t\3\2\2\2=>\t\2\2\2>\13"+
+		"\3\2\2\2?@\7\n\2\2@A\7\t\2\2AB\5\22\n\2BC\7\13\2\2C\r\3\2\2\2DE\7\f\2"+
+		"\2EF\7\t\2\2FG\5\24\13\2GH\7\r\2\2H\17\3\2\2\2IJ\7\16\2\2JK\7\t\2\2KL"+
+		"\5\26\f\2LM\7\17\2\2M\21\3\2\2\2NO\5\30\r\2OP\7<\2\2PQ\7\20\2\2QS\3\2"+
+		"\2\2RN\3\2\2\2ST\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\23\3\2\2\2VW\7<\2\2WY\7"+
+		"\20\2\2XV\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\25\3\2\2\2\\^\5\34\17"+
+		"\2]\\\3\2\2\2^_\3\2\2\2_]\3\2\2\2_`\3\2\2\2`\27\3\2\2\2ab\5\n\6\2bd\5"+
+		"\32\16\2ce\7\21\2\2dc\3\2\2\2de\3\2\2\2e\31\3\2\2\2fg\t\3\2\2g\33\3\2"+
+		"\2\2hi\7)\2\2ij\7#\2\2jk\5\n\6\2kl\7\"\2\2lm\5\32\16\2mn\7\"\2\2no\7<"+
+		"\2\2op\7$\2\2pq\7\20\2\2q\u010e\3\2\2\2rs\7*\2\2st\7#\2\2tu\5\n\6\2uv"+
+		"\7\"\2\2vw\5\32\16\2wx\7\"\2\2xy\7<\2\2yz\7$\2\2z{\7\20\2\2{\u010e\3\2"+
+		"\2\2|}\7+\2\2}~\7#\2\2~\177\7<\2\2\177\u0080\7\"\2\2\u0080\u0081\5\n\6"+
+		"\2\u0081\u0082\7\"\2\2\u0082\u0083\5\"\22\2\u0083\u0084\7$\2\2\u0084\u0085"+
+		"\7\20\2\2\u0085\u010e\3\2\2\2\u0086\u0087\7,\2\2\u0087\u0088\7#\2\2\u0088"+
+		"\u0089\5\n\6\2\u0089\u008a\7\"\2\2\u008a\u008b\5\32\16\2\u008b\u008c\7"+
+		"\"\2\2\u008c\u008d\7<\2\2\u008d\u008e\5\36\20\2\u008e\u008f\7$\2\2\u008f"+
+		"\u0090\7\20\2\2\u0090\u010e\3\2\2\2\u0091\u0092\7-\2\2\u0092\u0093\7#"+
+		"\2\2\u0093\u0094\7<\2\2\u0094\u0095\7\"\2\2\u0095\u0096\7<\2\2\u0096\u0097"+
+		"\7$\2\2\u0097\u010e\7\20\2\2\u0098\u0099\7/\2\2\u0099\u009a\7#\2\2\u009a"+
+		"\u009b\5\n\6\2\u009b\u009c\7\"\2\2\u009c\u009d\5\32\16\2\u009d\u009e\7"+
+		"\"\2\2\u009e\u009f\7<\2\2\u009f\u00a0\7$\2\2\u00a0\u00a1\7\20\2\2\u00a1"+
+		"\u010e\3\2\2\2\u00a2\u00a3\7.\2\2\u00a3\u00a4\7#\2\2\u00a4\u00a5\5\n\6"+
+		"\2\u00a5\u00a6\7\"\2\2\u00a6\u00a7\5\32\16\2\u00a7\u00a8\7\"\2\2\u00a8"+
+		"\u00a9\7<\2\2\u00a9\u00aa\7$\2\2\u00aa\u00ab\7\20\2\2\u00ab\u010e\3\2"+
+		"\2\2\u00ac\u00ad\7\60\2\2\u00ad\u00ae\7#\2\2\u00ae\u00af\5\n\6\2\u00af"+
+		"\u00b0\7\"\2\2\u00b0\u00b1\5\32\16\2\u00b1\u00b2\7\"\2\2\u00b2\u00b3\7"+
+		"<\2\2\u00b3\u00b4\7$\2\2\u00b4\u00b5\7\20\2\2\u00b5\u010e\3\2\2\2\u00b6"+
+		"\u00b7\7\61\2\2\u00b7\u00b8\7#\2\2\u00b8\u00b9\5\n\6\2\u00b9\u00ba\7\""+
+		"\2\2\u00ba\u00bb\5\32\16\2\u00bb\u00bc\7\"\2\2\u00bc\u00bd\7<\2\2\u00bd"+
+		"\u00be\7$\2\2\u00be\u00bf\7\20\2\2\u00bf\u010e\3\2\2\2\u00c0\u00c1\7\62"+
+		"\2\2\u00c1\u00c2\7#\2\2\u00c2\u00c3\5\n\6\2\u00c3\u00c4\7\"\2\2\u00c4"+
+		"\u00c5\5\32\16\2\u00c5\u00c6\7\"\2\2\u00c6\u00c7\7<\2\2\u00c7\u00c8\7"+
+		"$\2\2\u00c8\u00c9\7\20\2\2\u00c9\u010e\3\2\2\2\u00ca\u00cb\7\63\2\2\u00cb"+
+		"\u00cc\7#\2\2\u00cc\u00cd\5\n\6\2\u00cd\u00ce\7\"\2\2\u00ce\u00cf\5\32"+
+		"\16\2\u00cf\u00d0\7\"\2\2\u00d0\u00d1\7<\2\2\u00d1\u00d2\7$\2\2\u00d2"+
+		"\u00d3\7\20\2\2\u00d3\u010e\3\2\2\2\u00d4\u00d5\7\64\2\2\u00d5\u00d6\7"+
+		"#\2\2\u00d6\u00d7\5\n\6\2\u00d7\u00d8\7\"\2\2\u00d8\u00d9\5\32\16\2\u00d9"+
+		"\u00da\7\"\2\2\u00da\u00db\7<\2\2\u00db\u00dc\5\36\20\2\u00dc\u00dd\7"+
+		"$\2\2\u00dd\u00de\7\20\2\2\u00de\u010e\3\2\2\2\u00df\u00e0\7\65\2\2\u00e0"+
+		"\u00e1\7#\2\2\u00e1\u00e2\5\n\6\2\u00e2\u00e3\7\"\2\2\u00e3\u00e4\5\32"+
+		"\16\2\u00e4\u00e5\7\"\2\2\u00e5\u00e6\7<\2\2\u00e6\u00e7\7$\2\2\u00e7"+
+		"\u00e8\7\20\2\2\u00e8\u010e\3\2\2\2\u00e9\u00ea\7\66\2\2\u00ea\u00eb\7"+
+		"#\2\2\u00eb\u00ec\7<\2\2\u00ec\u00ed\7$\2\2\u00ed\u010e\7\20\2\2\u00ee"+
+		"\u00ef\78\2\2\u00ef\u00f0\7#\2\2\u00f0\u00f1\7<\2\2\u00f1\u00f2\7$\2\2"+
+		"\u00f2\u010e\7\20\2\2\u00f3\u00f4\7\67\2\2\u00f4\u00f5\7#\2\2\u00f5\u00f6"+
+		"\7<\2\2\u00f6\u00f7\7$\2\2\u00f7\u010e\7\20\2\2\u00f8\u00f9\79\2\2\u00f9"+
+		"\u00fa\7#\2\2\u00fa\u00fb\5\n\6\2\u00fb\u00fc\7\"\2\2\u00fc\u00fd\5\32"+
+		"\16\2\u00fd\u00fe\7\"\2\2\u00fe\u00ff\7<\2\2\u00ff\u0100\5\36\20\2\u0100"+
+		"\u0101\7$\2\2\u0101\u0102\7\20\2\2\u0102\u010e\3\2\2\2\u0103\u0104\7:"+
+		"\2\2\u0104\u0105\7#\2\2\u0105\u0106\7<\2\2\u0106\u0107\7\"\2\2\u0107\u0108"+
+		"\5\n\6\2\u0108\u0109\7\"\2\2\u0109\u010a\5\"\22\2\u010a\u010b\7$\2\2\u010b"+
+		"\u010c\7\20\2\2\u010c\u010e\3\2\2\2\u010dh\3\2\2\2\u010dr\3\2\2\2\u010d"+
+		"|\3\2\2\2\u010d\u0086\3\2\2\2\u010d\u0091\3\2\2\2\u010d\u0098\3\2\2\2"+
+		"\u010d\u00a2\3\2\2\2\u010d\u00ac\3\2\2\2\u010d\u00b6\3\2\2\2\u010d\u00c0"+
+		"\3\2\2\2\u010d\u00ca\3\2\2\2\u010d\u00d4\3\2\2\2\u010d\u00df\3\2\2\2\u010d"+
+		"\u00e9\3\2\2\2\u010d\u00ee\3\2\2\2\u010d\u00f3\3\2\2\2\u010d\u00f8\3\2"+
+		"\2\2\u010d\u0103\3\2\2\2\u010e\35\3\2\2\2\u010f\u0110\7\"\2\2\u0110\u0111"+
+		"\5\n\6\2\u0111\u0112\7\"\2\2\u0112\u0113\5\32\16\2\u0113\u0114\7\"\2\2"+
+		"\u0114\u0115\7<\2\2\u0115\u0116\5\36\20\2\u0116\u0119\3\2\2\2\u0117\u0119"+
+		"\3\2\2\2\u0118\u010f\3\2\2\2\u0118\u0117\3\2\2\2\u0119\37\3\2\2\2\u011a"+
+		"\u011b\7%\2\2\u011b\u011c\5\n\6\2\u011c\u011d\5\"\22\2\u011d\u0120\3\2"+
+		"\2\2\u011e\u0120\3\2\2\2\u011f\u011a\3\2\2\2\u011f\u011e\3\2\2\2\u0120"+
+		"!\3\2\2\2\u0121\u0122\t\4\2\2\u0122#\3\2\2\2\n\62TZ_d\u010d\u0118\u011f";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
