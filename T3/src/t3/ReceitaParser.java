@@ -15,25 +15,27 @@ public class ReceitaParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__51=1, T__50=2, T__49=3, T__48=4, T__47=5, T__46=6, T__45=7, T__44=8, 
-		T__43=9, T__42=10, T__41=11, T__40=12, T__39=13, T__38=14, T__37=15, T__36=16, 
-		T__35=17, T__34=18, T__33=19, T__32=20, T__31=21, T__30=22, T__29=23, 
-		T__28=24, T__27=25, T__26=26, T__25=27, T__24=28, T__23=29, T__22=30, 
-		T__21=31, T__20=32, T__19=33, T__18=34, T__17=35, T__16=36, T__15=37, 
-		T__14=38, T__13=39, T__12=40, T__11=41, T__10=42, T__9=43, T__8=44, T__7=45, 
-		T__6=46, T__5=47, T__4=48, T__3=49, T__2=50, T__1=51, T__0=52, TITULO=53, 
-		ID=54, INTEIRO=55, REAL=56, WS=57, COMENTARIO=58;
+		T__54=1, T__53=2, T__52=3, T__51=4, T__50=5, T__49=6, T__48=7, T__47=8, 
+		T__46=9, T__45=10, T__44=11, T__43=12, T__42=13, T__41=14, T__40=15, T__39=16, 
+		T__38=17, T__37=18, T__36=19, T__35=20, T__34=21, T__33=22, T__32=23, 
+		T__31=24, T__30=25, T__29=26, T__28=27, T__27=28, T__26=29, T__25=30, 
+		T__24=31, T__23=32, T__22=33, T__21=34, T__20=35, T__19=36, T__18=37, 
+		T__17=38, T__16=39, T__15=40, T__14=41, T__13=42, T__12=43, T__11=44, 
+		T__10=45, T__9=46, T__8=47, T__7=48, T__6=49, T__5=50, T__4=51, T__3=52, 
+		T__2=53, T__1=54, T__0=55, TITULO=56, ID=57, INTEIRO=58, REAL=59, WS=60, 
+		COMENTARIO=61;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'misturar'", "'temperar'", "'xicaras(cha)'", "'min'", "'unidades'", 
-		"'colher(sopa)'", "'colocar'", "'seg'", "'mexer'", "'copo(americano)'", 
+		"<INVALID>", "'temperar'", "'misturar'", "'xicaras(cha)'", "'min'", "'unidades'", 
+		"'colher(sopa)'", "'colocar'", "'seg'", "'l'", "'mexer'", "'copo(americano)'", 
 		"'ingredientes'", "'ferver'", "'fim_utensilios'", "'fritar'", "'untar'", 
 		"'kg'", "'lata'", "')'", "'por'", "'cubo'", "'iniciante'", "'separar'", 
 		"'assar'", "'colheres(sopa)'", "'experiente'", "'acrescentar'", "'fim_ingredientes'", 
 		"'g'", "'fim_modo_preparo'", "'utensilios'", "','", "'('", "':'", "'peneirar'", 
 		"'cortar'", "'espremer'", "'unidade'", "'.'", "'adicionar'", "'master_chef'", 
-		"'bater'", "'modo_preparo'", "'fogo'", "'intermediario'", "'rendimento'", 
-		"'copos(americano)'", "'picar'", "'fatiar'", "'xicara(cha)'", "'de'", 
-		"'fim_rendimento'", "'hr'", "TITULO", "ID", "INTEIRO", "REAL", "WS", "COMENTARIO"
+		"'bater'", "'modo_preparo'", "'fogo'", "'intermediario'", "'copos(americano)'", 
+		"'rendimento'", "'ml'", "'picar'", "'fatiar'", "'xicara(cha)'", "'de'", 
+		"'fim_rendimento'", "'colher(cha)'", "'hr'", "TITULO", "ID", "INTEIRO", 
+		"REAL", "WS", "COMENTARIO"
 	};
 	public static final int
 		RULE_receita = 0, RULE_nivel = 1, RULE_corpo_receita = 2, RULE_rendimento = 3, 
@@ -145,7 +147,7 @@ public class ReceitaParser extends Parser {
 			{
 			setState(39);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 21) | (1L << 25) | (1L << 40) | (1L << 44))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 22) | (1L << 26) | (1L << 41) | (1L << 45))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -232,10 +234,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45); match(45);
-			setState(46); match(33);
+			setState(45); match(47);
+			setState(46); match(34);
 			setState(47); numero();
-			setState(48); match(51);
+			setState(48); match(53);
 			}
 		}
 		catch (RecognitionException re) {
@@ -316,10 +318,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52); match(11);
-			setState(53); match(33);
+			setState(52); match(12);
+			setState(53); match(34);
 			setState(54); lista_ingredientes();
-			setState(55); match(27);
+			setState(55); match(28);
 			}
 		}
 		catch (RecognitionException re) {
@@ -357,10 +359,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(57); match(30);
-			setState(58); match(33);
+			setState(57); match(31);
+			setState(58); match(34);
 			setState(59); lista_utensilios();
-			setState(60); match(13);
+			setState(60); match(14);
 			}
 		}
 		catch (RecognitionException re) {
@@ -398,10 +400,10 @@ public class ReceitaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62); match(42);
-			setState(63); match(33);
+			setState(62); match(43);
+			setState(63); match(34);
 			setState(64); procedimento();
-			setState(65); match(29);
+			setState(65); match(30);
 			}
 		}
 		catch (RecognitionException re) {
@@ -455,7 +457,7 @@ public class ReceitaParser extends Parser {
 				{
 				setState(67); quantidade();
 				setState(68); match(ID);
-				setState(69); match(38);
+				setState(69); match(39);
 				}
 				}
 				setState(73); 
@@ -508,7 +510,7 @@ public class ReceitaParser extends Parser {
 				{
 				{
 				setState(75); match(ID);
-				setState(76); match(38);
+				setState(76); match(39);
 				}
 				}
 				setState(79); 
@@ -568,7 +570,7 @@ public class ReceitaParser extends Parser {
 				setState(84); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 1) | (1L << 2) | (1L << 7) | (1L << 9) | (1L << 12) | (1L << 14) | (1L << 15) | (1L << 22) | (1L << 23) | (1L << 26) | (1L << 34) | (1L << 35) | (1L << 36) | (1L << 39) | (1L << 41) | (1L << 43) | (1L << 47) | (1L << 48))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 1) | (1L << 2) | (1L << 7) | (1L << 10) | (1L << 13) | (1L << 15) | (1L << 16) | (1L << 23) | (1L << 24) | (1L << 27) | (1L << 35) | (1L << 36) | (1L << 37) | (1L << 40) | (1L << 42) | (1L << 44) | (1L << 49) | (1L << 50))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -614,9 +616,9 @@ public class ReceitaParser extends Parser {
 			setState(87); unidade_de_medida();
 			setState(89);
 			_la = _input.LA(1);
-			if (_la==50) {
+			if (_la==52) {
 				{
-				setState(88); match(50);
+				setState(88); match(52);
 				}
 			}
 
@@ -657,7 +659,7 @@ public class ReceitaParser extends Parser {
 			{
 			setState(91);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 5) | (1L << 6) | (1L << 10) | (1L << 16) | (1L << 17) | (1L << 20) | (1L << 24) | (1L << 28) | (1L << 37) | (1L << 46) | (1L << 49))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 5) | (1L << 6) | (1L << 9) | (1L << 11) | (1L << 17) | (1L << 18) | (1L << 21) | (1L << 25) | (1L << 29) | (1L << 38) | (1L << 46) | (1L << 48) | (1L << 51) | (1L << 54))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -711,245 +713,245 @@ public class ReceitaParser extends Parser {
 		try {
 			setState(258);
 			switch (_input.LA(1)) {
-			case 26:
+			case 27:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(93); match(26);
-				setState(94); match(32);
+				setState(93); match(27);
+				setState(94); match(33);
 				setState(95); numero();
-				setState(96); match(31);
+				setState(96); match(32);
 				setState(97); unidade_de_medida();
-				setState(98); match(31);
+				setState(98); match(32);
 				setState(99); match(ID);
-				setState(100); match(18);
-				setState(101); match(38);
+				setState(100); match(19);
+				setState(101); match(39);
 				}
 				break;
-			case 39:
+			case 40:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(103); match(39);
-				setState(104); match(32);
+				setState(103); match(40);
+				setState(104); match(33);
 				setState(105); numero();
-				setState(106); match(31);
+				setState(106); match(32);
 				setState(107); unidade_de_medida();
-				setState(108); match(31);
+				setState(108); match(32);
 				setState(109); match(ID);
-				setState(110); match(18);
-				setState(111); match(38);
+				setState(110); match(19);
+				setState(111); match(39);
 				}
 				break;
-			case 23:
+			case 24:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(113); match(23);
-				setState(114); match(32);
+				setState(113); match(24);
+				setState(114); match(33);
 				setState(115); match(ID);
-				setState(116); match(31);
+				setState(116); match(32);
 				setState(117); numero();
-				setState(118); match(31);
+				setState(118); match(32);
 				setState(119); unidade_de_tempo();
-				setState(120); match(18);
-				setState(121); match(38);
+				setState(120); match(19);
+				setState(121); match(39);
 				}
 				break;
-			case 41:
+			case 42:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(123); match(41);
-				setState(124); match(32);
+				setState(123); match(42);
+				setState(124); match(33);
 				setState(125); numero();
-				setState(126); match(31);
+				setState(126); match(32);
 				setState(127); unidade_de_medida();
-				setState(128); match(31);
+				setState(128); match(32);
 				setState(129); match(ID);
 				setState(130); mais_id();
-				setState(131); match(18);
-				setState(132); match(38);
+				setState(131); match(19);
+				setState(132); match(39);
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(134); match(7);
-				setState(135); match(32);
+				setState(135); match(33);
 				setState(136); match(ID);
-				setState(137); match(31);
+				setState(137); match(32);
 				setState(138); match(ID);
-				setState(139); match(18);
-				setState(140); match(38);
-				}
-				break;
-			case 35:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(141); match(35);
-				setState(142); match(32);
-				setState(143); numero();
-				setState(144); match(31);
-				setState(145); unidade_de_medida();
-				setState(146); match(31);
-				setState(147); match(ID);
-				setState(148); match(18);
-				setState(149); match(38);
+				setState(139); match(19);
+				setState(140); match(39);
 				}
 				break;
 			case 36:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(141); match(36);
+				setState(142); match(33);
+				setState(143); numero();
+				setState(144); match(32);
+				setState(145); unidade_de_medida();
+				setState(146); match(32);
+				setState(147); match(ID);
+				setState(148); match(19);
+				setState(149); match(39);
+				}
+				break;
+			case 37:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(151); match(36);
-				setState(152); match(32);
+				setState(151); match(37);
+				setState(152); match(33);
 				setState(153); numero();
-				setState(154); match(31);
+				setState(154); match(32);
 				setState(155); unidade_de_medida();
-				setState(156); match(31);
+				setState(156); match(32);
 				setState(157); match(ID);
-				setState(158); match(18);
-				setState(159); match(38);
+				setState(158); match(19);
+				setState(159); match(39);
 				}
 				break;
-			case 12:
+			case 13:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(161); match(12);
-				setState(162); match(32);
+				setState(161); match(13);
+				setState(162); match(33);
 				setState(163); numero();
-				setState(164); match(31);
+				setState(164); match(32);
 				setState(165); unidade_de_medida();
-				setState(166); match(31);
+				setState(166); match(32);
 				setState(167); match(ID);
-				setState(168); match(18);
-				setState(169); match(38);
+				setState(168); match(19);
+				setState(169); match(39);
 				}
 				break;
-			case 48:
+			case 50:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(171); match(48);
-				setState(172); match(32);
+				setState(171); match(50);
+				setState(172); match(33);
 				setState(173); numero();
-				setState(174); match(31);
+				setState(174); match(32);
 				setState(175); unidade_de_medida();
-				setState(176); match(31);
+				setState(176); match(32);
 				setState(177); match(ID);
-				setState(178); match(18);
-				setState(179); match(38);
+				setState(178); match(19);
+				setState(179); match(39);
 				}
 				break;
-			case 34:
+			case 35:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(181); match(34);
-				setState(182); match(32);
+				setState(181); match(35);
+				setState(182); match(33);
 				setState(183); numero();
-				setState(184); match(31);
+				setState(184); match(32);
 				setState(185); unidade_de_medida();
-				setState(186); match(31);
+				setState(186); match(32);
 				setState(187); match(ID);
-				setState(188); match(18);
-				setState(189); match(38);
+				setState(188); match(19);
+				setState(189); match(39);
 				}
 				break;
-			case 47:
+			case 49:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(191); match(47);
-				setState(192); match(32);
+				setState(191); match(49);
+				setState(192); match(33);
 				setState(193); numero();
-				setState(194); match(31);
+				setState(194); match(32);
 				setState(195); unidade_de_medida();
-				setState(196); match(31);
+				setState(196); match(32);
 				setState(197); match(ID);
-				setState(198); match(18);
-				setState(199); match(38);
+				setState(198); match(19);
+				setState(199); match(39);
 				}
 				break;
-			case 22:
+			case 23:
 				enterOuterAlt(_localctx, 12);
 				{
-				setState(201); match(22);
-				setState(202); match(32);
+				setState(201); match(23);
+				setState(202); match(33);
 				setState(203); numero();
-				setState(204); match(31);
+				setState(204); match(32);
 				setState(205); unidade_de_medida();
-				setState(206); match(31);
+				setState(206); match(32);
 				setState(207); match(ID);
 				setState(208); mais_id();
-				setState(209); match(18);
-				setState(210); match(38);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 13);
-				{
-				setState(212); match(2);
-				setState(213); match(32);
-				setState(214); numero();
-				setState(215); match(31);
-				setState(216); unidade_de_medida();
-				setState(217); match(31);
-				setState(218); match(ID);
-				setState(219); match(18);
-				setState(220); match(38);
-				}
-				break;
-			case 15:
-				enterOuterAlt(_localctx, 14);
-				{
-				setState(222); match(15);
-				setState(223); match(32);
-				setState(224); match(ID);
-				setState(225); match(18);
-				setState(226); match(38);
-				}
-				break;
-			case 14:
-				enterOuterAlt(_localctx, 15);
-				{
-				setState(227); match(14);
-				setState(228); match(32);
-				setState(229); match(ID);
-				setState(230); match(18);
-				setState(231); match(38);
-				}
-				break;
-			case 9:
-				enterOuterAlt(_localctx, 16);
-				{
-				setState(232); match(9);
-				setState(233); match(32);
-				setState(234); match(ID);
-				setState(235); match(18);
-				setState(236); match(38);
+				setState(209); match(19);
+				setState(210); match(39);
 				}
 				break;
 			case 1:
-				enterOuterAlt(_localctx, 17);
+				enterOuterAlt(_localctx, 13);
 				{
-				setState(237); match(1);
-				setState(238); match(32);
-				setState(239); numero();
-				setState(240); match(31);
-				setState(241); unidade_de_medida();
-				setState(242); match(31);
-				setState(243); match(ID);
-				setState(244); mais_id();
-				setState(245); match(18);
-				setState(246); match(38);
+				setState(212); match(1);
+				setState(213); match(33);
+				setState(214); numero();
+				setState(215); match(32);
+				setState(216); unidade_de_medida();
+				setState(217); match(32);
+				setState(218); match(ID);
+				setState(219); match(19);
+				setState(220); match(39);
 				}
 				break;
-			case 43:
+			case 16:
+				enterOuterAlt(_localctx, 14);
+				{
+				setState(222); match(16);
+				setState(223); match(33);
+				setState(224); match(ID);
+				setState(225); match(19);
+				setState(226); match(39);
+				}
+				break;
+			case 15:
+				enterOuterAlt(_localctx, 15);
+				{
+				setState(227); match(15);
+				setState(228); match(33);
+				setState(229); match(ID);
+				setState(230); match(19);
+				setState(231); match(39);
+				}
+				break;
+			case 10:
+				enterOuterAlt(_localctx, 16);
+				{
+				setState(232); match(10);
+				setState(233); match(33);
+				setState(234); match(ID);
+				setState(235); match(19);
+				setState(236); match(39);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 17);
+				{
+				setState(237); match(2);
+				setState(238); match(33);
+				setState(239); numero();
+				setState(240); match(32);
+				setState(241); unidade_de_medida();
+				setState(242); match(32);
+				setState(243); match(ID);
+				setState(244); mais_id();
+				setState(245); match(19);
+				setState(246); match(39);
+				}
+				break;
+			case 44:
 				enterOuterAlt(_localctx, 18);
 				{
-				setState(248); match(43);
-				setState(249); match(32);
+				setState(248); match(44);
+				setState(249); match(33);
 				setState(250); match(ID);
-				setState(251); match(31);
+				setState(251); match(32);
 				setState(252); numero();
-				setState(253); match(31);
+				setState(253); match(32);
 				setState(254); unidade_de_tempo();
-				setState(255); match(18);
-				setState(256); match(38);
+				setState(255); match(19);
+				setState(256); match(39);
 				}
 				break;
 			default:
@@ -998,19 +1000,19 @@ public class ReceitaParser extends Parser {
 		try {
 			setState(269);
 			switch (_input.LA(1)) {
-			case 31:
+			case 32:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(260); match(31);
+				setState(260); match(32);
 				setState(261); numero();
-				setState(262); match(31);
+				setState(262); match(32);
 				setState(263); unidade_de_medida();
-				setState(264); match(31);
+				setState(264); match(32);
 				setState(265); match(ID);
 				setState(266); mais_id();
 				}
 				break;
-			case 18:
+			case 19:
 				enterOuterAlt(_localctx, 2);
 				{
 				}
@@ -1057,10 +1059,10 @@ public class ReceitaParser extends Parser {
 		try {
 			setState(276);
 			switch (_input.LA(1)) {
-			case 19:
+			case 20:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(271); match(19);
+				setState(271); match(20);
 				setState(272); numero();
 				setState(273); unidade_de_tempo();
 				}
@@ -1109,7 +1111,7 @@ public class ReceitaParser extends Parser {
 			{
 			setState(278);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 8) | (1L << 52))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 8) | (1L << 55))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -1127,7 +1129,7 @@ public class ReceitaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3<\u011b\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3?\u011b\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3"+
@@ -1148,75 +1150,75 @@ public class ReceitaParser extends Parser {
 		"\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u0105\n\17\3\20\3\20\3\20\3\20\3\20"+
 		"\3\20\3\20\3\20\3\20\5\20\u0110\n\20\3\21\3\21\3\21\3\21\3\21\5\21\u0117"+
 		"\n\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
-		"\2\6\6\2\27\27\33\33**..\3\29:\f\2\5\5\7\b\f\f\22\23\26\26\32\32\36\36"+
-		"\'\'\60\60\63\63\5\2\6\6\n\n\66\66\u0120\2$\3\2\2\2\4)\3\2\2\2\6+\3\2"+
-		"\2\2\b/\3\2\2\2\n\64\3\2\2\2\f\66\3\2\2\2\16;\3\2\2\2\20@\3\2\2\2\22I"+
-		"\3\2\2\2\24O\3\2\2\2\26T\3\2\2\2\30X\3\2\2\2\32]\3\2\2\2\34\u0104\3\2"+
-		"\2\2\36\u010f\3\2\2\2 \u0116\3\2\2\2\"\u0118\3\2\2\2$%\7\67\2\2%&\5\4"+
-		"\3\2&\'\5\6\4\2\'(\5\b\5\2(\3\3\2\2\2)*\t\2\2\2*\5\3\2\2\2+,\5\f\7\2,"+
-		"-\5\16\b\2-.\5\20\t\2.\7\3\2\2\2/\60\7/\2\2\60\61\7#\2\2\61\62\5\n\6\2"+
-		"\62\63\7\65\2\2\63\t\3\2\2\2\64\65\t\3\2\2\65\13\3\2\2\2\66\67\7\r\2\2"+
-		"\678\7#\2\289\5\22\n\29:\7\35\2\2:\r\3\2\2\2;<\7 \2\2<=\7#\2\2=>\5\24"+
-		"\13\2>?\7\17\2\2?\17\3\2\2\2@A\7,\2\2AB\7#\2\2BC\5\26\f\2CD\7\37\2\2D"+
-		"\21\3\2\2\2EF\5\30\r\2FG\78\2\2GH\7(\2\2HJ\3\2\2\2IE\3\2\2\2JK\3\2\2\2"+
-		"KI\3\2\2\2KL\3\2\2\2L\23\3\2\2\2MN\78\2\2NP\7(\2\2OM\3\2\2\2PQ\3\2\2\2"+
-		"QO\3\2\2\2QR\3\2\2\2R\25\3\2\2\2SU\5\34\17\2TS\3\2\2\2UV\3\2\2\2VT\3\2"+
-		"\2\2VW\3\2\2\2W\27\3\2\2\2XY\5\n\6\2Y[\5\32\16\2Z\\\7\64\2\2[Z\3\2\2\2"+
-		"[\\\3\2\2\2\\\31\3\2\2\2]^\t\4\2\2^\33\3\2\2\2_`\7\34\2\2`a\7\"\2\2ab"+
-		"\5\n\6\2bc\7!\2\2cd\5\32\16\2de\7!\2\2ef\78\2\2fg\7\24\2\2gh\7(\2\2h\u0105"+
-		"\3\2\2\2ij\7)\2\2jk\7\"\2\2kl\5\n\6\2lm\7!\2\2mn\5\32\16\2no\7!\2\2op"+
-		"\78\2\2pq\7\24\2\2qr\7(\2\2r\u0105\3\2\2\2st\7\31\2\2tu\7\"\2\2uv\78\2"+
-		"\2vw\7!\2\2wx\5\n\6\2xy\7!\2\2yz\5\"\22\2z{\7\24\2\2{|\7(\2\2|\u0105\3"+
-		"\2\2\2}~\7+\2\2~\177\7\"\2\2\177\u0080\5\n\6\2\u0080\u0081\7!\2\2\u0081"+
-		"\u0082\5\32\16\2\u0082\u0083\7!\2\2\u0083\u0084\78\2\2\u0084\u0085\5\36"+
-		"\20\2\u0085\u0086\7\24\2\2\u0086\u0087\7(\2\2\u0087\u0105\3\2\2\2\u0088"+
-		"\u0089\7\t\2\2\u0089\u008a\7\"\2\2\u008a\u008b\78\2\2\u008b\u008c\7!\2"+
-		"\2\u008c\u008d\78\2\2\u008d\u008e\7\24\2\2\u008e\u0105\7(\2\2\u008f\u0090"+
-		"\7%\2\2\u0090\u0091\7\"\2\2\u0091\u0092\5\n\6\2\u0092\u0093\7!\2\2\u0093"+
-		"\u0094\5\32\16\2\u0094\u0095\7!\2\2\u0095\u0096\78\2\2\u0096\u0097\7\24"+
-		"\2\2\u0097\u0098\7(\2\2\u0098\u0105\3\2\2\2\u0099\u009a\7&\2\2\u009a\u009b"+
-		"\7\"\2\2\u009b\u009c\5\n\6\2\u009c\u009d\7!\2\2\u009d\u009e\5\32\16\2"+
-		"\u009e\u009f\7!\2\2\u009f\u00a0\78\2\2\u00a0\u00a1\7\24\2\2\u00a1\u00a2"+
-		"\7(\2\2\u00a2\u0105\3\2\2\2\u00a3\u00a4\7\16\2\2\u00a4\u00a5\7\"\2\2\u00a5"+
-		"\u00a6\5\n\6\2\u00a6\u00a7\7!\2\2\u00a7\u00a8\5\32\16\2\u00a8\u00a9\7"+
-		"!\2\2\u00a9\u00aa\78\2\2\u00aa\u00ab\7\24\2\2\u00ab\u00ac\7(\2\2\u00ac"+
-		"\u0105\3\2\2\2\u00ad\u00ae\7\62\2\2\u00ae\u00af\7\"\2\2\u00af\u00b0\5"+
-		"\n\6\2\u00b0\u00b1\7!\2\2\u00b1\u00b2\5\32\16\2\u00b2\u00b3\7!\2\2\u00b3"+
-		"\u00b4\78\2\2\u00b4\u00b5\7\24\2\2\u00b5\u00b6\7(\2\2\u00b6\u0105\3\2"+
-		"\2\2\u00b7\u00b8\7$\2\2\u00b8\u00b9\7\"\2\2\u00b9\u00ba\5\n\6\2\u00ba"+
-		"\u00bb\7!\2\2\u00bb\u00bc\5\32\16\2\u00bc\u00bd\7!\2\2\u00bd\u00be\78"+
-		"\2\2\u00be\u00bf\7\24\2\2\u00bf\u00c0\7(\2\2\u00c0\u0105\3\2\2\2\u00c1"+
-		"\u00c2\7\61\2\2\u00c2\u00c3\7\"\2\2\u00c3\u00c4\5\n\6\2\u00c4\u00c5\7"+
-		"!\2\2\u00c5\u00c6\5\32\16\2\u00c6\u00c7\7!\2\2\u00c7\u00c8\78\2\2\u00c8"+
-		"\u00c9\7\24\2\2\u00c9\u00ca\7(\2\2\u00ca\u0105\3\2\2\2\u00cb\u00cc\7\30"+
-		"\2\2\u00cc\u00cd\7\"\2\2\u00cd\u00ce\5\n\6\2\u00ce\u00cf\7!\2\2\u00cf"+
-		"\u00d0\5\32\16\2\u00d0\u00d1\7!\2\2\u00d1\u00d2\78\2\2\u00d2\u00d3\5\36"+
-		"\20\2\u00d3\u00d4\7\24\2\2\u00d4\u00d5\7(\2\2\u00d5\u0105\3\2\2\2\u00d6"+
-		"\u00d7\7\4\2\2\u00d7\u00d8\7\"\2\2\u00d8\u00d9\5\n\6\2\u00d9\u00da\7!"+
-		"\2\2\u00da\u00db\5\32\16\2\u00db\u00dc\7!\2\2\u00dc\u00dd\78\2\2\u00dd"+
-		"\u00de\7\24\2\2\u00de\u00df\7(\2\2\u00df\u0105\3\2\2\2\u00e0\u00e1\7\21"+
-		"\2\2\u00e1\u00e2\7\"\2\2\u00e2\u00e3\78\2\2\u00e3\u00e4\7\24\2\2\u00e4"+
-		"\u0105\7(\2\2\u00e5\u00e6\7\20\2\2\u00e6\u00e7\7\"\2\2\u00e7\u00e8\78"+
-		"\2\2\u00e8\u00e9\7\24\2\2\u00e9\u0105\7(\2\2\u00ea\u00eb\7\13\2\2\u00eb"+
-		"\u00ec\7\"\2\2\u00ec\u00ed\78\2\2\u00ed\u00ee\7\24\2\2\u00ee\u0105\7("+
-		"\2\2\u00ef\u00f0\7\3\2\2\u00f0\u00f1\7\"\2\2\u00f1\u00f2\5\n\6\2\u00f2"+
-		"\u00f3\7!\2\2\u00f3\u00f4\5\32\16\2\u00f4\u00f5\7!\2\2\u00f5\u00f6\78"+
-		"\2\2\u00f6\u00f7\5\36\20\2\u00f7\u00f8\7\24\2\2\u00f8\u00f9\7(\2\2\u00f9"+
-		"\u0105\3\2\2\2\u00fa\u00fb\7-\2\2\u00fb\u00fc\7\"\2\2\u00fc\u00fd\78\2"+
-		"\2\u00fd\u00fe\7!\2\2\u00fe\u00ff\5\n\6\2\u00ff\u0100\7!\2\2\u0100\u0101"+
-		"\5\"\22\2\u0101\u0102\7\24\2\2\u0102\u0103\7(\2\2\u0103\u0105\3\2\2\2"+
-		"\u0104_\3\2\2\2\u0104i\3\2\2\2\u0104s\3\2\2\2\u0104}\3\2\2\2\u0104\u0088"+
-		"\3\2\2\2\u0104\u008f\3\2\2\2\u0104\u0099\3\2\2\2\u0104\u00a3\3\2\2\2\u0104"+
-		"\u00ad\3\2\2\2\u0104\u00b7\3\2\2\2\u0104\u00c1\3\2\2\2\u0104\u00cb\3\2"+
-		"\2\2\u0104\u00d6\3\2\2\2\u0104\u00e0\3\2\2\2\u0104\u00e5\3\2\2\2\u0104"+
-		"\u00ea\3\2\2\2\u0104\u00ef\3\2\2\2\u0104\u00fa\3\2\2\2\u0105\35\3\2\2"+
-		"\2\u0106\u0107\7!\2\2\u0107\u0108\5\n\6\2\u0108\u0109\7!\2\2\u0109\u010a"+
-		"\5\32\16\2\u010a\u010b\7!\2\2\u010b\u010c\78\2\2\u010c\u010d\5\36\20\2"+
-		"\u010d\u0110\3\2\2\2\u010e\u0110\3\2\2\2\u010f\u0106\3\2\2\2\u010f\u010e"+
-		"\3\2\2\2\u0110\37\3\2\2\2\u0111\u0112\7\25\2\2\u0112\u0113\5\n\6\2\u0113"+
-		"\u0114\5\"\22\2\u0114\u0117\3\2\2\2\u0115\u0117\3\2\2\2\u0116\u0111\3"+
-		"\2\2\2\u0116\u0115\3\2\2\2\u0117!\3\2\2\2\u0118\u0119\t\5\2\2\u0119#\3"+
-		"\2\2\2\tKQV[\u0104\u010f\u0116";
+		"\2\6\6\2\30\30\34\34++//\3\2<=\17\2\5\5\7\b\13\13\r\r\23\24\27\27\33\33"+
+		"\37\37((\60\60\62\62\65\6588\5\2\6\6\n\n99\u0120\2$\3\2\2\2\4)\3\2\2\2"+
+		"\6+\3\2\2\2\b/\3\2\2\2\n\64\3\2\2\2\f\66\3\2\2\2\16;\3\2\2\2\20@\3\2\2"+
+		"\2\22I\3\2\2\2\24O\3\2\2\2\26T\3\2\2\2\30X\3\2\2\2\32]\3\2\2\2\34\u0104"+
+		"\3\2\2\2\36\u010f\3\2\2\2 \u0116\3\2\2\2\"\u0118\3\2\2\2$%\7:\2\2%&\5"+
+		"\4\3\2&\'\5\6\4\2\'(\5\b\5\2(\3\3\2\2\2)*\t\2\2\2*\5\3\2\2\2+,\5\f\7\2"+
+		",-\5\16\b\2-.\5\20\t\2.\7\3\2\2\2/\60\7\61\2\2\60\61\7$\2\2\61\62\5\n"+
+		"\6\2\62\63\7\67\2\2\63\t\3\2\2\2\64\65\t\3\2\2\65\13\3\2\2\2\66\67\7\16"+
+		"\2\2\678\7$\2\289\5\22\n\29:\7\36\2\2:\r\3\2\2\2;<\7!\2\2<=\7$\2\2=>\5"+
+		"\24\13\2>?\7\20\2\2?\17\3\2\2\2@A\7-\2\2AB\7$\2\2BC\5\26\f\2CD\7 \2\2"+
+		"D\21\3\2\2\2EF\5\30\r\2FG\7;\2\2GH\7)\2\2HJ\3\2\2\2IE\3\2\2\2JK\3\2\2"+
+		"\2KI\3\2\2\2KL\3\2\2\2L\23\3\2\2\2MN\7;\2\2NP\7)\2\2OM\3\2\2\2PQ\3\2\2"+
+		"\2QO\3\2\2\2QR\3\2\2\2R\25\3\2\2\2SU\5\34\17\2TS\3\2\2\2UV\3\2\2\2VT\3"+
+		"\2\2\2VW\3\2\2\2W\27\3\2\2\2XY\5\n\6\2Y[\5\32\16\2Z\\\7\66\2\2[Z\3\2\2"+
+		"\2[\\\3\2\2\2\\\31\3\2\2\2]^\t\4\2\2^\33\3\2\2\2_`\7\35\2\2`a\7#\2\2a"+
+		"b\5\n\6\2bc\7\"\2\2cd\5\32\16\2de\7\"\2\2ef\7;\2\2fg\7\25\2\2gh\7)\2\2"+
+		"h\u0105\3\2\2\2ij\7*\2\2jk\7#\2\2kl\5\n\6\2lm\7\"\2\2mn\5\32\16\2no\7"+
+		"\"\2\2op\7;\2\2pq\7\25\2\2qr\7)\2\2r\u0105\3\2\2\2st\7\32\2\2tu\7#\2\2"+
+		"uv\7;\2\2vw\7\"\2\2wx\5\n\6\2xy\7\"\2\2yz\5\"\22\2z{\7\25\2\2{|\7)\2\2"+
+		"|\u0105\3\2\2\2}~\7,\2\2~\177\7#\2\2\177\u0080\5\n\6\2\u0080\u0081\7\""+
+		"\2\2\u0081\u0082\5\32\16\2\u0082\u0083\7\"\2\2\u0083\u0084\7;\2\2\u0084"+
+		"\u0085\5\36\20\2\u0085\u0086\7\25\2\2\u0086\u0087\7)\2\2\u0087\u0105\3"+
+		"\2\2\2\u0088\u0089\7\t\2\2\u0089\u008a\7#\2\2\u008a\u008b\7;\2\2\u008b"+
+		"\u008c\7\"\2\2\u008c\u008d\7;\2\2\u008d\u008e\7\25\2\2\u008e\u0105\7)"+
+		"\2\2\u008f\u0090\7&\2\2\u0090\u0091\7#\2\2\u0091\u0092\5\n\6\2\u0092\u0093"+
+		"\7\"\2\2\u0093\u0094\5\32\16\2\u0094\u0095\7\"\2\2\u0095\u0096\7;\2\2"+
+		"\u0096\u0097\7\25\2\2\u0097\u0098\7)\2\2\u0098\u0105\3\2\2\2\u0099\u009a"+
+		"\7\'\2\2\u009a\u009b\7#\2\2\u009b\u009c\5\n\6\2\u009c\u009d\7\"\2\2\u009d"+
+		"\u009e\5\32\16\2\u009e\u009f\7\"\2\2\u009f\u00a0\7;\2\2\u00a0\u00a1\7"+
+		"\25\2\2\u00a1\u00a2\7)\2\2\u00a2\u0105\3\2\2\2\u00a3\u00a4\7\17\2\2\u00a4"+
+		"\u00a5\7#\2\2\u00a5\u00a6\5\n\6\2\u00a6\u00a7\7\"\2\2\u00a7\u00a8\5\32"+
+		"\16\2\u00a8\u00a9\7\"\2\2\u00a9\u00aa\7;\2\2\u00aa\u00ab\7\25\2\2\u00ab"+
+		"\u00ac\7)\2\2\u00ac\u0105\3\2\2\2\u00ad\u00ae\7\64\2\2\u00ae\u00af\7#"+
+		"\2\2\u00af\u00b0\5\n\6\2\u00b0\u00b1\7\"\2\2\u00b1\u00b2\5\32\16\2\u00b2"+
+		"\u00b3\7\"\2\2\u00b3\u00b4\7;\2\2\u00b4\u00b5\7\25\2\2\u00b5\u00b6\7)"+
+		"\2\2\u00b6\u0105\3\2\2\2\u00b7\u00b8\7%\2\2\u00b8\u00b9\7#\2\2\u00b9\u00ba"+
+		"\5\n\6\2\u00ba\u00bb\7\"\2\2\u00bb\u00bc\5\32\16\2\u00bc\u00bd\7\"\2\2"+
+		"\u00bd\u00be\7;\2\2\u00be\u00bf\7\25\2\2\u00bf\u00c0\7)\2\2\u00c0\u0105"+
+		"\3\2\2\2\u00c1\u00c2\7\63\2\2\u00c2\u00c3\7#\2\2\u00c3\u00c4\5\n\6\2\u00c4"+
+		"\u00c5\7\"\2\2\u00c5\u00c6\5\32\16\2\u00c6\u00c7\7\"\2\2\u00c7\u00c8\7"+
+		";\2\2\u00c8\u00c9\7\25\2\2\u00c9\u00ca\7)\2\2\u00ca\u0105\3\2\2\2\u00cb"+
+		"\u00cc\7\31\2\2\u00cc\u00cd\7#\2\2\u00cd\u00ce\5\n\6\2\u00ce\u00cf\7\""+
+		"\2\2\u00cf\u00d0\5\32\16\2\u00d0\u00d1\7\"\2\2\u00d1\u00d2\7;\2\2\u00d2"+
+		"\u00d3\5\36\20\2\u00d3\u00d4\7\25\2\2\u00d4\u00d5\7)\2\2\u00d5\u0105\3"+
+		"\2\2\2\u00d6\u00d7\7\3\2\2\u00d7\u00d8\7#\2\2\u00d8\u00d9\5\n\6\2\u00d9"+
+		"\u00da\7\"\2\2\u00da\u00db\5\32\16\2\u00db\u00dc\7\"\2\2\u00dc\u00dd\7"+
+		";\2\2\u00dd\u00de\7\25\2\2\u00de\u00df\7)\2\2\u00df\u0105\3\2\2\2\u00e0"+
+		"\u00e1\7\22\2\2\u00e1\u00e2\7#\2\2\u00e2\u00e3\7;\2\2\u00e3\u00e4\7\25"+
+		"\2\2\u00e4\u0105\7)\2\2\u00e5\u00e6\7\21\2\2\u00e6\u00e7\7#\2\2\u00e7"+
+		"\u00e8\7;\2\2\u00e8\u00e9\7\25\2\2\u00e9\u0105\7)\2\2\u00ea\u00eb\7\f"+
+		"\2\2\u00eb\u00ec\7#\2\2\u00ec\u00ed\7;\2\2\u00ed\u00ee\7\25\2\2\u00ee"+
+		"\u0105\7)\2\2\u00ef\u00f0\7\4\2\2\u00f0\u00f1\7#\2\2\u00f1\u00f2\5\n\6"+
+		"\2\u00f2\u00f3\7\"\2\2\u00f3\u00f4\5\32\16\2\u00f4\u00f5\7\"\2\2\u00f5"+
+		"\u00f6\7;\2\2\u00f6\u00f7\5\36\20\2\u00f7\u00f8\7\25\2\2\u00f8\u00f9\7"+
+		")\2\2\u00f9\u0105\3\2\2\2\u00fa\u00fb\7.\2\2\u00fb\u00fc\7#\2\2\u00fc"+
+		"\u00fd\7;\2\2\u00fd\u00fe\7\"\2\2\u00fe\u00ff\5\n\6\2\u00ff\u0100\7\""+
+		"\2\2\u0100\u0101\5\"\22\2\u0101\u0102\7\25\2\2\u0102\u0103\7)\2\2\u0103"+
+		"\u0105\3\2\2\2\u0104_\3\2\2\2\u0104i\3\2\2\2\u0104s\3\2\2\2\u0104}\3\2"+
+		"\2\2\u0104\u0088\3\2\2\2\u0104\u008f\3\2\2\2\u0104\u0099\3\2\2\2\u0104"+
+		"\u00a3\3\2\2\2\u0104\u00ad\3\2\2\2\u0104\u00b7\3\2\2\2\u0104\u00c1\3\2"+
+		"\2\2\u0104\u00cb\3\2\2\2\u0104\u00d6\3\2\2\2\u0104\u00e0\3\2\2\2\u0104"+
+		"\u00e5\3\2\2\2\u0104\u00ea\3\2\2\2\u0104\u00ef\3\2\2\2\u0104\u00fa\3\2"+
+		"\2\2\u0105\35\3\2\2\2\u0106\u0107\7\"\2\2\u0107\u0108\5\n\6\2\u0108\u0109"+
+		"\7\"\2\2\u0109\u010a\5\32\16\2\u010a\u010b\7\"\2\2\u010b\u010c\7;\2\2"+
+		"\u010c\u010d\5\36\20\2\u010d\u0110\3\2\2\2\u010e\u0110\3\2\2\2\u010f\u0106"+
+		"\3\2\2\2\u010f\u010e\3\2\2\2\u0110\37\3\2\2\2\u0111\u0112\7\26\2\2\u0112"+
+		"\u0113\5\n\6\2\u0113\u0114\5\"\22\2\u0114\u0117\3\2\2\2\u0115\u0117\3"+
+		"\2\2\2\u0116\u0111\3\2\2\2\u0116\u0115\3\2\2\2\u0117!\3\2\2\2\u0118\u0119"+
+		"\t\5\2\2\u0119#\3\2\2\2\tKQV[\u0104\u010f\u0116";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

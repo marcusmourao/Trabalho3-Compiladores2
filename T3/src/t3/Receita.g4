@@ -58,13 +58,16 @@ unidade_de_medida:
                      'lata'|
                      'xicara(cha)'|
                      'xicaras(cha)'|
+                     'colher(cha)'|
                      'colher(sopa)'|
                      'colheres(sopa)'|
                      'copo(americano)'|
                      'copos(americano)'|
                      'unidade' |
                      'unidades' |
-                     'cubo'
+                     'cubo'|
+                     'ml'|
+                     'l'
 ;
 
 verbo:
