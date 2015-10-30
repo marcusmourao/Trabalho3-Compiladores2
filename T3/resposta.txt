@@ -1,3 +1,4 @@
 Linha: 7 - Identificador laranjas já declarado
 Linha: 18 - Identificador colher já declarado
+Linha: 31 - Unidade de medida "balas" inválida
 Fim da compilacao

@@ -28,6 +28,7 @@ modo_preparo :
 
 bater(3, unidades, ovos). 
 espremer (3, unidades, laranjas).
+acrescentar(3, balas , acucar).
 bater (3, unidades, ovos, 3, unidades, laranjas).
 bater (1, unidade, mistura, 1, xicara(cha), acucar).
 bater (1, unidade, mistura, 0.5, copo(americano), oleo).
