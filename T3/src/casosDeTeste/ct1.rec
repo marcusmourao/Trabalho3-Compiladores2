@@ -28,14 +28,13 @@ modo_preparo :
 
 bater(3, unidades, ovos). 
 espremer (3, unidades, laranjas).
-acrescentar(3, balas , acucar).
-bater (3, unidades, ovos, 3, unidades, laranjas).
+bater (3, unidades, ovos, 3, balaas, coco).
 bater (1, unidade, mistura, 1, xicara(cha), acucar).
 bater (1, unidade, mistura, 0.5, copo(americano), oleo).
 bater (1, unidade, mistura, 3, xicara(cha), farinha).
 bater(1, unidade, mistura, 1, colher(sopa), fermento).
 untar(forma).
-colocar(mistura, forma).
+colocar(mistura, fooorma).
 fogo(forma, 40, min).
 
 fim_modo_preparo

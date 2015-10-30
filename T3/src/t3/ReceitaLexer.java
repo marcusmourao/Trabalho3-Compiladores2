@@ -59,7 +59,7 @@ public class ReceitaLexer extends Lexer {
 
 
 	   public static String grupo="<<379387, 379352, 489450, 551740>>";
-	   TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
+	   TabelaDeSimbolos TabelaIngredientes = new TabelaDeSimbolos("Ingredientes");
 	   TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
 	   TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
 	   String error="";

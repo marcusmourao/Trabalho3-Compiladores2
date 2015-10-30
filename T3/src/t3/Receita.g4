@@ -8,7 +8,7 @@ grammar Receita;
 
 @members {
    public static String grupo="<<379387, 379352, 489450, 551740>>";
-   TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
+   TabelaDeSimbolos TabelaIngredientes = new TabelaDeSimbolos("Ingredientes");
    TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
    TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
    String error="";
@@ -99,6 +99,7 @@ receita:
         TabelaMedidas.adicionarSimbolo("xicara(cha)","xicara(cha)");
         TabelaMedidas.adicionarSimbolo("xicaras(cha)","xicaras(cha)");
         TabelaMedidas.adicionarSimbolo("colher(sopa)","colher(sopa)");
+        TabelaMedidas.adicionarSimbolo("colher(cha)","colher(cha)");
         TabelaMedidas.adicionarSimbolo("colheres(sopa)","colheres(sopa)");
         TabelaMedidas.adicionarSimbolo("colheres(cha)","colheres(cha)");
         TabelaMedidas.adicionarSimbolo("copo(americano)","copo(americano)");
@@ -108,6 +109,9 @@ receita:
         TabelaMedidas.adicionarSimbolo("cubo","cubo");
         TabelaMedidas.adicionarSimbolo("ml","ml");
         TabelaMedidas.adicionarSimbolo("l","l");
+        TabelaIngredientes.adicionarSimbolo("mistura","mistura");
+        TabelaIngredientes.adicionarSimbolo("todos_ingredientes","todos_ingredientes");
+
        }
        TITULO nivel corpo_receita rendimento 
        {if(error!="")throw new RuntimeException(error);}
@@ -144,8 +148,8 @@ lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade
 }
     : ( v2=quantidade v1=ID PONTO {
                                    
-                                   if(!TabelaIngradientes.existeSimbolo($v1.getText())){
-                                         TabelaIngradientes.adicionarSimbolo($v1.getText(), $v2._unidade_medida);
+                                   if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+                                         TabelaIngredientes.adicionarSimbolo($v1.getText(), $v2._unidade_medida);
                                    }
                                    else{
                                         error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
@@ -183,10 +187,10 @@ unidade_de_medida returns[ String unidade_medida]
     : KILO {$unidade_medida = "kg";}
     |GRAMA {$unidade_medida = "g";}
     |LATA  {$unidade_medida = "lata";}
-    |XICARA {$unidade_medida = "xicara";}
-    |XICARAS {$unidade_medida = "xicaras";}
-    |COLHER_CHA {$unidade_medida = "colher(chá)";}
-    |COLHERES_CHA {$unidade_medida = "colheres(chá)";}
+    |XICARA {$unidade_medida = "xicara(cha)";}
+    |XICARAS {$unidade_medida = "xicaras(cha)";}
+    |COLHER_CHA {$unidade_medida = "colher(cha)";}
+    |COLHERES_CHA {$unidade_medida = "colheres(cha)";}
     |COLHER_SOPA {$unidade_medida = "colher(sopa)";}
     |COLHERES_SOPA {$unidade_medida = "colheres(sopa)";}
     |COPO_AMERICANO {$unidade_medida = "copo(americano)";}
@@ -202,118 +206,194 @@ unidade_de_medida returns[ String unidade_medida]
 verbo:
        ACRESCENTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
-             error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " não declarado\n";
-         }
-         if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
-             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
-         }
-       }//apenas 1 ID
-     | ADICIONAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO  //apenas 1 ID
-       {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
        }
-     | ASSAR ABRE_PARENTESE ID VIRGULA numero VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO        //apenas 1 ID
-       
-     | BATER ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO // 1 ou + ID
-     | COLOCAR ABRE_PARENTESE ID VIRGULA ID FECHA_PARENTESE PONTO  // 2 ID
-     | CORTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+     | ADICIONAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " não declarado\n";
+         }
+         if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
+         }
+       }
+     | ASSAR ABRE_PARENTESE v1=ID VIRGULA numero VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
+       {
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
+         }
+       }
+     | BATER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO // 1 ou + ID
+       {
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
+         }
+        if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
+         }
+        for(String s: $v3.list_Ingredientes)
+        {
+            if(!TabelaIngredientes.existeSimbolo(s)){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + s + " não declarado\n";
+         }
+        }
+        
+        for(String u: $v3.unidade_Medidas)
+        {
+            if(!TabelaMedidas.existeSimbolo(u)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
+         }
+        }
+       }
+     | COLOCAR ABRE_PARENTESE v1=ID VIRGULA vv2=ID FECHA_PARENTESE PONTO // 2 ID
+       {
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
+         }
+        if(!TabelaUtensilios.existeSimbolo($vv2.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Utenselio \"" + $vv2.getText() + "\" não declarado\n";
+         }
+        
+       }
+     | CORTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO 
+       {
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | ESPREMER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | ESPREMER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | FERVER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | FERVER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | FATIAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | FATIAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | PENEIRAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | PENEIRAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | PICAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO  //apenas 1 ID
+       }
+     | PICAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | SEPARAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO // 1 ou + ID
-     | TEMPERAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO  //apenas 1 ID
+       }
+     | SEPARAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
+         }
+        if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
+         }
+        for(String s: $v3.list_Ingredientes)
+        {
+            if(!TabelaIngredientes.existeSimbolo(s)){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + s + " não declarado\n";
+         }
+        }
+        
+        for(String u: $v3.unidade_Medidas)
+        {
+            if(!TabelaMedidas.existeSimbolo(u)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
+         }
+        }
+       }
+     | TEMPERAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
+       {
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
-       }//apenas 1 ID
-     | UNTAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | UNTAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
          if(!TabelaUtensilios.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
-       }//apenas 1 ID
-     | FRITAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | FRITAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          
-       }//apenas 1 ID
-     | MEXER ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO //apenas 1 ID
+       }
+     | MEXER ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
-         if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          
-       }//apenas 1 ID
-     | MISTURAR ABRE_PARENTESE numero VIRGULA unidade_de_medida  VIRGULA ID mais_id FECHA_PARENTESE PONTO // 1 ou + ID
+       }
+     | MISTURAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
+       {
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
+         }
+        if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
+         }
+        for(String s: $v3.list_Ingredientes)
+        {
+            if(!TabelaIngredientes.existeSimbolo(s)){
+             error += "Linha: "+ $v1.getLine() + " - Ingrediente " + s + " não declarado\n";
+         }
+        }
+        
+        for(String u: $v3.unidade_Medidas)
+        {
+            if(!TabelaMedidas.existeSimbolo(u)){
+             error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
+         }
+        }
+       }
        
-     | FOGO ABRE_PARENTESE v1=ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO //apenas 1 ID
+     | FOGO ABRE_PARENTESE v1=ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO 
        {
          if(!TabelaUtensilios.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
-       }//apenas 1 ID
+       }
 ;
 
 mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
@@ -321,7 +401,14 @@ mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
       $list_Ingredientes = new ArrayList<String>(); 
       $unidade_Medidas = new ArrayList<String>(); 
 }
-    : VIRGULA numero VIRGULA unidade_de_medida VIRGULA ID mais_id
+    : VIRGULA numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID v3=mais_id
+      {
+         $list_Ingredientes.add($v1.getText());
+         $unidade_Medidas.add($v2.unidade_medida);
+         $list_Ingredientes.addAll($v3.list_Ingredientes);
+         $unidade_Medidas.addAll($v3.unidade_Medidas);
+
+      }
     |
     ;
 
