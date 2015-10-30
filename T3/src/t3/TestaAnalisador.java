@@ -21,7 +21,7 @@ public class TestaAnalisador {
         ReceitaParser parser = new ReceitaParser(tokens);
         try {
             //inicialização do Gerador de Código
-            //GeradorDeCodigo gdc = new GeradorDeCodigo(out);
+           //GeradorDeCodigo gdc = new GeradorDeCodigo(out);
 
             // Adição dos listeners no LEXER e no PARSER
             lexer.addErrorListener(new T3ErrorListenerLexer(out));

@@ -8,7 +8,6 @@ grammar Receita;
 
 @members {
    public static String grupo="<<379387, 379352, 489450, 551740>>";
-   PilhaDeTabelas pilhaDeTabelas = new PilhaDeTabelas();
    TabelaDeSimbolos TabelaIngradientes = new TabelaDeSimbolos("Ingredientes");
    TabelaDeSimbolos TabelaUtensilios = new TabelaDeSimbolos("Utensilios");
    TabelaDeSimbolos TabelaMedidas = new TabelaDeSimbolos("Unidades de Medida");
@@ -110,7 +109,9 @@ receita:
         TabelaMedidas.adicionarSimbolo("ml","ml");
         TabelaMedidas.adicionarSimbolo("l","l");
        }
-       TITULO nivel corpo_receita rendimento ;
+       TITULO nivel corpo_receita rendimento 
+       {if(error!="")throw new RuntimeException(error);}
+       ;
 
 nivel returns[ String nome_nivel]
 @init{ $nome_nivel = "";}
@@ -124,10 +125,10 @@ corpo_receita: ingredientes utensilios preparo ;
 
 rendimento: RENDIMENTO DOIS_PONTOS numero FIM_RENDIMENTO ;
 
-numero returns[ float qnt_numero]
-@init{$qnt_numero = -1;}
-    : INTEIRO
-    | REAL
+numero returns[ String qnt_numero]
+@init{$qnt_numero = "";}
+    : v1=INTEIRO {$qnt_numero = $v1.getText();}
+    | v2=REAL {$qnt_numero = $v2.getText();}
 ;
 
 ingredientes: INGREDIENTES DOIS_PONTOS lista_ingredientes FIM_INGREDIENTES ;
@@ -136,13 +137,46 @@ utensilios: UTENSILIOS DOIS_PONTOS lista_utensilios FIM_UTENSILIOS ;
 
 preparo: MODO_PREPARO DOIS_PONTOS procedimento FIM_MODO_PREPARO ;
            
-lista_ingredientes: (quantidade ID PONTO)+ ;           
+lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
+@init{
+      $list_Ingredientes = new ArrayList<String>(); 
+      $unidade_Medidas = new ArrayList<String>(); 
+}
+    : ( v2=quantidade v1=ID PONTO {
+                                   
+                                   if(!TabelaIngradientes.existeSimbolo($v1.getText())){
+                                         TabelaIngradientes.adicionarSimbolo($v1.getText(), $v2._unidade_medida);
+                                   }
+                                   else{
+                                        error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
+                                   }
+                                   
+                                   
+                                  } )+ ;           
 
-lista_utensilios: (ID PONTO)+ ;
+lista_utensilios returns[ List<String> list_Utensilios]
+@init{$list_Utensilios = new ArrayList<String>();}
+    : (v1=ID PONTO {
+                                   
+                                   if(!TabelaUtensilios.existeSimbolo($v1.getText())){
+                                         TabelaUtensilios.adicionarSimbolo($v1.getText(), "utensilio");
+                                   }
+                                   else{
+                                        error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
+                                   }
+                                   
+                                   
+                                  } )+ ;
 
 procedimento: (verbo)+ ;
 
-quantidade: numero unidade_de_medida (DE)? ;
+quantidade returns[String _quantidade, String _unidade_medida]
+@init{$_quantidade = ""; $_unidade_medida="";}
+    : v1=numero v2=unidade_de_medida (DE)?
+      { 
+        $_unidade_medida = $v2.unidade_medida;
+      }
+    ;
 
 unidade_de_medida returns[ String unidade_medida]
 @init {$unidade_medida = "";}
@@ -185,12 +219,19 @@ verbo:
      | FOGO ABRE_PARENTESE ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
 ;
 
-mais_id: VIRGULA numero VIRGULA unidade_de_medida VIRGULA ID mais_id
-       |
-       ;
+mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
+@init{
+      $list_Ingredientes = new ArrayList<String>(); 
+      $unidade_Medidas = new ArrayList<String>(); 
+}
+    : VIRGULA numero VIRGULA unidade_de_medida VIRGULA ID mais_id
+    |
+    ;
 
-tempo:
-         POR numero unidade_de_tempo |
+tempo returns [int _tempo, String _unidade_Tempo]
+@init{$_tempo = -1; $_unidade_Tempo = "";}
+    : POR numero unidade_de_tempo
+    |
 ;
 
 unidade_de_tempo returns [String unidade_tempo]
