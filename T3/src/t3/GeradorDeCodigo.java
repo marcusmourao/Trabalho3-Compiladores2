@@ -18,8 +18,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
 "</head>\n" +
 "<body>\n" +
 "<!-- O seu HTML vem aqui! -->\n" +
-        "<p> Título: "+ ctx.TITULO().getText().replaceAll("\"", " ") + "</p>" +
-        "<p> Nível: "+ ctx.nivel().nome_nivel + "</p>");
+        "<h1>"+ ctx.TITULO().getText().replaceAll("\"", " ") + " - (" + ctx.nivel().nome_nivel+ ")</h1>");
    
    }
    
@@ -29,73 +28,37 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                "</body>\n" +
                "</html>");
    }
-/*
-    @Override
-    public void exitPrograma(LAParser.ProgramaContext ctx) {
-        saida.println("return 0;");
-        saida.println("}");
-    }
+   
+   @Override 
+   public void enterIngredientes( ReceitaParser.IngredientesContext ctx){
+       saida.println("<h2> Lista de Ingredientes:  </h2>");
 
-    @Override
-    public void enterCmd(LAParser.CmdContext ctx) {
-        if (ctx.tipoCmd.equals("leia")) {
-            saida.println("scanf(\"%" + verifica_tipo(ctx.identificador().tipoSimbolo) + "\",&" + ctx.identificador().txt + ");");
-        } else {
-            if (ctx.tipoCmd.equals("escreva")) {
-                saida.println("printf(\"%" + verifica_tipo(ctx.expressao().tipoSimbolo) +  "\"," + ctx.expressao().txt +  ");");
-            }
-            else
-                 if (ctx.tipoCmd.equals("se")) {
-                saida.println("if("+ctx.expressao().getText()+"){");
-                }
-                 if (ctx.tipoCmd.equals("senao")){
-                     saida.println("}else{");
-                 }
-            
-        }
+   }
+   
+   @Override
+   public void enterLista_ingredientes(ReceitaParser.Lista_ingredientesContext ctx){
+       String ingrediente,numero,unidade_medida;
+       for(int i=0; i<ctx.list_Ingredientes.size(); i++){
+           ingrediente = ctx.list_Ingredientes.get(i);
+           numero = ctx._numero.get(i);
+           unidade_medida = ctx.unidade_Medidas.get(i);
+           if(unidade_medida.equals("unidade") || unidade_medida.equals("unidades") )
+                saida.println("<p>"+ numero +" " + ingrediente  + "</p>");
+           else
+                saida.println("<p>"+ numero +" " + unidade_medida +" " + "de " + ingrediente  + "</p>");
 
-    }
-    
-    @Override
-    public void enterComandos (LAParser.ComandosContext ctx)
-    {
-       
-    }
-    
-    @Override
-    public void enterDecl_local(LAParser.Decl_localContext ctx)
-    {
-      if(ctx.variavel.tipoSimbolo.equals("inteiro"))
-          saida.println("int " + ctx.variavel.nomes.toString().substring(1, ctx.variavel.nomes.toString().length()-1) + ";") ;
-      else
-      {
-          if(ctx.variavel.tipoSimbolo.equals("real"))
-          saida.println("float " + ctx.variavel.nomes.toString().substring(1, ctx.variavel.nomes.toString().length()-1)+ ";") ;
-          else
-          {
-             if(ctx.variavel.tipoSimbolo.equals("literal"))
-                  saida.println("char " + ctx.variavel.nomes.toString().substring(1, ctx.variavel.nomes.toString().length()-1) + "[80]" + ";") ;
-             else
-                 if(ctx.variavel.tipoSimbolo.equals("logico"))
-                  saida.println("bool " + ctx.variavel.nomes.toString().substring(1, ctx.variavel.nomes.toString().length()-1)+ ";") ;
-          }
-      }
-    
-    }
-
-    public char verifica_tipo(String tipo) {
-        if (tipo.equals("literal")) {
-            return 's';
-        } else {
-            if (tipo.equals("inteiro")) {
-                return 'd';
-            } else {
-                if (tipo.equals("real")) {
-                    return 'f';
-                }
-            }
-        }
-        return 'd';
-    }*/
-
-}
+       }
+   }
+   
+   @Override public void enterPreparo(ReceitaParser.PreparoContext ctx){
+       saida.println("<h2> Modo de Preparo </h2>");
+   }
+   
+  
+   
+   @Override public void enterVerbo(ReceitaParser.VerboContext ctx){
+       saida.println("<p>" + ctx.comando + "</p>");
+   }
+   
+   
+   }

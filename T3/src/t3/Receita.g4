@@ -141,10 +141,11 @@ utensilios: UTENSILIOS DOIS_PONTOS lista_utensilios FIM_UTENSILIOS ;
 
 preparo: MODO_PREPARO DOIS_PONTOS procedimento FIM_MODO_PREPARO ;
            
-lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
+lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade_Medidas, List<String> _numero]
 @init{
       $list_Ingredientes = new ArrayList<String>(); 
-      $unidade_Medidas = new ArrayList<String>(); 
+      $unidade_Medidas = new ArrayList<String>();
+      $_numero = new ArrayList<String>(); 
 }
     : ( v2=quantidade v1=ID PONTO {
                                    
@@ -154,6 +155,10 @@ lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade
                                    else{
                                         error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
                                    }
+                                   
+                                   $list_Ingredientes.add($v1.getText()); 
+                                   $unidade_Medidas.add($v2._unidade_medida);
+                                   $_numero.add($v2._quantidade);
                                    
                                    
                                   } )+ ;           
@@ -172,13 +177,16 @@ lista_utensilios returns[ List<String> list_Utensilios]
                                    
                                   } )+ ;
 
-procedimento: (verbo)+ ;
+procedimento returns[String comando]
+@init{$comando="";}
+    : (v1=verbo{$comando=$v1.comando;})+ ;
 
 quantidade returns[String _quantidade, String _unidade_medida]
 @init{$_quantidade = ""; $_unidade_medida="";}
     : v1=numero v2=unidade_de_medida (DE)?
       { 
         $_unidade_medida = $v2.unidade_medida;
+        $_quantidade = $v1.qnt_numero;
       }
     ;
 
@@ -203,7 +211,9 @@ unidade_de_medida returns[ String unidade_medida]
     | v1=ID {$unidade_medida = $v1.getText();}
     ;
 
-verbo:
+verbo returns[String comando]
+@init{$comando = "";}
+    :
        ACRESCENTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
          if(!TabelaIngredientes.existeSimbolo($v1.getText())){
@@ -212,6 +222,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "acrescentar";
        }
      | ADICIONAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -221,12 +232,14 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "adicionar";
        }
      | ASSAR ABRE_PARENTESE v1=ID VIRGULA numero VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
        {
         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
+         $comando = "assar";
        }
      | BATER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO // 1 ou + ID
        {
@@ -249,6 +262,7 @@ verbo:
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
          }
         }
+         $comando = "bater";
        }
      | COLOCAR ABRE_PARENTESE v1=ID VIRGULA vv2=ID FECHA_PARENTESE PONTO // 2 ID
        {
@@ -258,7 +272,7 @@ verbo:
         if(!TabelaUtensilios.existeSimbolo($vv2.getText())){
              error += "Linha: "+ $v1.getLine() + " - Utenselio \"" + $vv2.getText() + "\" não declarado\n";
          }
-        
+         $comando = "colocar";
        }
      | CORTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO 
        {
@@ -268,6 +282,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "cortar";
        }
      | ESPREMER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -277,6 +292,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "espremer";
        }
      | FERVER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -286,6 +302,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "ferver";
        }
      | FATIAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -295,6 +312,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "fatiar";
        }
      | PENEIRAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -304,6 +322,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "peneirar";
        }
      | PICAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -313,6 +332,7 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "picar";
        }
      | SEPARAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
        {
@@ -335,6 +355,7 @@ verbo:
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
          }
         }
+         $comando = "separar";
        }
      | TEMPERAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -344,26 +365,28 @@ verbo:
          if(!TabelaMedidas.existeSimbolo($v2.unidade_medida)){
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
+         $comando = "temperar";
        }
      | UNTAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
          if(!TabelaUtensilios.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
+         $comando = "untar";
        }
      | FRITAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
          if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
-         
+         $comando = "fritar";
        }
      | MEXER ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
          if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
-         
+         $comando = "mexer";
        }
      | MISTURAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
        {
@@ -386,6 +409,7 @@ verbo:
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + u + "\" inválida\n";
          }
         }
+        $comando = "misturar";
        }
        
      | FOGO ABRE_PARENTESE v1=ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO 
@@ -393,6 +417,7 @@ verbo:
          if(!TabelaUtensilios.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
+         $comando = "fogo";
        }
 ;
 
