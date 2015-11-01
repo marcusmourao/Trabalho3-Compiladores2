@@ -211,8 +211,8 @@ unidade_de_medida returns[ String unidade_medida]
     | v1=ID {$unidade_medida = $v1.getText();}
     ;
 
-verbo returns[String comando]
-@init{$comando = "";}
+verbo returns[String comando, String _id, String _id2]
+@init{$comando = ""; $_id=""; $_id2="";}
     :
        ACRESCENTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -223,6 +223,7 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "acrescentar";
+         $_id=$v1.getText();
        }
      | ADICIONAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -233,6 +234,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "adicionar";
+         $_id=$v1.getText();
+
        }
      | ASSAR ABRE_PARENTESE v1=ID VIRGULA numero VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO
        {
@@ -240,6 +243,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          $comando = "assar";
+         $_id=$v1.getText();
+
        }
      | BATER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO // 1 ou + ID
        {
@@ -263,6 +268,7 @@ verbo returns[String comando]
          }
         }
          $comando = "bater";
+         $_id = $v1.getText();
        }
      | COLOCAR ABRE_PARENTESE v1=ID VIRGULA vv2=ID FECHA_PARENTESE PONTO // 2 ID
        {
@@ -273,6 +279,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Utenselio \"" + $vv2.getText() + "\" não declarado\n";
          }
          $comando = "colocar";
+         $_id=$v1.getText();
+
        }
      | CORTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO 
        {
@@ -283,6 +291,7 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "cortar";
+         $_id=$v1.getText();
        }
      | ESPREMER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -293,6 +302,7 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "espremer";
+         $_id=$v1.getText();
        }
      | FERVER ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -303,6 +313,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "ferver";
+         $_id=$v1.getText();
+
        }
      | FATIAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -313,6 +325,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "fatiar";
+         $_id=$v1.getText();
+
        }
      | PENEIRAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -323,6 +337,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "peneirar";
+         $_id=$v1.getText();
+
        }
      | PICAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -333,6 +349,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "picar";
+         $_id=$v1.getText();
+
        }
      | SEPARAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
        {
@@ -356,6 +374,8 @@ verbo returns[String comando]
          }
         }
          $comando = "separar";
+         $_id=$v1.getText();
+
        }
      | TEMPERAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO
        {
@@ -366,6 +386,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Unidade de medida \"" + $v2.unidade_medida + "\" inválida\n";
          }
          $comando = "temperar";
+         $_id=$v1.getText();
+
        }
      | UNTAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
@@ -373,6 +395,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
          $comando = "untar";
+         $_id=$v1.getText();
+
        }
      | FRITAR ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
@@ -380,6 +404,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          $comando = "fritar";
+         $_id=$v1.getText();
+
        }
      | MEXER ABRE_PARENTESE v1=ID FECHA_PARENTESE PONTO
        {
@@ -387,6 +413,8 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
          }
          $comando = "mexer";
+         $_id=$v1.getText();
+
        }
      | MISTURAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID v3=mais_id FECHA_PARENTESE PONTO
        {
@@ -410,6 +438,8 @@ verbo returns[String comando]
          }
         }
         $comando = "misturar";
+         $_id=$v1.getText();
+
        }
        
      | FOGO ABRE_PARENTESE v1=ID VIRGULA numero  VIRGULA unidade_de_tempo FECHA_PARENTESE PONTO 
@@ -418,21 +448,25 @@ verbo returns[String comando]
              error += "Linha: "+ $v1.getLine() + " - Utensílio " + $v1.getText() + " não declarado\n";
          }
          $comando = "fogo";
+         $_id=$v1.getText();
+
        }
 ;
 
-mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas]
+mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas, List<String> _numero]
 @init{
       $list_Ingredientes = new ArrayList<String>(); 
-      $unidade_Medidas = new ArrayList<String>(); 
+      $unidade_Medidas = new ArrayList<String>();
+      $_numero = new ArrayList<String>();
 }
-    : VIRGULA numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID v3=mais_id
+    : VIRGULA v4=numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID v3=mais_id
       {
          $list_Ingredientes.add($v1.getText());
          $unidade_Medidas.add($v2.unidade_medida);
+         $_numero.add($v4.qnt_numero);
          $list_Ingredientes.addAll($v3.list_Ingredientes);
          $unidade_Medidas.addAll($v3.unidade_Medidas);
-
+         $_numero.addAll($v3._numero);
       }
     |
     ;

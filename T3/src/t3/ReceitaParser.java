@@ -951,6 +951,8 @@ public class ReceitaParser extends Parser {
 
 	public static class VerboContext extends ParserRuleContext {
 		public String comando;
+		public String _id;
+		public String _id2;
 		public Unidade_de_medidaContext v2;
 		public Token v1;
 		public Mais_idContext v3;
@@ -1013,7 +1015,7 @@ public class ReceitaParser extends Parser {
 	public final VerboContext verbo() throws RecognitionException {
 		VerboContext _localctx = new VerboContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_verbo);
-		((VerboContext)_localctx).comando =  "";
+		((VerboContext)_localctx).comando =  ""; ((VerboContext)_localctx)._id = ""; ((VerboContext)_localctx)._id2 = "";
 		try {
 			setState(330);
 			switch (_input.LA(1)) {
@@ -1037,6 +1039,7 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "acrescentar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
 				       
 				}
 				break;
@@ -1060,6 +1063,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "adicionar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1080,6 +1085,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "assar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1117,6 +1124,7 @@ public class ReceitaParser extends Parser {
 				         }
 				        }
 				         ((VerboContext)_localctx).comando =  "bater";
+				         ((VerboContext)_localctx)._id =  ((VerboContext)_localctx).v1.getText();
 				       
 				}
 				break;
@@ -1138,6 +1146,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Utenselio \"" + ((VerboContext)_localctx).vv2.getText() + "\" não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "colocar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1161,6 +1171,7 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "cortar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
 				       
 				}
 				break;
@@ -1184,6 +1195,7 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "espremer";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
 				       
 				}
 				break;
@@ -1207,6 +1219,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "ferver";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1230,6 +1244,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "fatiar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1253,6 +1269,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "peneirar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1276,6 +1294,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "picar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1313,6 +1333,8 @@ public class ReceitaParser extends Parser {
 				         }
 				        }
 				         ((VerboContext)_localctx).comando =  "separar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1336,6 +1358,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Unidade de medida \"" + ((VerboContext)_localctx).v2.unidade_medida + "\" inválida\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "temperar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1352,6 +1376,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Utensílio " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "untar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1368,6 +1394,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "fritar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1384,6 +1412,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "mexer";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1421,6 +1451,8 @@ public class ReceitaParser extends Parser {
 				         }
 				        }
 				        ((VerboContext)_localctx).comando =  "misturar";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1441,6 +1473,8 @@ public class ReceitaParser extends Parser {
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Utensílio " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
 				         }
 				         ((VerboContext)_localctx).comando =  "fogo";
+				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+
 				       
 				}
 				break;
@@ -1462,6 +1496,8 @@ public class ReceitaParser extends Parser {
 	public static class Mais_idContext extends ParserRuleContext {
 		public List<String> list_Ingredientes;
 		public List<String> unidade_Medidas;
+		public List<String> _numero;
+		public NumeroContext v4;
 		public Unidade_de_medidaContext v2;
 		public Token v1;
 		public Mais_idContext v3;
@@ -1498,7 +1534,8 @@ public class ReceitaParser extends Parser {
 		enterRule(_localctx, 28, RULE_mais_id);
 
 		      ((Mais_idContext)_localctx).list_Ingredientes =  new ArrayList<String>(); 
-		      ((Mais_idContext)_localctx).unidade_Medidas =  new ArrayList<String>(); 
+		      ((Mais_idContext)_localctx).unidade_Medidas =  new ArrayList<String>();
+		      ((Mais_idContext)_localctx)._numero =  new ArrayList<String>();
 
 		try {
 			setState(342);
@@ -1507,7 +1544,7 @@ public class ReceitaParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(332); match(VIRGULA);
-				setState(333); numero();
+				setState(333); ((Mais_idContext)_localctx).v4 = numero();
 				setState(334); match(VIRGULA);
 				setState(335); ((Mais_idContext)_localctx).v2 = unidade_de_medida();
 				setState(336); match(VIRGULA);
@@ -1516,9 +1553,10 @@ public class ReceitaParser extends Parser {
 
 				         _localctx.list_Ingredientes.add(((Mais_idContext)_localctx).v1.getText());
 				         _localctx.unidade_Medidas.add(((Mais_idContext)_localctx).v2.unidade_medida);
+				         _localctx._numero.add(((Mais_idContext)_localctx).v4.qnt_numero);
 				         _localctx.list_Ingredientes.addAll(((Mais_idContext)_localctx).v3.list_Ingredientes);
 				         _localctx.unidade_Medidas.addAll(((Mais_idContext)_localctx).v3.unidade_Medidas);
-
+				         _localctx._numero.addAll(((Mais_idContext)_localctx).v3._numero);
 				      
 				}
 				break;

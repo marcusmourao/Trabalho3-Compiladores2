@@ -14,15 +14,11 @@
 <p>0.5 copo(americano) de oleo</p>
 <p>3 ovos</p>
 <h2> Modo de Preparo </h2>
-<p>bater</p>
-<p>espremer</p>
-<p>bater</p>
-<p>bater</p>
-<p>bater</p>
-<p>bater</p>
-<p>bater</p>
-<p>untar</p>
-<p>colocar</p>
-<p>fogo</p>
+<p> Bata 3 ovos</p>
+<p> Bata 3 ovos</p>
+<p> Bata 1 mistura</p>
+<p> Bata 1 mistura</p>
+<p> Bata 1 mistura</p>
+<p> Bata 1 mistura</p>
 </body>
 </html>

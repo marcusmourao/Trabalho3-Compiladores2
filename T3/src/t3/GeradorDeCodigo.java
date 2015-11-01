@@ -57,7 +57,102 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
   
    
    @Override public void enterVerbo(ReceitaParser.VerboContext ctx){
-       saida.println("<p>" + ctx.comando + "</p>");
+      
+       if(ctx.comando.equals("acrescentar")){
+       
+       }
+       else{
+           if(ctx.comando.equals("adicionar")){
+       
+           }
+           else{
+               if(ctx.comando.equals("assar")){
+       
+               }
+               else{
+                   if(ctx.comando.equals("bater")){
+                       if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                           saida.println("<p> Bata " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                       else
+                           saida.println("<p> Bata " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
+
+                   }
+                   else{
+                       if(ctx.comando.equals("colocar")){
+       
+                       }
+                       else{
+                           if(ctx.comando.equals("cortar")){
+       
+                           }
+                           else{
+                               if(ctx.comando.equals("espremer")){
+       
+                               }
+                               else{
+                                   if(ctx.comando.equals("ferver")){
+       
+                                   }
+                                   else{
+                                       if(ctx.comando.equals("fatiar")){
+       
+                                       }
+                                       else{
+                                           if(ctx.comando.equals("peneirar")){
+       
+                                           }
+                                           else{
+                                               if(ctx.comando.equals("picar")){
+       
+                                               }
+                                               else{
+                                                   if(ctx.comando.equals("separar")){
+       
+                                                   }
+                                                   else{
+                                                       if(ctx.comando.equals("temperar")){
+       
+                                                       }
+                                                       else{
+                                                           if(ctx.comando.equals("untar")){
+       
+                                                           }
+                                                           else{
+                                                               if(ctx.comando.equals("fritar")){
+       
+                                                               }
+                                                               else{
+                                                                   if(ctx.comando.equals("mexer")){
+       
+                                                                   }
+                                                                   else{
+                                                                       if(ctx.comando.equals("misturar")){
+       
+                                                                       }
+                                                                       else{
+                                                                           if(ctx.comando.equals("fogo")){
+       
+                                                                           }
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
+                                                       }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+       
+       //saida.println("<p>" + ctx.comando + "</p>");
+       
    }
    
    
