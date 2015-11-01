@@ -1,6 +1,6 @@
 package t3;
 
-public class GeradorDeCodigo  {
+public class GeradorDeCodigo extends ReceitaBaseListener {
 
     SaidaParser saida;
 
@@ -8,14 +8,28 @@ public class GeradorDeCodigo  {
         this.saida = saida;
     }
 
-   /* @Override
-    public void enterPrograma(LAParser.ProgramaContext ctx) {
-        saida.println("#include <stdio.h>");
-        saida.println("#include <stdlib.h>");
-        saida.println("int main(){");
-
-    }
-
+   @Override
+   public void enterReceita(ReceitaParser.ReceitaContext ctx){
+       saida.println(
+"<html lang=' pt-BR' >\n" +
+"<head>\n" +
+"<meta charset=\"UTF-8\">\n" +
+"<title>" + ctx.TITULO().getText().replaceAll("\"", " ")  +" - Linguagem Receita</title>\n" +
+"</head>\n" +
+"<body>\n" +
+"<!-- O seu HTML vem aqui! -->\n" +
+        "<p> Título: "+ ctx.TITULO().getText().replaceAll("\"", " ") + "</p>" +
+        "<p> Nível: "+ ctx.nivel().nome_nivel + "</p>");
+   
+   }
+   
+   @Override
+   public void exitReceita(ReceitaParser.ReceitaContext ctx){
+       saida.println(
+               "</body>\n" +
+               "</html>");
+   }
+/*
     @Override
     public void exitPrograma(LAParser.ProgramaContext ctx) {
         saida.println("return 0;");

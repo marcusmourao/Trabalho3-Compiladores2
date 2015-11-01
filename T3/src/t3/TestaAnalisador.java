@@ -21,7 +21,7 @@ public class TestaAnalisador {
         ReceitaParser parser = new ReceitaParser(tokens);
         try {
             //inicialização do Gerador de Código
-           //GeradorDeCodigo gdc = new GeradorDeCodigo(out);
+           GeradorDeCodigo gdc = new GeradorDeCodigo(out);
 
             // Adição dos listeners no LEXER e no PARSER
             lexer.addErrorListener(new T3ErrorListenerLexer(out));
@@ -30,7 +30,12 @@ public class TestaAnalisador {
             // Inicio 
             ReceitaParser.ReceitaContext raiz = parser.receita();
             ParseTreeWalker ptw = new ParseTreeWalker();
-            //ptw.walk(gdc, raiz);
+            ptw.walk(gdc, raiz);
+            PrintWriter pw = new PrintWriter(new File("resposta.html"));
+        pw.print(out.toString());
+        pw.flush();
+        pw.close();
+        
         } catch (RuntimeException e) {
             // Pega as mensagens de erro semanticas
             if (e.getMessage() != null) {
