@@ -14,7 +14,7 @@ public class TestaAnalisador {
 
     public static void main(String args[]) throws IOException, RecognitionException {
         SaidaParser out = new SaidaParser();
-        ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct1.rec"));
+        ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct2.rec"));
         //ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(args[0]));
         ReceitaLexer lexer = new ReceitaLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -31,10 +31,10 @@ public class TestaAnalisador {
             ReceitaParser.ReceitaContext raiz = parser.receita();
             ParseTreeWalker ptw = new ParseTreeWalker();
             ptw.walk(gdc, raiz);
-            PrintWriter pw = new PrintWriter(new File("resposta.html"));
-        pw.print(out.toString());
-        pw.flush();
-        pw.close();
+            PrintWriter pw = new PrintWriter(new File("resposta2.html"));
+            pw.print(out.toString());
+            pw.flush();
+            pw.close();
         
         } catch (RuntimeException e) {
             // Pega as mensagens de erro semanticas
@@ -43,10 +43,10 @@ public class TestaAnalisador {
             }
         }
 
-        PrintWriter pw = new PrintWriter(new File("resposta.txt"));
-        pw.print(out.toString());
-        pw.flush();
-        pw.close();
+        PrintWriter pr = new PrintWriter(new File("resposta2.html"));
+        pr.print(out.toString());
+        pr.flush();
+        pr.close();
         
     }
 }

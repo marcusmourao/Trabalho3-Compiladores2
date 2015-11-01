@@ -123,8 +123,8 @@ public class ReceitaParser extends Parser {
 			        TabelaMedidas.adicionarSimbolo("unidade","unidade");
 			        TabelaMedidas.adicionarSimbolo("unidades","unidades");
 			        TabelaMedidas.adicionarSimbolo("cubo","cubo");
-			        TabelaMedidas.adicionarSimbolo("ml","ml");
-			        TabelaMedidas.adicionarSimbolo("l","l");
+			        TabelaMedidas.adicionarSimbolo("mL","mL");
+			        TabelaMedidas.adicionarSimbolo("L","L");
 			        TabelaIngredientes.adicionarSimbolo("mistura","mistura");
 			        TabelaIngredientes.adicionarSimbolo("todos_ingredientes","todos_ingredientes");
 
@@ -1147,6 +1147,7 @@ public class ReceitaParser extends Parser {
 				         }
 				         ((VerboContext)_localctx).comando =  "colocar";
 				         ((VerboContext)_localctx)._id = ((VerboContext)_localctx).v1.getText();
+				         ((VerboContext)_localctx)._id2 = ((VerboContext)_localctx).vv2.getText();
 
 				       
 				}

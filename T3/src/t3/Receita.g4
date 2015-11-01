@@ -107,8 +107,8 @@ receita:
         TabelaMedidas.adicionarSimbolo("unidade","unidade");
         TabelaMedidas.adicionarSimbolo("unidades","unidades");
         TabelaMedidas.adicionarSimbolo("cubo","cubo");
-        TabelaMedidas.adicionarSimbolo("ml","ml");
-        TabelaMedidas.adicionarSimbolo("l","l");
+        TabelaMedidas.adicionarSimbolo("mL","mL");
+        TabelaMedidas.adicionarSimbolo("L","L");
         TabelaIngredientes.adicionarSimbolo("mistura","mistura");
         TabelaIngredientes.adicionarSimbolo("todos_ingredientes","todos_ingredientes");
 
@@ -280,6 +280,7 @@ verbo returns[String comando, String _id, String _id2]
          }
          $comando = "colocar";
          $_id=$v1.getText();
+         $_id2=$vv2.getText();
 
        }
      | CORTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida  VIRGULA v1=ID FECHA_PARENTESE PONTO 

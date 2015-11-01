@@ -31,7 +31,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
    
    @Override 
    public void enterIngredientes( ReceitaParser.IngredientesContext ctx){
-       saida.println("<h2> Lista de Ingredientes:  </h2>");
+       saida.println("<h2> Lista de Ingredientes </h2>");
 
    }
    
@@ -54,20 +54,32 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
        saida.println("<h2> Modo de Preparo </h2>");
    }
    
+   @Override public void enterRendimento(ReceitaParser.RendimentoContext ctx){
+       saida.println("<h2> Rendimento </h2> <p>" + ctx.numero().qnt_numero + " porcao(oes) </p>");
+   }
+
   
    
    @Override public void enterVerbo(ReceitaParser.VerboContext ctx){
       
        if(ctx.comando.equals("acrescentar")){
-       
+           if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+               saida.println("<p> Acrescente " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+           else
+               saida.println("<p> Acrescente " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        }
        else{
            if(ctx.comando.equals("adicionar")){
+               if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                   saida.println("<p> Adicione " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+               else
+                   saida.println("<p> Adicione " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
            }
            else{
                if(ctx.comando.equals("assar")){
-       
+                           saida.println("<p> Asse as" + ctx._id + "por " + ctx.numero().qnt_numero + " " + ctx.unidade_de_tempo().unidade_tempo + "</p>");
+                       
                }
                else{
                    if(ctx.comando.equals("bater")){
@@ -79,30 +91,53 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                    }
                    else{
                        if(ctx.comando.equals("colocar")){
+                               saida.println("<p> Coloque " + ctx._id + " na " + ctx._id2 + "</p>");
+                           
        
                        }
                        else{
                            if(ctx.comando.equals("cortar")){
-       
+                               if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                   saida.println("<p> Corte " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                               else
+                                   saida.println("<p> Corte " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
                            }
                            else{
                                if(ctx.comando.equals("espremer")){
-       
+                                   if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                       saida.println("<p> Esprema " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                   else
+                                       saida.println("<p> Esprema " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
                                }
                                else{
                                    if(ctx.comando.equals("ferver")){
-       
+                                       if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                           saida.println("<p> Ferva " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                       else
+                                           saida.println("<p> Ferva " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
                                    }
                                    else{
                                        if(ctx.comando.equals("fatiar")){
+                                           if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                               saida.println("<p> Fatie " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                           else
+                                               saida.println("<p> Fatie " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
                                        }
                                        else{
                                            if(ctx.comando.equals("peneirar")){
+                                               if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                                   saida.println("<p> Peneire " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                               else
+                                                   saida.println("<p> Peneire " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
                                            }
                                            else{
                                                if(ctx.comando.equals("picar")){
+                                                   if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                                       saida.println("<p> Pique " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                                   else
+                                                       saida.println("<p> Pique " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
                                                }
                                                else{
@@ -111,18 +146,27 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                                                    }
                                                    else{
                                                        if(ctx.comando.equals("temperar")){
+                                                           if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                                               saida.println("<p> Tempere " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                                           else
+                                                               saida.println("<p> Tempere " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
                                                        }
                                                        else{
                                                            if(ctx.comando.equals("untar")){
+                                                               saida.println("<p> Unte uma " + ctx._id + "</p>");
        
                                                            }
                                                            else{
                                                                if(ctx.comando.equals("fritar")){
-       
+                                                                       saida.println("<p> Frite a " +  ctx._id + "</p>");       
                                                                }
                                                                else{
                                                                    if(ctx.comando.equals("mexer")){
+                                                                       if(ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades"))
+                                                                           saida.println("<p> Mexa " + ctx.numero().qnt_numero +" "+ ctx._id + "</p>");
+                                                                        else
+                                                                           saida.println("<p> Mexa " + ctx.numero().qnt_numero +" "+ ctx.unidade_de_medida().unidade_medida+ " de "+ ctx._id + "</p>");
        
                                                                    }
                                                                    else{
@@ -131,6 +175,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                                                                        }
                                                                        else{
                                                                            if(ctx.comando.equals("fogo")){
+                                                                               saida.println("<p> Leve a "+ ctx._id + " ao forno por "+ ctx.numero().qnt_numero + " " + ctx.unidade_de_tempo().unidade_tempo + "</p>");
        
                                                                            }
                                                                        }
