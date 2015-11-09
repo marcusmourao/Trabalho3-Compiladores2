@@ -44,6 +44,7 @@ COPOS_AMERICANO: 'copos(americano)';
 UNIDADE: 'unidade';
 UNIDADES: 'unidades';
 CUBO: 'cubo';
+CUBOS: 'cubos';
 MILI_LITRO: 'ml';
 LITRO: 'l';
 VIRGULA: ',';
@@ -107,6 +108,7 @@ receita:
         TabelaMedidas.adicionarSimbolo("unidade","unidade");
         TabelaMedidas.adicionarSimbolo("unidades","unidades");
         TabelaMedidas.adicionarSimbolo("cubo","cubo");
+        TabelaMedidas.adicionarSimbolo("cubos","cubos");
         TabelaMedidas.adicionarSimbolo("mL","mL");
         TabelaMedidas.adicionarSimbolo("L","L");
         TabelaIngredientes.adicionarSimbolo("mistura","mistura");
@@ -206,6 +208,7 @@ unidade_de_medida returns[ String unidade_medida]
     |UNIDADE {$unidade_medida = "unidade";}
     |UNIDADES {$unidade_medida = "unidades";}
     |CUBO {$unidade_medida = "cubo";}
+    |CUBOS {$unidade_medida = "cubos";}
     |MILI_LITRO {$unidade_medida = "mL";}
     |LITRO {$unidade_medida = "L";}
     | v1=ID {$unidade_medida = $v1.getText();}

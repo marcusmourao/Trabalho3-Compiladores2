@@ -20,12 +20,12 @@ public class ReceitaParser extends Parser {
 		FIM_UTENSILIOS=11, MODO_PREPARO=12, FIM_MODO_PREPARO=13, PONTO=14, DE=15, 
 		KILO=16, GRAMA=17, LATA=18, XICARA=19, XICARAS=20, COLHER_SOPA=21, COLHER_CHA=22, 
 		COLHERES_SOPA=23, COLHERES_CHA=24, COPO_AMERICANO=25, COPOS_AMERICANO=26, 
-		UNIDADE=27, UNIDADES=28, CUBO=29, MILI_LITRO=30, LITRO=31, VIRGULA=32, 
-		ABRE_PARENTESE=33, FECHA_PARENTESE=34, POR=35, SEGUNDO=36, MINUTO=37, 
-		HORA=38, ACRESCENTAR=39, ADICIONAR=40, ASSAR=41, BATER=42, COLOCAR=43, 
-		ESPREMER=44, CORTAR=45, FERVER=46, FATIAR=47, PENEIRAR=48, PICAR=49, SEPARAR=50, 
-		TEMPERAR=51, UNTAR=52, MEXER=53, FRITAR=54, MISTURAR=55, FOGO=56, TITULO=57, 
-		ID=58, INTEIRO=59, REAL=60, WS=61, COMENTARIO=62;
+		UNIDADE=27, UNIDADES=28, CUBO=29, CUBOS=30, MILI_LITRO=31, LITRO=32, VIRGULA=33, 
+		ABRE_PARENTESE=34, FECHA_PARENTESE=35, POR=36, SEGUNDO=37, MINUTO=38, 
+		HORA=39, ACRESCENTAR=40, ADICIONAR=41, ASSAR=42, BATER=43, COLOCAR=44, 
+		ESPREMER=45, CORTAR=46, FERVER=47, FATIAR=48, PENEIRAR=49, PICAR=50, SEPARAR=51, 
+		TEMPERAR=52, UNTAR=53, MEXER=54, FRITAR=55, MISTURAR=56, FOGO=57, TITULO=58, 
+		ID=59, INTEIRO=60, REAL=61, WS=62, COMENTARIO=63;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'iniciante'", "'intermediario'", "'experiente'", "'master_chef'", 
 		"'rendimento'", "'fim_rendimento'", "':'", "'ingredientes'", "'fim_ingredientes'", 
@@ -33,11 +33,11 @@ public class ReceitaParser extends Parser {
 		"'.'", "'de'", "'kg'", "'g'", "'lata'", "'xicara(cha)'", "'xicaras(cha)'", 
 		"'colher(sopa)'", "'colher(cha)'", "'colheres(sopa)'", "'colheres(cha)'", 
 		"'copo(americano)'", "'copos(americano)'", "'unidade'", "'unidades'", 
-		"'cubo'", "'ml'", "'l'", "','", "'('", "')'", "'por'", "'seg'", "'min'", 
-		"'hr'", "'acrescentar'", "'adicionar'", "'assar'", "'bater'", "'colocar'", 
-		"'espremer'", "'cortar'", "'ferver'", "'fatiar'", "'peneirar'", "'picar'", 
-		"'separar'", "'temperar'", "'untar'", "'mexer'", "'fritar'", "'misturar'", 
-		"'fogo'", "TITULO", "ID", "INTEIRO", "REAL", "WS", "COMENTARIO"
+		"'cubo'", "'cubos'", "'ml'", "'l'", "','", "'('", "')'", "'por'", "'seg'", 
+		"'min'", "'hr'", "'acrescentar'", "'adicionar'", "'assar'", "'bater'", 
+		"'colocar'", "'espremer'", "'cortar'", "'ferver'", "'fatiar'", "'peneirar'", 
+		"'picar'", "'separar'", "'temperar'", "'untar'", "'mexer'", "'fritar'", 
+		"'misturar'", "'fogo'", "TITULO", "ID", "INTEIRO", "REAL", "WS", "COMENTARIO"
 	};
 	public static final int
 		RULE_receita = 0, RULE_nivel = 1, RULE_corpo_receita = 2, RULE_rendimento = 3, 
@@ -123,6 +123,7 @@ public class ReceitaParser extends Parser {
 			        TabelaMedidas.adicionarSimbolo("unidade","unidade");
 			        TabelaMedidas.adicionarSimbolo("unidades","unidades");
 			        TabelaMedidas.adicionarSimbolo("cubo","cubo");
+			        TabelaMedidas.adicionarSimbolo("cubos","cubos");
 			        TabelaMedidas.adicionarSimbolo("mL","mL");
 			        TabelaMedidas.adicionarSimbolo("L","L");
 			        TabelaIngredientes.adicionarSimbolo("mistura","mistura");
@@ -794,6 +795,7 @@ public class ReceitaParser extends Parser {
 		public TerminalNode XICARA() { return getToken(ReceitaParser.XICARA, 0); }
 		public TerminalNode LITRO() { return getToken(ReceitaParser.LITRO, 0); }
 		public TerminalNode LATA() { return getToken(ReceitaParser.LATA, 0); }
+		public TerminalNode CUBOS() { return getToken(ReceitaParser.CUBOS, 0); }
 		public Unidade_de_medidaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -813,7 +815,7 @@ public class ReceitaParser extends Parser {
 		enterRule(_localctx, 24, RULE_unidade_de_medida);
 		((Unidade_de_medidaContext)_localctx).unidade_medida =  "";
 		try {
-			setState(145);
+			setState(147);
 			switch (_input.LA(1)) {
 			case KILO:
 				enterOuterAlt(_localctx, 1);
@@ -913,24 +915,31 @@ public class ReceitaParser extends Parser {
 				((Unidade_de_medidaContext)_localctx).unidade_medida =  "cubo";
 				}
 				break;
-			case MILI_LITRO:
+			case CUBOS:
 				enterOuterAlt(_localctx, 15);
 				{
-				setState(139); match(MILI_LITRO);
+				setState(139); match(CUBOS);
+				((Unidade_de_medidaContext)_localctx).unidade_medida =  "cubos";
+				}
+				break;
+			case MILI_LITRO:
+				enterOuterAlt(_localctx, 16);
+				{
+				setState(141); match(MILI_LITRO);
 				((Unidade_de_medidaContext)_localctx).unidade_medida =  "mL";
 				}
 				break;
 			case LITRO:
-				enterOuterAlt(_localctx, 16);
+				enterOuterAlt(_localctx, 17);
 				{
-				setState(141); match(LITRO);
+				setState(143); match(LITRO);
 				((Unidade_de_medidaContext)_localctx).unidade_medida =  "L";
 				}
 				break;
 			case ID:
-				enterOuterAlt(_localctx, 17);
+				enterOuterAlt(_localctx, 18);
 				{
-				setState(143); ((Unidade_de_medidaContext)_localctx).v1 = match(ID);
+				setState(145); ((Unidade_de_medidaContext)_localctx).v1 = match(ID);
 				((Unidade_de_medidaContext)_localctx).unidade_medida =  ((Unidade_de_medidaContext)_localctx).v1.getText();
 				}
 				break;
@@ -1017,20 +1026,20 @@ public class ReceitaParser extends Parser {
 		enterRule(_localctx, 26, RULE_verbo);
 		((VerboContext)_localctx).comando =  ""; ((VerboContext)_localctx)._id = ""; ((VerboContext)_localctx)._id2 = "";
 		try {
-			setState(330);
+			setState(332);
 			switch (_input.LA(1)) {
 			case ACRESCENTAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(147); match(ACRESCENTAR);
-				setState(148); match(ABRE_PARENTESE);
-				setState(149); numero();
-				setState(150); match(VIRGULA);
-				setState(151); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(149); match(ACRESCENTAR);
+				setState(150); match(ABRE_PARENTESE);
+				setState(151); numero();
 				setState(152); match(VIRGULA);
-				setState(153); ((VerboContext)_localctx).v1 = match(ID);
-				setState(154); match(FECHA_PARENTESE);
-				setState(155); match(PONTO);
+				setState(153); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(154); match(VIRGULA);
+				setState(155); ((VerboContext)_localctx).v1 = match(ID);
+				setState(156); match(FECHA_PARENTESE);
+				setState(157); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Identificador " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1046,15 +1055,15 @@ public class ReceitaParser extends Parser {
 			case ADICIONAR:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(158); match(ADICIONAR);
-				setState(159); match(ABRE_PARENTESE);
-				setState(160); numero();
-				setState(161); match(VIRGULA);
-				setState(162); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(160); match(ADICIONAR);
+				setState(161); match(ABRE_PARENTESE);
+				setState(162); numero();
 				setState(163); match(VIRGULA);
-				setState(164); ((VerboContext)_localctx).v1 = match(ID);
-				setState(165); match(FECHA_PARENTESE);
-				setState(166); match(PONTO);
+				setState(164); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(165); match(VIRGULA);
+				setState(166); ((VerboContext)_localctx).v1 = match(ID);
+				setState(167); match(FECHA_PARENTESE);
+				setState(168); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Identificador " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1071,15 +1080,15 @@ public class ReceitaParser extends Parser {
 			case ASSAR:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(169); match(ASSAR);
-				setState(170); match(ABRE_PARENTESE);
-				setState(171); ((VerboContext)_localctx).v1 = match(ID);
-				setState(172); match(VIRGULA);
-				setState(173); numero();
+				setState(171); match(ASSAR);
+				setState(172); match(ABRE_PARENTESE);
+				setState(173); ((VerboContext)_localctx).v1 = match(ID);
 				setState(174); match(VIRGULA);
-				setState(175); unidade_de_tempo();
-				setState(176); match(FECHA_PARENTESE);
-				setState(177); match(PONTO);
+				setState(175); numero();
+				setState(176); match(VIRGULA);
+				setState(177); unidade_de_tempo();
+				setState(178); match(FECHA_PARENTESE);
+				setState(179); match(PONTO);
 
 				        if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1093,16 +1102,16 @@ public class ReceitaParser extends Parser {
 			case BATER:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(180); match(BATER);
-				setState(181); match(ABRE_PARENTESE);
-				setState(182); numero();
-				setState(183); match(VIRGULA);
-				setState(184); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(182); match(BATER);
+				setState(183); match(ABRE_PARENTESE);
+				setState(184); numero();
 				setState(185); match(VIRGULA);
-				setState(186); ((VerboContext)_localctx).v1 = match(ID);
-				setState(187); ((VerboContext)_localctx).v3 = mais_id();
-				setState(188); match(FECHA_PARENTESE);
-				setState(189); match(PONTO);
+				setState(186); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(187); match(VIRGULA);
+				setState(188); ((VerboContext)_localctx).v1 = match(ID);
+				setState(189); ((VerboContext)_localctx).v3 = mais_id();
+				setState(190); match(FECHA_PARENTESE);
+				setState(191); match(PONTO);
 
 				        if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1131,13 +1140,13 @@ public class ReceitaParser extends Parser {
 			case COLOCAR:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(192); match(COLOCAR);
-				setState(193); match(ABRE_PARENTESE);
-				setState(194); ((VerboContext)_localctx).v1 = match(ID);
-				setState(195); match(VIRGULA);
-				setState(196); ((VerboContext)_localctx).vv2 = match(ID);
-				setState(197); match(FECHA_PARENTESE);
-				setState(198); match(PONTO);
+				setState(194); match(COLOCAR);
+				setState(195); match(ABRE_PARENTESE);
+				setState(196); ((VerboContext)_localctx).v1 = match(ID);
+				setState(197); match(VIRGULA);
+				setState(198); ((VerboContext)_localctx).vv2 = match(ID);
+				setState(199); match(FECHA_PARENTESE);
+				setState(200); match(PONTO);
 
 				        if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1155,15 +1164,15 @@ public class ReceitaParser extends Parser {
 			case CORTAR:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(200); match(CORTAR);
-				setState(201); match(ABRE_PARENTESE);
-				setState(202); numero();
-				setState(203); match(VIRGULA);
-				setState(204); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(202); match(CORTAR);
+				setState(203); match(ABRE_PARENTESE);
+				setState(204); numero();
 				setState(205); match(VIRGULA);
-				setState(206); ((VerboContext)_localctx).v1 = match(ID);
-				setState(207); match(FECHA_PARENTESE);
-				setState(208); match(PONTO);
+				setState(206); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(207); match(VIRGULA);
+				setState(208); ((VerboContext)_localctx).v1 = match(ID);
+				setState(209); match(FECHA_PARENTESE);
+				setState(210); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1179,15 +1188,15 @@ public class ReceitaParser extends Parser {
 			case ESPREMER:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(211); match(ESPREMER);
-				setState(212); match(ABRE_PARENTESE);
-				setState(213); numero();
-				setState(214); match(VIRGULA);
-				setState(215); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(213); match(ESPREMER);
+				setState(214); match(ABRE_PARENTESE);
+				setState(215); numero();
 				setState(216); match(VIRGULA);
-				setState(217); ((VerboContext)_localctx).v1 = match(ID);
-				setState(218); match(FECHA_PARENTESE);
-				setState(219); match(PONTO);
+				setState(217); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(218); match(VIRGULA);
+				setState(219); ((VerboContext)_localctx).v1 = match(ID);
+				setState(220); match(FECHA_PARENTESE);
+				setState(221); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1203,15 +1212,15 @@ public class ReceitaParser extends Parser {
 			case FERVER:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(222); match(FERVER);
-				setState(223); match(ABRE_PARENTESE);
-				setState(224); numero();
-				setState(225); match(VIRGULA);
-				setState(226); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(224); match(FERVER);
+				setState(225); match(ABRE_PARENTESE);
+				setState(226); numero();
 				setState(227); match(VIRGULA);
-				setState(228); ((VerboContext)_localctx).v1 = match(ID);
-				setState(229); match(FECHA_PARENTESE);
-				setState(230); match(PONTO);
+				setState(228); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(229); match(VIRGULA);
+				setState(230); ((VerboContext)_localctx).v1 = match(ID);
+				setState(231); match(FECHA_PARENTESE);
+				setState(232); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1228,15 +1237,15 @@ public class ReceitaParser extends Parser {
 			case FATIAR:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(233); match(FATIAR);
-				setState(234); match(ABRE_PARENTESE);
-				setState(235); numero();
-				setState(236); match(VIRGULA);
-				setState(237); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(235); match(FATIAR);
+				setState(236); match(ABRE_PARENTESE);
+				setState(237); numero();
 				setState(238); match(VIRGULA);
-				setState(239); ((VerboContext)_localctx).v1 = match(ID);
-				setState(240); match(FECHA_PARENTESE);
-				setState(241); match(PONTO);
+				setState(239); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(240); match(VIRGULA);
+				setState(241); ((VerboContext)_localctx).v1 = match(ID);
+				setState(242); match(FECHA_PARENTESE);
+				setState(243); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1253,15 +1262,15 @@ public class ReceitaParser extends Parser {
 			case PENEIRAR:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(244); match(PENEIRAR);
-				setState(245); match(ABRE_PARENTESE);
-				setState(246); numero();
-				setState(247); match(VIRGULA);
-				setState(248); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(246); match(PENEIRAR);
+				setState(247); match(ABRE_PARENTESE);
+				setState(248); numero();
 				setState(249); match(VIRGULA);
-				setState(250); ((VerboContext)_localctx).v1 = match(ID);
-				setState(251); match(FECHA_PARENTESE);
-				setState(252); match(PONTO);
+				setState(250); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(251); match(VIRGULA);
+				setState(252); ((VerboContext)_localctx).v1 = match(ID);
+				setState(253); match(FECHA_PARENTESE);
+				setState(254); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1278,15 +1287,15 @@ public class ReceitaParser extends Parser {
 			case PICAR:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(255); match(PICAR);
-				setState(256); match(ABRE_PARENTESE);
-				setState(257); numero();
-				setState(258); match(VIRGULA);
-				setState(259); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(257); match(PICAR);
+				setState(258); match(ABRE_PARENTESE);
+				setState(259); numero();
 				setState(260); match(VIRGULA);
-				setState(261); ((VerboContext)_localctx).v1 = match(ID);
-				setState(262); match(FECHA_PARENTESE);
-				setState(263); match(PONTO);
+				setState(261); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(262); match(VIRGULA);
+				setState(263); ((VerboContext)_localctx).v1 = match(ID);
+				setState(264); match(FECHA_PARENTESE);
+				setState(265); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1303,16 +1312,16 @@ public class ReceitaParser extends Parser {
 			case SEPARAR:
 				enterOuterAlt(_localctx, 12);
 				{
-				setState(266); match(SEPARAR);
-				setState(267); match(ABRE_PARENTESE);
-				setState(268); numero();
-				setState(269); match(VIRGULA);
-				setState(270); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(268); match(SEPARAR);
+				setState(269); match(ABRE_PARENTESE);
+				setState(270); numero();
 				setState(271); match(VIRGULA);
-				setState(272); ((VerboContext)_localctx).v1 = match(ID);
-				setState(273); ((VerboContext)_localctx).v3 = mais_id();
-				setState(274); match(FECHA_PARENTESE);
-				setState(275); match(PONTO);
+				setState(272); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(273); match(VIRGULA);
+				setState(274); ((VerboContext)_localctx).v1 = match(ID);
+				setState(275); ((VerboContext)_localctx).v3 = mais_id();
+				setState(276); match(FECHA_PARENTESE);
+				setState(277); match(PONTO);
 
 				        if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1342,15 +1351,15 @@ public class ReceitaParser extends Parser {
 			case TEMPERAR:
 				enterOuterAlt(_localctx, 13);
 				{
-				setState(278); match(TEMPERAR);
-				setState(279); match(ABRE_PARENTESE);
-				setState(280); numero();
-				setState(281); match(VIRGULA);
-				setState(282); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(280); match(TEMPERAR);
+				setState(281); match(ABRE_PARENTESE);
+				setState(282); numero();
 				setState(283); match(VIRGULA);
-				setState(284); ((VerboContext)_localctx).v1 = match(ID);
-				setState(285); match(FECHA_PARENTESE);
-				setState(286); match(PONTO);
+				setState(284); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(285); match(VIRGULA);
+				setState(286); ((VerboContext)_localctx).v1 = match(ID);
+				setState(287); match(FECHA_PARENTESE);
+				setState(288); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1367,11 +1376,11 @@ public class ReceitaParser extends Parser {
 			case UNTAR:
 				enterOuterAlt(_localctx, 14);
 				{
-				setState(289); match(UNTAR);
-				setState(290); match(ABRE_PARENTESE);
-				setState(291); ((VerboContext)_localctx).v1 = match(ID);
-				setState(292); match(FECHA_PARENTESE);
-				setState(293); match(PONTO);
+				setState(291); match(UNTAR);
+				setState(292); match(ABRE_PARENTESE);
+				setState(293); ((VerboContext)_localctx).v1 = match(ID);
+				setState(294); match(FECHA_PARENTESE);
+				setState(295); match(PONTO);
 
 				         if(!TabelaUtensilios.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Utensílio " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1385,11 +1394,11 @@ public class ReceitaParser extends Parser {
 			case FRITAR:
 				enterOuterAlt(_localctx, 15);
 				{
-				setState(295); match(FRITAR);
-				setState(296); match(ABRE_PARENTESE);
-				setState(297); ((VerboContext)_localctx).v1 = match(ID);
-				setState(298); match(FECHA_PARENTESE);
-				setState(299); match(PONTO);
+				setState(297); match(FRITAR);
+				setState(298); match(ABRE_PARENTESE);
+				setState(299); ((VerboContext)_localctx).v1 = match(ID);
+				setState(300); match(FECHA_PARENTESE);
+				setState(301); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1403,11 +1412,11 @@ public class ReceitaParser extends Parser {
 			case MEXER:
 				enterOuterAlt(_localctx, 16);
 				{
-				setState(301); match(MEXER);
-				setState(302); match(ABRE_PARENTESE);
-				setState(303); ((VerboContext)_localctx).v1 = match(ID);
-				setState(304); match(FECHA_PARENTESE);
-				setState(305); match(PONTO);
+				setState(303); match(MEXER);
+				setState(304); match(ABRE_PARENTESE);
+				setState(305); ((VerboContext)_localctx).v1 = match(ID);
+				setState(306); match(FECHA_PARENTESE);
+				setState(307); match(PONTO);
 
 				         if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1421,16 +1430,16 @@ public class ReceitaParser extends Parser {
 			case MISTURAR:
 				enterOuterAlt(_localctx, 17);
 				{
-				setState(307); match(MISTURAR);
-				setState(308); match(ABRE_PARENTESE);
-				setState(309); numero();
-				setState(310); match(VIRGULA);
-				setState(311); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(309); match(MISTURAR);
+				setState(310); match(ABRE_PARENTESE);
+				setState(311); numero();
 				setState(312); match(VIRGULA);
-				setState(313); ((VerboContext)_localctx).v1 = match(ID);
-				setState(314); ((VerboContext)_localctx).v3 = mais_id();
-				setState(315); match(FECHA_PARENTESE);
-				setState(316); match(PONTO);
+				setState(313); ((VerboContext)_localctx).v2 = unidade_de_medida();
+				setState(314); match(VIRGULA);
+				setState(315); ((VerboContext)_localctx).v1 = match(ID);
+				setState(316); ((VerboContext)_localctx).v3 = mais_id();
+				setState(317); match(FECHA_PARENTESE);
+				setState(318); match(PONTO);
 
 				        if(!TabelaIngredientes.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Ingrediente " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1460,15 +1469,15 @@ public class ReceitaParser extends Parser {
 			case FOGO:
 				enterOuterAlt(_localctx, 18);
 				{
-				setState(319); match(FOGO);
-				setState(320); match(ABRE_PARENTESE);
-				setState(321); ((VerboContext)_localctx).v1 = match(ID);
-				setState(322); match(VIRGULA);
-				setState(323); numero();
+				setState(321); match(FOGO);
+				setState(322); match(ABRE_PARENTESE);
+				setState(323); ((VerboContext)_localctx).v1 = match(ID);
 				setState(324); match(VIRGULA);
-				setState(325); unidade_de_tempo();
-				setState(326); match(FECHA_PARENTESE);
-				setState(327); match(PONTO);
+				setState(325); numero();
+				setState(326); match(VIRGULA);
+				setState(327); unidade_de_tempo();
+				setState(328); match(FECHA_PARENTESE);
+				setState(329); match(PONTO);
 
 				         if(!TabelaUtensilios.existeSimbolo(((VerboContext)_localctx).v1.getText())){
 				             error += "Linha: "+ ((VerboContext)_localctx).v1.getLine() + " - Utensílio " + ((VerboContext)_localctx).v1.getText() + " não declarado\n";
@@ -1539,18 +1548,18 @@ public class ReceitaParser extends Parser {
 		      ((Mais_idContext)_localctx)._numero =  new ArrayList<String>();
 
 		try {
-			setState(342);
+			setState(344);
 			switch (_input.LA(1)) {
 			case VIRGULA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(332); match(VIRGULA);
-				setState(333); ((Mais_idContext)_localctx).v4 = numero();
 				setState(334); match(VIRGULA);
-				setState(335); ((Mais_idContext)_localctx).v2 = unidade_de_medida();
+				setState(335); ((Mais_idContext)_localctx).v4 = numero();
 				setState(336); match(VIRGULA);
-				setState(337); ((Mais_idContext)_localctx).v1 = match(ID);
-				setState(338); ((Mais_idContext)_localctx).v3 = mais_id();
+				setState(337); ((Mais_idContext)_localctx).v2 = unidade_de_medida();
+				setState(338); match(VIRGULA);
+				setState(339); ((Mais_idContext)_localctx).v1 = match(ID);
+				setState(340); ((Mais_idContext)_localctx).v3 = mais_id();
 
 				         _localctx.list_Ingredientes.add(((Mais_idContext)_localctx).v1.getText());
 				         _localctx.unidade_Medidas.add(((Mais_idContext)_localctx).v2.unidade_medida);
@@ -1610,14 +1619,14 @@ public class ReceitaParser extends Parser {
 		enterRule(_localctx, 30, RULE_tempo);
 		((TempoContext)_localctx)._tempo =  -1; ((TempoContext)_localctx)._unidade_Tempo =  "";
 		try {
-			setState(349);
+			setState(351);
 			switch (_input.LA(1)) {
 			case POR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(344); match(POR);
-				setState(345); numero();
-				setState(346); unidade_de_tempo();
+				setState(346); match(POR);
+				setState(347); numero();
+				setState(348); unidade_de_tempo();
 				}
 				break;
 			case EOF:
@@ -1664,26 +1673,26 @@ public class ReceitaParser extends Parser {
 		enterRule(_localctx, 32, RULE_unidade_de_tempo);
 		((Unidade_de_tempoContext)_localctx).unidade_tempo =  "";
 		try {
-			setState(357);
+			setState(359);
 			switch (_input.LA(1)) {
 			case SEGUNDO:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(351); match(SEGUNDO);
+				setState(353); match(SEGUNDO);
 				((Unidade_de_tempoContext)_localctx).unidade_tempo =  "seg";
 				}
 				break;
 			case MINUTO:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(353); match(MINUTO);
+				setState(355); match(MINUTO);
 				((Unidade_de_tempoContext)_localctx).unidade_tempo =  "min";
 				}
 				break;
 			case HORA:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(355); match(HORA);
+				setState(357); match(HORA);
 				((Unidade_de_tempoContext)_localctx).unidade_tempo =  "hr";
 				}
 				break;
@@ -1703,7 +1712,7 @@ public class ReceitaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3@\u016a\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3A\u016c\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\64\n"+
@@ -1713,7 +1722,7 @@ public class ReceitaParser extends Parser {
 		"\3\f\6\fg\n\f\r\f\16\fh\3\r\3\r\3\r\5\rn\n\r\3\r\3\r\3\16\3\16\3\16\3"+
 		"\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
 		"\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
-		"\16\3\16\3\16\5\16\u0094\n\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
+		"\16\3\16\3\16\3\16\3\16\5\16\u0096\n\16\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
@@ -1726,106 +1735,107 @@ public class ReceitaParser extends Parser {
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u014d\n\17\3\20\3\20\3\20\3\20"+
-		"\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u0159\n\20\3\21\3\21\3\21\3\21\3\21"+
-		"\5\21\u0160\n\21\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u0168\n\22\3\22\2"+
-		"\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\2\u0185\2$\3\2\2\2\4"+
-		"\63\3\2\2\2\6\65\3\2\2\2\b9\3\2\2\2\nB\3\2\2\2\fD\3\2\2\2\16I\3\2\2\2"+
-		"\20N\3\2\2\2\22X\3\2\2\2\24_\3\2\2\2\26f\3\2\2\2\30j\3\2\2\2\32\u0093"+
-		"\3\2\2\2\34\u014c\3\2\2\2\36\u0158\3\2\2\2 \u015f\3\2\2\2\"\u0167\3\2"+
-		"\2\2$%\b\2\1\2%&\7;\2\2&\'\5\4\3\2\'(\5\6\4\2()\5\b\5\2)*\b\2\1\2*\3\3"+
-		"\2\2\2+,\7\3\2\2,\64\b\3\1\2-.\7\4\2\2.\64\b\3\1\2/\60\7\5\2\2\60\64\b"+
-		"\3\1\2\61\62\7\6\2\2\62\64\b\3\1\2\63+\3\2\2\2\63-\3\2\2\2\63/\3\2\2\2"+
-		"\63\61\3\2\2\2\64\5\3\2\2\2\65\66\5\f\7\2\66\67\5\16\b\2\678\5\20\t\2"+
-		"8\7\3\2\2\29:\7\7\2\2:;\7\t\2\2;<\5\n\6\2<=\7\b\2\2=\t\3\2\2\2>?\7=\2"+
-		"\2?C\b\6\1\2@A\7>\2\2AC\b\6\1\2B>\3\2\2\2B@\3\2\2\2C\13\3\2\2\2DE\7\n"+
-		"\2\2EF\7\t\2\2FG\5\22\n\2GH\7\13\2\2H\r\3\2\2\2IJ\7\f\2\2JK\7\t\2\2KL"+
-		"\5\24\13\2LM\7\r\2\2M\17\3\2\2\2NO\7\16\2\2OP\7\t\2\2PQ\5\26\f\2QR\7\17"+
-		"\2\2R\21\3\2\2\2ST\5\30\r\2TU\7<\2\2UV\7\20\2\2VW\b\n\1\2WY\3\2\2\2XS"+
-		"\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\23\3\2\2\2\\]\7<\2\2]^\7\20\2"+
-		"\2^`\b\13\1\2_\\\3\2\2\2`a\3\2\2\2a_\3\2\2\2ab\3\2\2\2b\25\3\2\2\2cd\5"+
-		"\34\17\2de\b\f\1\2eg\3\2\2\2fc\3\2\2\2gh\3\2\2\2hf\3\2\2\2hi\3\2\2\2i"+
-		"\27\3\2\2\2jk\5\n\6\2km\5\32\16\2ln\7\21\2\2ml\3\2\2\2mn\3\2\2\2no\3\2"+
-		"\2\2op\b\r\1\2p\31\3\2\2\2qr\7\22\2\2r\u0094\b\16\1\2st\7\23\2\2t\u0094"+
-		"\b\16\1\2uv\7\24\2\2v\u0094\b\16\1\2wx\7\25\2\2x\u0094\b\16\1\2yz\7\26"+
-		"\2\2z\u0094\b\16\1\2{|\7\30\2\2|\u0094\b\16\1\2}~\7\32\2\2~\u0094\b\16"+
-		"\1\2\177\u0080\7\27\2\2\u0080\u0094\b\16\1\2\u0081\u0082\7\31\2\2\u0082"+
-		"\u0094\b\16\1\2\u0083\u0084\7\33\2\2\u0084\u0094\b\16\1\2\u0085\u0086"+
-		"\7\34\2\2\u0086\u0094\b\16\1\2\u0087\u0088\7\35\2\2\u0088\u0094\b\16\1"+
-		"\2\u0089\u008a\7\36\2\2\u008a\u0094\b\16\1\2\u008b\u008c\7\37\2\2\u008c"+
-		"\u0094\b\16\1\2\u008d\u008e\7 \2\2\u008e\u0094\b\16\1\2\u008f\u0090\7"+
-		"!\2\2\u0090\u0094\b\16\1\2\u0091\u0092\7<\2\2\u0092\u0094\b\16\1\2\u0093"+
-		"q\3\2\2\2\u0093s\3\2\2\2\u0093u\3\2\2\2\u0093w\3\2\2\2\u0093y\3\2\2\2"+
-		"\u0093{\3\2\2\2\u0093}\3\2\2\2\u0093\177\3\2\2\2\u0093\u0081\3\2\2\2\u0093"+
-		"\u0083\3\2\2\2\u0093\u0085\3\2\2\2\u0093\u0087\3\2\2\2\u0093\u0089\3\2"+
-		"\2\2\u0093\u008b\3\2\2\2\u0093\u008d\3\2\2\2\u0093\u008f\3\2\2\2\u0093"+
-		"\u0091\3\2\2\2\u0094\33\3\2\2\2\u0095\u0096\7)\2\2\u0096\u0097\7#\2\2"+
-		"\u0097\u0098\5\n\6\2\u0098\u0099\7\"\2\2\u0099\u009a\5\32\16\2\u009a\u009b"+
-		"\7\"\2\2\u009b\u009c\7<\2\2\u009c\u009d\7$\2\2\u009d\u009e\7\20\2\2\u009e"+
-		"\u009f\b\17\1\2\u009f\u014d\3\2\2\2\u00a0\u00a1\7*\2\2\u00a1\u00a2\7#"+
-		"\2\2\u00a2\u00a3\5\n\6\2\u00a3\u00a4\7\"\2\2\u00a4\u00a5\5\32\16\2\u00a5"+
-		"\u00a6\7\"\2\2\u00a6\u00a7\7<\2\2\u00a7\u00a8\7$\2\2\u00a8\u00a9\7\20"+
-		"\2\2\u00a9\u00aa\b\17\1\2\u00aa\u014d\3\2\2\2\u00ab\u00ac\7+\2\2\u00ac"+
-		"\u00ad\7#\2\2\u00ad\u00ae\7<\2\2\u00ae\u00af\7\"\2\2\u00af\u00b0\5\n\6"+
-		"\2\u00b0\u00b1\7\"\2\2\u00b1\u00b2\5\"\22\2\u00b2\u00b3\7$\2\2\u00b3\u00b4"+
-		"\7\20\2\2\u00b4\u00b5\b\17\1\2\u00b5\u014d\3\2\2\2\u00b6\u00b7\7,\2\2"+
-		"\u00b7\u00b8\7#\2\2\u00b8\u00b9\5\n\6\2\u00b9\u00ba\7\"\2\2\u00ba\u00bb"+
-		"\5\32\16\2\u00bb\u00bc\7\"\2\2\u00bc\u00bd\7<\2\2\u00bd\u00be\5\36\20"+
-		"\2\u00be\u00bf\7$\2\2\u00bf\u00c0\7\20\2\2\u00c0\u00c1\b\17\1\2\u00c1"+
-		"\u014d\3\2\2\2\u00c2\u00c3\7-\2\2\u00c3\u00c4\7#\2\2\u00c4\u00c5\7<\2"+
-		"\2\u00c5\u00c6\7\"\2\2\u00c6\u00c7\7<\2\2\u00c7\u00c8\7$\2\2\u00c8\u00c9"+
-		"\7\20\2\2\u00c9\u014d\b\17\1\2\u00ca\u00cb\7/\2\2\u00cb\u00cc\7#\2\2\u00cc"+
-		"\u00cd\5\n\6\2\u00cd\u00ce\7\"\2\2\u00ce\u00cf\5\32\16\2\u00cf\u00d0\7"+
-		"\"\2\2\u00d0\u00d1\7<\2\2\u00d1\u00d2\7$\2\2\u00d2\u00d3\7\20\2\2\u00d3"+
-		"\u00d4\b\17\1\2\u00d4\u014d\3\2\2\2\u00d5\u00d6\7.\2\2\u00d6\u00d7\7#"+
-		"\2\2\u00d7\u00d8\5\n\6\2\u00d8\u00d9\7\"\2\2\u00d9\u00da\5\32\16\2\u00da"+
-		"\u00db\7\"\2\2\u00db\u00dc\7<\2\2\u00dc\u00dd\7$\2\2\u00dd\u00de\7\20"+
-		"\2\2\u00de\u00df\b\17\1\2\u00df\u014d\3\2\2\2\u00e0\u00e1\7\60\2\2\u00e1"+
-		"\u00e2\7#\2\2\u00e2\u00e3\5\n\6\2\u00e3\u00e4\7\"\2\2\u00e4\u00e5\5\32"+
-		"\16\2\u00e5\u00e6\7\"\2\2\u00e6\u00e7\7<\2\2\u00e7\u00e8\7$\2\2\u00e8"+
-		"\u00e9\7\20\2\2\u00e9\u00ea\b\17\1\2\u00ea\u014d\3\2\2\2\u00eb\u00ec\7"+
-		"\61\2\2\u00ec\u00ed\7#\2\2\u00ed\u00ee\5\n\6\2\u00ee\u00ef\7\"\2\2\u00ef"+
-		"\u00f0\5\32\16\2\u00f0\u00f1\7\"\2\2\u00f1\u00f2\7<\2\2\u00f2\u00f3\7"+
-		"$\2\2\u00f3\u00f4\7\20\2\2\u00f4\u00f5\b\17\1\2\u00f5\u014d\3\2\2\2\u00f6"+
-		"\u00f7\7\62\2\2\u00f7\u00f8\7#\2\2\u00f8\u00f9\5\n\6\2\u00f9\u00fa\7\""+
-		"\2\2\u00fa\u00fb\5\32\16\2\u00fb\u00fc\7\"\2\2\u00fc\u00fd\7<\2\2\u00fd"+
-		"\u00fe\7$\2\2\u00fe\u00ff\7\20\2\2\u00ff\u0100\b\17\1\2\u0100\u014d\3"+
-		"\2\2\2\u0101\u0102\7\63\2\2\u0102\u0103\7#\2\2\u0103\u0104\5\n\6\2\u0104"+
-		"\u0105\7\"\2\2\u0105\u0106\5\32\16\2\u0106\u0107\7\"\2\2\u0107\u0108\7"+
-		"<\2\2\u0108\u0109\7$\2\2\u0109\u010a\7\20\2\2\u010a\u010b\b\17\1\2\u010b"+
-		"\u014d\3\2\2\2\u010c\u010d\7\64\2\2\u010d\u010e\7#\2\2\u010e\u010f\5\n"+
-		"\6\2\u010f\u0110\7\"\2\2\u0110\u0111\5\32\16\2\u0111\u0112\7\"\2\2\u0112"+
-		"\u0113\7<\2\2\u0113\u0114\5\36\20\2\u0114\u0115\7$\2\2\u0115\u0116\7\20"+
-		"\2\2\u0116\u0117\b\17\1\2\u0117\u014d\3\2\2\2\u0118\u0119\7\65\2\2\u0119"+
-		"\u011a\7#\2\2\u011a\u011b\5\n\6\2\u011b\u011c\7\"\2\2\u011c\u011d\5\32"+
-		"\16\2\u011d\u011e\7\"\2\2\u011e\u011f\7<\2\2\u011f\u0120\7$\2\2\u0120"+
-		"\u0121\7\20\2\2\u0121\u0122\b\17\1\2\u0122\u014d\3\2\2\2\u0123\u0124\7"+
-		"\66\2\2\u0124\u0125\7#\2\2\u0125\u0126\7<\2\2\u0126\u0127\7$\2\2\u0127"+
-		"\u0128\7\20\2\2\u0128\u014d\b\17\1\2\u0129\u012a\78\2\2\u012a\u012b\7"+
-		"#\2\2\u012b\u012c\7<\2\2\u012c\u012d\7$\2\2\u012d\u012e\7\20\2\2\u012e"+
-		"\u014d\b\17\1\2\u012f\u0130\7\67\2\2\u0130\u0131\7#\2\2\u0131\u0132\7"+
-		"<\2\2\u0132\u0133\7$\2\2\u0133\u0134\7\20\2\2\u0134\u014d\b\17\1\2\u0135"+
-		"\u0136\79\2\2\u0136\u0137\7#\2\2\u0137\u0138\5\n\6\2\u0138\u0139\7\"\2"+
-		"\2\u0139\u013a\5\32\16\2\u013a\u013b\7\"\2\2\u013b\u013c\7<\2\2\u013c"+
-		"\u013d\5\36\20\2\u013d\u013e\7$\2\2\u013e\u013f\7\20\2\2\u013f\u0140\b"+
-		"\17\1\2\u0140\u014d\3\2\2\2\u0141\u0142\7:\2\2\u0142\u0143\7#\2\2\u0143"+
-		"\u0144\7<\2\2\u0144\u0145\7\"\2\2\u0145\u0146\5\n\6\2\u0146\u0147\7\""+
-		"\2\2\u0147\u0148\5\"\22\2\u0148\u0149\7$\2\2\u0149\u014a\7\20\2\2\u014a"+
-		"\u014b\b\17\1\2\u014b\u014d\3\2\2\2\u014c\u0095\3\2\2\2\u014c\u00a0\3"+
-		"\2\2\2\u014c\u00ab\3\2\2\2\u014c\u00b6\3\2\2\2\u014c\u00c2\3\2\2\2\u014c"+
-		"\u00ca\3\2\2\2\u014c\u00d5\3\2\2\2\u014c\u00e0\3\2\2\2\u014c\u00eb\3\2"+
-		"\2\2\u014c\u00f6\3\2\2\2\u014c\u0101\3\2\2\2\u014c\u010c\3\2\2\2\u014c"+
-		"\u0118\3\2\2\2\u014c\u0123\3\2\2\2\u014c\u0129\3\2\2\2\u014c\u012f\3\2"+
-		"\2\2\u014c\u0135\3\2\2\2\u014c\u0141\3\2\2\2\u014d\35\3\2\2\2\u014e\u014f"+
-		"\7\"\2\2\u014f\u0150\5\n\6\2\u0150\u0151\7\"\2\2\u0151\u0152\5\32\16\2"+
-		"\u0152\u0153\7\"\2\2\u0153\u0154\7<\2\2\u0154\u0155\5\36\20\2\u0155\u0156"+
-		"\b\20\1\2\u0156\u0159\3\2\2\2\u0157\u0159\3\2\2\2\u0158\u014e\3\2\2\2"+
-		"\u0158\u0157\3\2\2\2\u0159\37\3\2\2\2\u015a\u015b\7%\2\2\u015b\u015c\5"+
-		"\n\6\2\u015c\u015d\5\"\22\2\u015d\u0160\3\2\2\2\u015e\u0160\3\2\2\2\u015f"+
-		"\u015a\3\2\2\2\u015f\u015e\3\2\2\2\u0160!\3\2\2\2\u0161\u0162\7&\2\2\u0162"+
-		"\u0168\b\22\1\2\u0163\u0164\7\'\2\2\u0164\u0168\b\22\1\2\u0165\u0166\7"+
-		"(\2\2\u0166\u0168\b\22\1\2\u0167\u0161\3\2\2\2\u0167\u0163\3\2\2\2\u0167"+
-		"\u0165\3\2\2\2\u0168#\3\2\2\2\r\63BZahm\u0093\u014c\u0158\u015f\u0167";
+		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u014f\n\17\3\20\3\20"+
+		"\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u015b\n\20\3\21\3\21\3\21"+
+		"\3\21\3\21\5\21\u0162\n\21\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u016a\n"+
+		"\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\2\u0188\2"+
+		"$\3\2\2\2\4\63\3\2\2\2\6\65\3\2\2\2\b9\3\2\2\2\nB\3\2\2\2\fD\3\2\2\2\16"+
+		"I\3\2\2\2\20N\3\2\2\2\22X\3\2\2\2\24_\3\2\2\2\26f\3\2\2\2\30j\3\2\2\2"+
+		"\32\u0095\3\2\2\2\34\u014e\3\2\2\2\36\u015a\3\2\2\2 \u0161\3\2\2\2\"\u0169"+
+		"\3\2\2\2$%\b\2\1\2%&\7<\2\2&\'\5\4\3\2\'(\5\6\4\2()\5\b\5\2)*\b\2\1\2"+
+		"*\3\3\2\2\2+,\7\3\2\2,\64\b\3\1\2-.\7\4\2\2.\64\b\3\1\2/\60\7\5\2\2\60"+
+		"\64\b\3\1\2\61\62\7\6\2\2\62\64\b\3\1\2\63+\3\2\2\2\63-\3\2\2\2\63/\3"+
+		"\2\2\2\63\61\3\2\2\2\64\5\3\2\2\2\65\66\5\f\7\2\66\67\5\16\b\2\678\5\20"+
+		"\t\28\7\3\2\2\29:\7\7\2\2:;\7\t\2\2;<\5\n\6\2<=\7\b\2\2=\t\3\2\2\2>?\7"+
+		">\2\2?C\b\6\1\2@A\7?\2\2AC\b\6\1\2B>\3\2\2\2B@\3\2\2\2C\13\3\2\2\2DE\7"+
+		"\n\2\2EF\7\t\2\2FG\5\22\n\2GH\7\13\2\2H\r\3\2\2\2IJ\7\f\2\2JK\7\t\2\2"+
+		"KL\5\24\13\2LM\7\r\2\2M\17\3\2\2\2NO\7\16\2\2OP\7\t\2\2PQ\5\26\f\2QR\7"+
+		"\17\2\2R\21\3\2\2\2ST\5\30\r\2TU\7=\2\2UV\7\20\2\2VW\b\n\1\2WY\3\2\2\2"+
+		"XS\3\2\2\2YZ\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\23\3\2\2\2\\]\7=\2\2]^\7\20"+
+		"\2\2^`\b\13\1\2_\\\3\2\2\2`a\3\2\2\2a_\3\2\2\2ab\3\2\2\2b\25\3\2\2\2c"+
+		"d\5\34\17\2de\b\f\1\2eg\3\2\2\2fc\3\2\2\2gh\3\2\2\2hf\3\2\2\2hi\3\2\2"+
+		"\2i\27\3\2\2\2jk\5\n\6\2km\5\32\16\2ln\7\21\2\2ml\3\2\2\2mn\3\2\2\2no"+
+		"\3\2\2\2op\b\r\1\2p\31\3\2\2\2qr\7\22\2\2r\u0096\b\16\1\2st\7\23\2\2t"+
+		"\u0096\b\16\1\2uv\7\24\2\2v\u0096\b\16\1\2wx\7\25\2\2x\u0096\b\16\1\2"+
+		"yz\7\26\2\2z\u0096\b\16\1\2{|\7\30\2\2|\u0096\b\16\1\2}~\7\32\2\2~\u0096"+
+		"\b\16\1\2\177\u0080\7\27\2\2\u0080\u0096\b\16\1\2\u0081\u0082\7\31\2\2"+
+		"\u0082\u0096\b\16\1\2\u0083\u0084\7\33\2\2\u0084\u0096\b\16\1\2\u0085"+
+		"\u0086\7\34\2\2\u0086\u0096\b\16\1\2\u0087\u0088\7\35\2\2\u0088\u0096"+
+		"\b\16\1\2\u0089\u008a\7\36\2\2\u008a\u0096\b\16\1\2\u008b\u008c\7\37\2"+
+		"\2\u008c\u0096\b\16\1\2\u008d\u008e\7 \2\2\u008e\u0096\b\16\1\2\u008f"+
+		"\u0090\7!\2\2\u0090\u0096\b\16\1\2\u0091\u0092\7\"\2\2\u0092\u0096\b\16"+
+		"\1\2\u0093\u0094\7=\2\2\u0094\u0096\b\16\1\2\u0095q\3\2\2\2\u0095s\3\2"+
+		"\2\2\u0095u\3\2\2\2\u0095w\3\2\2\2\u0095y\3\2\2\2\u0095{\3\2\2\2\u0095"+
+		"}\3\2\2\2\u0095\177\3\2\2\2\u0095\u0081\3\2\2\2\u0095\u0083\3\2\2\2\u0095"+
+		"\u0085\3\2\2\2\u0095\u0087\3\2\2\2\u0095\u0089\3\2\2\2\u0095\u008b\3\2"+
+		"\2\2\u0095\u008d\3\2\2\2\u0095\u008f\3\2\2\2\u0095\u0091\3\2\2\2\u0095"+
+		"\u0093\3\2\2\2\u0096\33\3\2\2\2\u0097\u0098\7*\2\2\u0098\u0099\7$\2\2"+
+		"\u0099\u009a\5\n\6\2\u009a\u009b\7#\2\2\u009b\u009c\5\32\16\2\u009c\u009d"+
+		"\7#\2\2\u009d\u009e\7=\2\2\u009e\u009f\7%\2\2\u009f\u00a0\7\20\2\2\u00a0"+
+		"\u00a1\b\17\1\2\u00a1\u014f\3\2\2\2\u00a2\u00a3\7+\2\2\u00a3\u00a4\7$"+
+		"\2\2\u00a4\u00a5\5\n\6\2\u00a5\u00a6\7#\2\2\u00a6\u00a7\5\32\16\2\u00a7"+
+		"\u00a8\7#\2\2\u00a8\u00a9\7=\2\2\u00a9\u00aa\7%\2\2\u00aa\u00ab\7\20\2"+
+		"\2\u00ab\u00ac\b\17\1\2\u00ac\u014f\3\2\2\2\u00ad\u00ae\7,\2\2\u00ae\u00af"+
+		"\7$\2\2\u00af\u00b0\7=\2\2\u00b0\u00b1\7#\2\2\u00b1\u00b2\5\n\6\2\u00b2"+
+		"\u00b3\7#\2\2\u00b3\u00b4\5\"\22\2\u00b4\u00b5\7%\2\2\u00b5\u00b6\7\20"+
+		"\2\2\u00b6\u00b7\b\17\1\2\u00b7\u014f\3\2\2\2\u00b8\u00b9\7-\2\2\u00b9"+
+		"\u00ba\7$\2\2\u00ba\u00bb\5\n\6\2\u00bb\u00bc\7#\2\2\u00bc\u00bd\5\32"+
+		"\16\2\u00bd\u00be\7#\2\2\u00be\u00bf\7=\2\2\u00bf\u00c0\5\36\20\2\u00c0"+
+		"\u00c1\7%\2\2\u00c1\u00c2\7\20\2\2\u00c2\u00c3\b\17\1\2\u00c3\u014f\3"+
+		"\2\2\2\u00c4\u00c5\7.\2\2\u00c5\u00c6\7$\2\2\u00c6\u00c7\7=\2\2\u00c7"+
+		"\u00c8\7#\2\2\u00c8\u00c9\7=\2\2\u00c9\u00ca\7%\2\2\u00ca\u00cb\7\20\2"+
+		"\2\u00cb\u014f\b\17\1\2\u00cc\u00cd\7\60\2\2\u00cd\u00ce\7$\2\2\u00ce"+
+		"\u00cf\5\n\6\2\u00cf\u00d0\7#\2\2\u00d0\u00d1\5\32\16\2\u00d1\u00d2\7"+
+		"#\2\2\u00d2\u00d3\7=\2\2\u00d3\u00d4\7%\2\2\u00d4\u00d5\7\20\2\2\u00d5"+
+		"\u00d6\b\17\1\2\u00d6\u014f\3\2\2\2\u00d7\u00d8\7/\2\2\u00d8\u00d9\7$"+
+		"\2\2\u00d9\u00da\5\n\6\2\u00da\u00db\7#\2\2\u00db\u00dc\5\32\16\2\u00dc"+
+		"\u00dd\7#\2\2\u00dd\u00de\7=\2\2\u00de\u00df\7%\2\2\u00df\u00e0\7\20\2"+
+		"\2\u00e0\u00e1\b\17\1\2\u00e1\u014f\3\2\2\2\u00e2\u00e3\7\61\2\2\u00e3"+
+		"\u00e4\7$\2\2\u00e4\u00e5\5\n\6\2\u00e5\u00e6\7#\2\2\u00e6\u00e7\5\32"+
+		"\16\2\u00e7\u00e8\7#\2\2\u00e8\u00e9\7=\2\2\u00e9\u00ea\7%\2\2\u00ea\u00eb"+
+		"\7\20\2\2\u00eb\u00ec\b\17\1\2\u00ec\u014f\3\2\2\2\u00ed\u00ee\7\62\2"+
+		"\2\u00ee\u00ef\7$\2\2\u00ef\u00f0\5\n\6\2\u00f0\u00f1\7#\2\2\u00f1\u00f2"+
+		"\5\32\16\2\u00f2\u00f3\7#\2\2\u00f3\u00f4\7=\2\2\u00f4\u00f5\7%\2\2\u00f5"+
+		"\u00f6\7\20\2\2\u00f6\u00f7\b\17\1\2\u00f7\u014f\3\2\2\2\u00f8\u00f9\7"+
+		"\63\2\2\u00f9\u00fa\7$\2\2\u00fa\u00fb\5\n\6\2\u00fb\u00fc\7#\2\2\u00fc"+
+		"\u00fd\5\32\16\2\u00fd\u00fe\7#\2\2\u00fe\u00ff\7=\2\2\u00ff\u0100\7%"+
+		"\2\2\u0100\u0101\7\20\2\2\u0101\u0102\b\17\1\2\u0102\u014f\3\2\2\2\u0103"+
+		"\u0104\7\64\2\2\u0104\u0105\7$\2\2\u0105\u0106\5\n\6\2\u0106\u0107\7#"+
+		"\2\2\u0107\u0108\5\32\16\2\u0108\u0109\7#\2\2\u0109\u010a\7=\2\2\u010a"+
+		"\u010b\7%\2\2\u010b\u010c\7\20\2\2\u010c\u010d\b\17\1\2\u010d\u014f\3"+
+		"\2\2\2\u010e\u010f\7\65\2\2\u010f\u0110\7$\2\2\u0110\u0111\5\n\6\2\u0111"+
+		"\u0112\7#\2\2\u0112\u0113\5\32\16\2\u0113\u0114\7#\2\2\u0114\u0115\7="+
+		"\2\2\u0115\u0116\5\36\20\2\u0116\u0117\7%\2\2\u0117\u0118\7\20\2\2\u0118"+
+		"\u0119\b\17\1\2\u0119\u014f\3\2\2\2\u011a\u011b\7\66\2\2\u011b\u011c\7"+
+		"$\2\2\u011c\u011d\5\n\6\2\u011d\u011e\7#\2\2\u011e\u011f\5\32\16\2\u011f"+
+		"\u0120\7#\2\2\u0120\u0121\7=\2\2\u0121\u0122\7%\2\2\u0122\u0123\7\20\2"+
+		"\2\u0123\u0124\b\17\1\2\u0124\u014f\3\2\2\2\u0125\u0126\7\67\2\2\u0126"+
+		"\u0127\7$\2\2\u0127\u0128\7=\2\2\u0128\u0129\7%\2\2\u0129\u012a\7\20\2"+
+		"\2\u012a\u014f\b\17\1\2\u012b\u012c\79\2\2\u012c\u012d\7$\2\2\u012d\u012e"+
+		"\7=\2\2\u012e\u012f\7%\2\2\u012f\u0130\7\20\2\2\u0130\u014f\b\17\1\2\u0131"+
+		"\u0132\78\2\2\u0132\u0133\7$\2\2\u0133\u0134\7=\2\2\u0134\u0135\7%\2\2"+
+		"\u0135\u0136\7\20\2\2\u0136\u014f\b\17\1\2\u0137\u0138\7:\2\2\u0138\u0139"+
+		"\7$\2\2\u0139\u013a\5\n\6\2\u013a\u013b\7#\2\2\u013b\u013c\5\32\16\2\u013c"+
+		"\u013d\7#\2\2\u013d\u013e\7=\2\2\u013e\u013f\5\36\20\2\u013f\u0140\7%"+
+		"\2\2\u0140\u0141\7\20\2\2\u0141\u0142\b\17\1\2\u0142\u014f\3\2\2\2\u0143"+
+		"\u0144\7;\2\2\u0144\u0145\7$\2\2\u0145\u0146\7=\2\2\u0146\u0147\7#\2\2"+
+		"\u0147\u0148\5\n\6\2\u0148\u0149\7#\2\2\u0149\u014a\5\"\22\2\u014a\u014b"+
+		"\7%\2\2\u014b\u014c\7\20\2\2\u014c\u014d\b\17\1\2\u014d\u014f\3\2\2\2"+
+		"\u014e\u0097\3\2\2\2\u014e\u00a2\3\2\2\2\u014e\u00ad\3\2\2\2\u014e\u00b8"+
+		"\3\2\2\2\u014e\u00c4\3\2\2\2\u014e\u00cc\3\2\2\2\u014e\u00d7\3\2\2\2\u014e"+
+		"\u00e2\3\2\2\2\u014e\u00ed\3\2\2\2\u014e\u00f8\3\2\2\2\u014e\u0103\3\2"+
+		"\2\2\u014e\u010e\3\2\2\2\u014e\u011a\3\2\2\2\u014e\u0125\3\2\2\2\u014e"+
+		"\u012b\3\2\2\2\u014e\u0131\3\2\2\2\u014e\u0137\3\2\2\2\u014e\u0143\3\2"+
+		"\2\2\u014f\35\3\2\2\2\u0150\u0151\7#\2\2\u0151\u0152\5\n\6\2\u0152\u0153"+
+		"\7#\2\2\u0153\u0154\5\32\16\2\u0154\u0155\7#\2\2\u0155\u0156\7=\2\2\u0156"+
+		"\u0157\5\36\20\2\u0157\u0158\b\20\1\2\u0158\u015b\3\2\2\2\u0159\u015b"+
+		"\3\2\2\2\u015a\u0150\3\2\2\2\u015a\u0159\3\2\2\2\u015b\37\3\2\2\2\u015c"+
+		"\u015d\7&\2\2\u015d\u015e\5\n\6\2\u015e\u015f\5\"\22\2\u015f\u0162\3\2"+
+		"\2\2\u0160\u0162\3\2\2\2\u0161\u015c\3\2\2\2\u0161\u0160\3\2\2\2\u0162"+
+		"!\3\2\2\2\u0163\u0164\7\'\2\2\u0164\u016a\b\22\1\2\u0165\u0166\7(\2\2"+
+		"\u0166\u016a\b\22\1\2\u0167\u0168\7)\2\2\u0168\u016a\b\22\1\2\u0169\u0163"+
+		"\3\2\2\2\u0169\u0165\3\2\2\2\u0169\u0167\3\2\2\2\u016a#\3\2\2\2\r\63B"+
+		"Zahm\u0095\u014e\u015a\u0161\u0169";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

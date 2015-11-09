@@ -6,7 +6,7 @@ ingredientes :
 10 unidades limoes.
 5 colheres(sopa) acucar.
 1 l cachaca.
-8 cubo gelo.
+8 cubos gelo.
  
 fim_ingredientes
 
@@ -24,7 +24,7 @@ modo_preparo :
 espremer(10, unidades, limoes).
 adicionar(5, colheres(sopa), acucar).
 adicionar(1, l, cachaca).
-adicionar(8, cubo, gelo).
+adicionar(8, cubos, gelo).
 mexer(mistura).
 
 fim_modo_preparo
