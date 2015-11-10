@@ -11,14 +11,76 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
     @Override
     public void enterReceita(ReceitaParser.ReceitaContext ctx) {
         saida.println(
-                "<html lang=' pt-BR' >\n"
+                "<!DOCTYPE html>\n"
+                + "<html lang=\"en\">\n"
                 + "<head>\n"
-                + "<meta charset=\"UTF-8\">\n"
-                + "<title>" + ctx.TITULO().getText().replaceAll("\"", " ") + " - Linguagem Receita</title>\n"
+                + "    <meta charset=\"utf-8\">\n"
+                + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+                + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+                + "    <meta name=\"description\" content=\"\">\n"
+                + "    <meta name=\"author\" content=\"\">\n"
+                + "    <title>RECEITA-CC2</title>\n"
+                + "    <!-- Bootstrap Core CSS -->\n"
+                + "    <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n"
+                + "    <!-- Custom CSS -->\n"
+                + "    <link href=\"css/scrolling-nav.css\" rel=\"stylesheet\">\n"
                 + "</head>\n"
-                + "<body>\n"
-                + "<!-- O seu HTML vem aqui! -->\n"
-                + "<h1>" + ctx.TITULO().getText().replaceAll("\"", " ") + " - (" + ctx.nivel().nome_nivel + ")</h1>");
+                + "\n"
+                + "<body id=\"page-top\" data-spy=\"scroll\" data-target=\".navbar-fixed-top\">\n"
+                + "\n"
+                + "    <!-- jQuery -->\n"
+                + "    <script src=\"js/jquery.js\"></script>\n"
+                + "    <!-- Bootstrap Core JavaScript -->\n"
+                + "    <script src=\"js/bootstrap.min.js\"></script>\n"
+                + "    <!-- Scrolling Nav JavaScript -->\n"
+                + "    <script src=\"js/jquery.easing.min.js\"></script>\n"
+                + "    <script src=\"js/scrolling-nav.js\"></script>\n"
+                + "    <!-- Navigation -->\n"
+                + "    <nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\n"
+                + "        <div class=\"container\">\n"
+                + "            <div class=\"navbar-header page-scroll\">\n"
+                + "                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-ex1-collapse\">\n"
+                + "                    <span class=\"sr-only\">Toggle navigation</span>\n"
+                + "                    <span class=\"icon-bar\"></span>\n"
+                + "                    <span class=\"icon-bar\"></span>\n"
+                + "                    <span class=\"icon-bar\"></span>\n"
+                + "                </button>\n"
+                + "                <a class=\"navbar-brand page-scroll\" href=\"#page-top\">" + ctx.TITULO().getText().replaceAll("\"", " ") + "</a>\n"
+                + "            </div>\n"
+                + "            <!-- Collect the nav links, forms, and other content for toggling -->\n"
+                + "            <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n"
+                + "                <ul class=\"nav navbar-nav\" style=\" float:right\">\n"
+                + "                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->\n"
+                + "                    <li class=\"hidden\">\n"
+                + "                        <a class=\"page-scroll\" href=\"#page-top\"></a>\n"
+                + "                    </li>\n"
+                + "                    <li>\n"
+                + "                        <a class=\"page-scroll\" href=\"#about\"> Ingredientes </a>\n"
+                + "                    </li>\n"
+                + "                    <li>\n"
+                + "                        <a class=\"page-scroll\" href=\"#services\">Modo de Preparo</a>\n"
+                + "                    </li>\n"
+                + "                    <li>\n"
+                + "                        <a class=\"page-scroll\" href=\"#contact\">Rendimento</a>\n"
+                + "                    </li>\n"
+                + "                </ul>\n"
+                + "            </div>\n"
+                + "            <!-- /.navbar-collapse -->\n"
+                + "        </div>\n"
+                + "        <!-- /.container -->\n"
+                + "    </nav>"
+                + "<!-- Intro Section -->\n"
+                + "    <section id=\"intro\" class=\"intro-section\">\n"
+                + "        <div class=\"container\">\n"
+                + "            <div class=\"row\">\n"
+                + "                <div class=\"col-lg-12\">\n"
+                + "                    <h1>" + ctx.TITULO().getText().replaceAll("\"", " ") + "</h1>\n"
+                + "                    <a class=\"btn btn-default page-scroll\" href=\"#about\">Ver receita!</a>\n"
+                + "                </div>\n"
+                + "            </div>\n"
+                + "        </div>\n"
+                + "    </section>"
+        );
 
     }
 
@@ -31,8 +93,22 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
 
     @Override
     public void enterIngredientes(ReceitaParser.IngredientesContext ctx) {
-        saida.println("<h2> Lista de Ingredientes </h2>");
+        saida.println("<!-- About Section -->\n"
+                + "    <section id=\"about\" class=\"about-section\">\n"
+                + "        <div class=\"container\">\n"
+                + "            <div class=\"row\">\n"
+                + "                <div class=\"col-lg-12\">\n"
+                + "                    <h1>Ingredientes</h1>\n"
+                + "                </div>\n");
 
+    }
+
+    @Override
+    public void exitIngredientes(ReceitaParser.IngredientesContext ctx) {
+
+        saida.println("</div>\n"
+                + "        </div>\n"
+                + "    </section>");
     }
 
     @Override
@@ -53,17 +129,45 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
 
     @Override
     public void enterPreparo(ReceitaParser.PreparoContext ctx) {
-        saida.println("<h2> Modo de Preparo </h2>");
+        saida.println("<!-- Services Section -->\n"
+                + "    <section id=\"services\" class=\"services-section\">\n"
+                + "        <div class=\"container\">\n"
+                + "            <div class=\"row\">\n"
+                + "                <div class=\"col-lg-12\">\n"
+                + "                    <h1>Modo de Preparo</h1>\n"
+                + "                </div>");
+    }
+
+    @Override
+    public void exitPreparo(ReceitaParser.PreparoContext ctx) {
+        saida.println("   </div>\n"
+                + "        </div>\n"
+                + "    </section>");
     }
 
     @Override
     public void enterRendimento(ReceitaParser.RendimentoContext ctx) {
+        saida.println("<!-- Contact Section -->\n"
+                + "    <section id=\"contact\" class=\"contact-section\">\n"
+                + "        <div class=\"container\">\n"
+                + "            <div class=\"row\">\n"
+                + "                <div class=\"col-lg-12\">\n"
+                + "                    <h1>Rendimento</h1>\n"
+                + "                </div>");
         float rendi = Float.valueOf(ctx.numero().qnt_numero);
-        if(rendi <= 1.0)
-            saida.println("<h2> Rendimento </h2> <p>" + ctx.numero().qnt_numero + " porcao </p>");
-        else
-            saida.println("<h2> Rendimento </h2> <p>" + ctx.numero().qnt_numero + " porcoes </p>");
+        if (rendi <= 1.0) {
+            saida.println("<p>" + ctx.numero().qnt_numero + " porcao </p>");
+        } else {
+            saida.println("<p>" + ctx.numero().qnt_numero + " porcoes </p>");
+        }
 
+    }
+
+    @Override
+    public void exitRendimento(ReceitaParser.RendimentoContext ctx) {
+        saida.println("  </div>\n"
+                + "        </div>\n"
+                + "    </section>");
     }
 
     @Override
