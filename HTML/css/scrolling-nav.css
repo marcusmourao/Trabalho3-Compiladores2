@@ -14,6 +14,10 @@ html {
     height: 100%;
 }
 
+h1 {
+	text-align: center;
+}
+
 @media(min-width:767px) {
     .navbar {
         padding: 20px 0;
@@ -32,29 +36,64 @@ The padding is very important to make sure the scrollspy picks up the right area
 of those sections to manage the look and feel of the site. */
 
 .intro-section {
-    height: 100%;
+	height:100%;
     padding-top: 150px;
     text-align: center;
     background: #fff;
 }
 
 .about-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
-}
-
-.services-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
+	height:100%;
+    padding-top: 50px;
+    text-align: left;
     background: #fff;
 }
 
+.services-section {
+	height:100%;
+    padding-top: 50px;
+    text-align: left;
+    background: #fff;
+
+}
+
 .contact-section {
-    height: 100%;
-    padding-top: 150px;
+	height:100%;
+    padding-top: 50px;
     text-align: center;
     background: #eee;
+
+}
+
+.border-blue{
+	border-radius: 25px;
+    border: 2px solid #00c0ef;
+    padding: 20px;
+    width: 75%;
+    margin: auto;	
+    
+}
+.border-yellow{
+	border-radius: 25px;
+    border: 2px solid #f39c12;
+    padding: 20px;
+    width: 75%;
+    margin: auto;
+}
+
+.border-green{
+	border-radius: 25px;
+    border: 2px solid green;
+    padding: 20px;
+    width: 75%;
+    margin: auto;
+}
+
+.pd-top{
+	margin-top: 50px;
+	margin-bottom: 25px;
+}
+
+.margin-style{
+	margin: 15px;
 }
