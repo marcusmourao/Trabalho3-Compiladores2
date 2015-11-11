@@ -19,7 +19,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
                 + "    <meta name=\"description\" content=\"\">\n"
                 + "    <meta name=\"author\" content=\"\">\n"
-                + "    <title>RECEITA-CC2</title>\n"
+                + "    <title>" + ctx.TITULO().getText().replaceAll("\"", " ") + "</title>\n"
                 + "    <!-- Bootstrap Core CSS -->\n"
                 + "    <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n"
                 + "    <!-- Custom CSS -->\n"
@@ -45,7 +45,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "                    <span class=\"icon-bar\"></span>\n"
                 + "                    <span class=\"icon-bar\"></span>\n"
                 + "                </button>\n"
-                + "                <a class=\"navbar-brand page-scroll\" href=\"#page-top\">" + ctx.TITULO().getText().replaceAll("\"", " ") + "</a>\n"
+                + "                <a class=\"navbar-brand page-scroll\" href=\"#page-top\">" + "RECEITAS.CC2" + "</a>\n"
                 + "            </div>\n"
                 + "            <!-- Collect the nav links, forms, and other content for toggling -->\n"
                 + "            <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n"
@@ -77,7 +77,7 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "                    <h1>" + ctx.TITULO().getText().replaceAll("\"", " ") + "</h1>"
                 + "                    <h3> (" + ctx.nivel().nome_nivel + ")</h3>"
                 + "<div style=\"float:center\"> <img src=\"images\\Logo.png\" width=\"40%\"/> </div>"
-                + "                    <a class=\"btn btn-default page-scroll\" href=\"#about\">Ver receita!</a>\n"
+                + "                    <a class=\"btn btn-default page-scroll pd-top\" href=\"#about\">Ver receita!</a>\n"
                 + "                </div>\n"
                 + "            </div>\n"
                 + "        </div>\n"
@@ -99,16 +99,19 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "    <section id=\"about\" class=\"about-section\">\n"
                 + "        <div class=\"container\">\n"
                 + "            <div class=\"row\">\n"
-                + "                <div class=\"col-lg-12\">\n"
+                + "                <div class=\"\">\n"
                 + "                    <h1>Ingredientes</h1>\n"
-                + "                </div>\n");
+                + "                </div>"
+                + "                </div>\n"
+                + "                <div class=\"border-yellow\">");
 
     }
 
     @Override
     public void exitIngredientes(ReceitaParser.IngredientesContext ctx) {
 
-        saida.println("</div>\n"
+        saida.println("                </div>"
+                + "</div>\n"
                 + "        </div>\n"
                 + "    </section>");
     }
@@ -135,14 +138,16 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "    <section id=\"services\" class=\"services-section\">\n"
                 + "        <div class=\"container\">\n"
                 + "            <div class=\"row\">\n"
-                + "                <div class=\"col-lg-12\">\n"
+                + "                <div class=\"\">\n"
                 + "                    <h1>Modo de Preparo</h1>\n"
-                + "                </div>");
+                + "                </div>"
+                + "                <div class=\"border-blue\">");
     }
 
     @Override
     public void exitPreparo(ReceitaParser.PreparoContext ctx) {
         saida.println("   </div>\n"
+                + "        </div>\n"
                 + "        </div>\n"
                 + "    </section>");
     }
@@ -155,7 +160,9 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
                 + "            <div class=\"row\">\n"
                 + "                <div class=\"col-lg-12\">\n"
                 + "                    <h1>Rendimento</h1>\n"
-                + "                </div>");
+                + "                </div>"
+                + "                <div class=\"border-green\">");
+
         float rendi = Float.valueOf(ctx.numero().qnt_numero);
         if (rendi <= 1.0) {
             saida.println("<p>" + ctx.numero().qnt_numero + " porcao </p>");
@@ -168,6 +175,8 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
     @Override
     public void exitRendimento(ReceitaParser.RendimentoContext ctx) {
         saida.println("  </div>\n"
+                + "<a class=\"btn btn-default page-scroll pd-top\" href=\"#page-top\">Voltar ao topo</a>"
+                + "        </div>\n"
                 + "        </div>\n"
                 + "    </section>");
     }

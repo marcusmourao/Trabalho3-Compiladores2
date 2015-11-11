@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RECEITA-CC2</title>
+    <title> Omelete </title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top"> Caipirinha </a>
+                <a class="navbar-brand page-scroll" href="#page-top">RECEITAS.CC2</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -60,7 +60,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1> Caipirinha </h1>                    <h3> (iniciante)</h3><div style="float:center"> <img src="images\Logo.png" width="40%"/> </div>                    <a class="btn btn-default page-scroll" href="#about">Ver receita!</a>
+                    <h1> Omelete </h1>                    <h3> (iniciante)</h3><div style="float:center"> <img src="images\Logo.png" width="40%"/> </div>                    <a class="btn btn-default page-scroll pd-top" href="#about">Ver receita!</a>
                 </div>
             </div>
         </div>
@@ -69,30 +69,35 @@
     <section id="about" class="about-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="">
                     <h1>Ingredientes</h1>
-                </div>
-
-<p>10 limoes</p>
-<p>5 colheres(sopa) de acucar</p>
-<p>1 L de cachaca</p>
-<p>8 cubos de gelo</p>
-</div>
+                </div>                </div>
+                <div class="border-yellow">
+<p>2 ovos</p>
+<p>0.5 colher(cha) de sal</p>
+<p>100 g de presunto</p>
+<p>100 g de mussarela</p>
+<p>0.5 colher(cha) de oregano</p>
+                </div></div>
         </div>
     </section>
 <!-- Services Section -->
     <section id="services" class="services-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="">
                     <h1>Modo de Preparo</h1>
-                </div>
-<p> Esprema 10 limoes</p>
-<p> Adicione 5 colheres(sopa) de acucar</p>
-<p> Adicione 1 L de cachaca</p>
-<p> Adicione 8 cubos de gelo</p>
-<p> Mexa a mistura</p>
+                </div>                <div class="border-blue">
+<p> Bata 2 ovos
+</p>
+<p> Unte uma frigideira</p>
+<p> Adicione 0.5 colher(cha) de sal</p>
+<p> Fatie 100 g de presunto</p>
+<p> Fatie 100 g de mussarela</p>
+<p> Coloque a mistura na frigideira</p>
+<p> Frite a mistura</p>
    </div>
+        </div>
         </div>
     </section>
 <!-- Contact Section -->
@@ -101,9 +106,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Rendimento</h1>
-                </div>
-<p>5 porcoes </p>
+                </div>                <div class="border-green">
+<p>1 porcao </p>
   </div>
+<a class="btn btn-default page-scroll pd-top" href="#page-top">Voltar ao topo</a>        </div>
         </div>
     </section>
 </body>
