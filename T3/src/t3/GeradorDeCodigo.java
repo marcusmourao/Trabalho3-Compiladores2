@@ -3,9 +3,11 @@ package t3;
 public class GeradorDeCodigo extends ReceitaBaseListener {
 
     SaidaParser saida;
+    //int tempo_total;
 
     public GeradorDeCodigo(SaidaParser saida) {
         this.saida = saida;
+        //this.tempo_total=0;
     }
 
     @Override
@@ -169,6 +171,8 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
         } else {
             saida.println("<p>" + ctx.numero().qnt_numero + " porcoes </p>");
         }
+        
+        //saida.println("<p> Tempo de preparo: " + tempo_total + "minutos </p>");
 
     }
 
@@ -183,6 +187,11 @@ public class GeradorDeCodigo extends ReceitaBaseListener {
 
     @Override
     public void enterVerbo(ReceitaParser.VerboContext ctx) {
+        
+        
+       
+        //if( !ctx._tempo.equals("0"))
+            //tempo_total += Integer.parseInt(ctx._tempo);
 
         if (ctx.comando.equals("acrescentar")) {
             if (ctx.unidade_de_medida().unidade_medida.equals("unidade") || ctx.unidade_de_medida().unidade_medida.equals("unidades")) {
