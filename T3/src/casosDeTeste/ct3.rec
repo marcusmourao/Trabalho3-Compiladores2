@@ -12,9 +12,6 @@ fim_ingredientes
 
 utensilios :
 
-copo.
-espremedor.
-colher.
 jarra.
 
 fim_utensilios
@@ -26,6 +23,7 @@ adicionar(5, colheres(sopa), acucar).
 adicionar(1, l, cachaca).
 adicionar(8, cubos, gelo).
 mexer(mistura).
+colocar(mistura, jarra).
 
 fim_modo_preparo
 

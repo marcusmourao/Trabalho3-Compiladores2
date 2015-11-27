@@ -1,0 +1,2 @@
+Linha: 18 - Identificador colher já declarado
+Fim da compilacao

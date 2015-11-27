@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title> Caipirinha </title>
+    <title> Bolo de Laranja </title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -60,7 +60,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1> Caipirinha </h1>                    <h3> (iniciante)</h3><div style="float:center"> <img src="images\Logo.png" width="40%"/> </div>                    <a class="btn btn-default page-scroll pd-top" href="#about">Ver receita!</a>
+                    <h1> Bolo de Laranja </h1>                    <h3> (iniciante)</h3><div style="float:center"> <img src="images\Logo.png" width="40%"/> </div>                    <a class="btn btn-default page-scroll pd-top" href="#about">Ver receita!</a>
                 </div>
             </div>
         </div>
@@ -73,10 +73,12 @@
                     <h1>Ingredientes</h1>
                 </div>                </div>
                 <div class="border-yellow">
-<p>10 limoes</p>
-<p>5 colheres(sopa) de acucar</p>
-<p>1 L de cachaca</p>
-<p>8 cubos de gelo</p>
+<p>3 laranjas</p>
+<p>3 xicaras(cha) de farinha</p>
+<p>1 colher(sopa) de fermento</p>
+<p>1 xicara(cha) de acucar</p>
+<p>0.5 copo(americano) de oleo</p>
+<p>3 ovos</p>
                 </div></div>
         </div>
     </section>
@@ -87,11 +89,22 @@
                 <div class="">
                     <h1>Modo de Preparo</h1>
                 </div>                <div class="border-blue">
-<p> Esprema 10 limoes</p>
-<p> Adicione 5 colheres(sopa) de acucar</p>
-<p> Adicione 1 L de cachaca</p>
-<p> Adicione 8 cubos de gelo</p>
-<p> Mexa a mistura</p>
+<p> Bata 3 ovos
+</p>
+<p> Esprema 3 laranjas</p>
+<p> Bata 3 ovos
+ com 3 laranjas </p>
+<p> Bata a mistura 
+ com 1 xicara(cha) de acucar </p>
+<p> Bata a mistura 
+ com 0.5 copo(americano) de oleo </p>
+<p> Bata a mistura 
+ com 3 xicara(cha) de farinha </p>
+<p> Bata a mistura 
+ com 1 colher(sopa) de fermento </p>
+<p> Unte uma forma</p>
+<p> Coloque a mistura na forma</p>
+<p> Leve a forma ao forno por 40 min</p>
    </div>
         </div>
         </div>
@@ -103,7 +116,7 @@
                 <div class="col-lg-12">
                     <h1>Rendimento</h1>
                 </div>                <div class="border-green">
-<p>5 porcoes </p>
+<p>15 porcoes </p>
   </div>
 <a class="btn btn-default page-scroll pd-top" href="#page-top">Voltar ao topo</a>        </div>
         </div>

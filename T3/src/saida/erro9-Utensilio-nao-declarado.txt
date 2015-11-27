@@ -1,0 +1,4 @@
+Linha: 35 - Utensílio forma não declarado
+Linha: 36 - Utenselio "forma" não declarado
+Linha: 37 - Utensílio forma não declarado
+Fim da compilacao

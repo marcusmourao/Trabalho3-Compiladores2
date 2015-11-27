@@ -94,6 +94,7 @@ COMENTARIO : '{' ~('\n'|'\r'|'\t')* '\r'? '\n'? '}'('\n'('\n'|'\t'))* {skip();};
 //Raiz do programa
 receita:
        {
+        //inicialização das unidades de medida válidas
         TabelaMedidas.adicionarSimbolo("kg","kg");
         TabelaMedidas.adicionarSimbolo("g","g");
         TabelaMedidas.adicionarSimbolo("lata","lata");
@@ -111,6 +112,7 @@ receita:
         TabelaMedidas.adicionarSimbolo("cubos","cubos");
         TabelaMedidas.adicionarSimbolo("mL","mL");
         TabelaMedidas.adicionarSimbolo("L","L");
+        //inicialização dos "ingredientes": "mistura" e "todos_ingredientes"
         TabelaIngredientes.adicionarSimbolo("mistura","mistura");
         TabelaIngredientes.adicionarSimbolo("todos_ingredientes","todos_ingredientes");
 
@@ -120,6 +122,7 @@ receita:
        ;
 
 nivel returns[ String nome_nivel]
+//regra retorna o nível da receita
 @init{ $nome_nivel = "";}
      : INICIANTE {$nome_nivel = "iniciante";}
      | INTERMEDIARIO {$nome_nivel = "intermediario";}
@@ -132,6 +135,7 @@ corpo_receita: ingredientes utensilios preparo ;
 rendimento: RENDIMENTO DOIS_PONTOS numero FIM_RENDIMENTO ;
 
 numero returns[ String qnt_numero]
+//regra retorna um número (real/inteiro)
 @init{$qnt_numero = "";}
     : v1=INTEIRO {$qnt_numero = $v1.getText();}
     | v2=REAL {$qnt_numero = $v2.getText();}
@@ -149,37 +153,34 @@ lista_ingredientes returns[ List<String> list_Ingredientes, List<String> unidade
       $unidade_Medidas = new ArrayList<String>();
       $_numero = new ArrayList<String>(); 
 }
-    : ( v2=quantidade v1=ID PONTO {
+    : ( v2=quantidade v1=ID PONTO 
+    {
+        if(!TabelaIngredientes.existeSimbolo($v1.getText())){
+            TabelaIngredientes.adicionarSimbolo($v1.getText(), $v2._unidade_medida);
+        }
+        else{
+            error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
+        }
                                    
-                                   if(!TabelaIngredientes.existeSimbolo($v1.getText())){
-                                         TabelaIngredientes.adicionarSimbolo($v1.getText(), $v2._unidade_medida);
-                                   }
-                                   else{
-                                        error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
-                                   }
-                                   
-                                   $list_Ingredientes.add($v1.getText()); 
-                                   $unidade_Medidas.add($v2._unidade_medida);
-                                   $_numero.add($v2._quantidade);
-                                   
-                                   
-                                  } )+ ;           
+        $list_Ingredientes.add($v1.getText()); 
+        $unidade_Medidas.add($v2._unidade_medida);
+        $_numero.add($v2._quantidade);
+     } )+ ;           
 
 lista_utensilios returns[ List<String> list_Utensilios]
 @init{$list_Utensilios = new ArrayList<String>();}
-    : (v1=ID PONTO {
-                                   
-                                   if(!TabelaUtensilios.existeSimbolo($v1.getText())){
-                                         TabelaUtensilios.adicionarSimbolo($v1.getText(), "utensilio");
-                                   }
-                                   else{
-                                        error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
-                                   }
-                                   
-                                   
-                                  } )+ ;
+    : (v1=ID PONTO 
+    {
+        if(!TabelaUtensilios.existeSimbolo($v1.getText())){
+            TabelaUtensilios.adicionarSimbolo($v1.getText(), "utensilio");
+        }
+        else{
+            error += "Linha: "+ $v1.getLine() + " - Identificador " + $v1.getText() + " já declarado\n";
+        }
+     } )+ ;
 
 procedimento returns[String comando]
+//regra retorna o nome do comando
 @init{$comando="";}
     : (v1=verbo{$comando=$v1.comando;})+ ;
 
@@ -193,6 +194,7 @@ quantidade returns[String _quantidade, String _unidade_medida]
     ;
 
 unidade_de_medida returns[ String unidade_medida]
+//regra retorna a unidade de medida
 @init {$unidade_medida = "";}
     : KILO {$unidade_medida = "kg";}
     |GRAMA {$unidade_medida = "g";}
@@ -215,6 +217,9 @@ unidade_de_medida returns[ String unidade_medida]
     ;
 
 verbo returns[String comando, String _id, String _id2]
+/* Para a maioria dos verbos verificamos se o identificador já foi declarado e se a unidade de medida é válida.
+   Alguns verbos recebem utensílios ao invés de ingredientes. Fazemos a verificação se o parâmetro é correto (Ingrediente/Utensílio).
+*/
 @init{$comando = ""; $_id=""; $_id2="";}
     :
        ACRESCENTAR ABRE_PARENTESE numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID FECHA_PARENTESE PONTO
@@ -277,9 +282,9 @@ verbo returns[String comando, String _id, String _id2]
        {
         if(!TabelaIngredientes.existeSimbolo($v1.getText())){
              error += "Linha: "+ $v1.getLine() + " - Ingrediente " + $v1.getText() + " não declarado\n";
-         }
+   }
         if(!TabelaUtensilios.existeSimbolo($vv2.getText())){
-             error += "Linha: "+ $v1.getLine() + " - Utenselio \"" + $vv2.getText() + "\" não declarado\n";
+             error += "Linha: "+ $v1.getLine() + " - Utensílio " + $vv2.getText() + " não declarado\n";
          }
          $comando = "colocar";
          $_id=$v1.getText();
@@ -463,14 +468,11 @@ mais_id returns[ List<String> list_Ingredientes, List<String> unidade_Medidas, L
       $unidade_Medidas = new ArrayList<String>();
       $_numero = new ArrayList<String>();
 }
-    : VIRGULA v4=numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID v3=mais_id
+    : VIRGULA v4=numero VIRGULA v2=unidade_de_medida VIRGULA v1=ID
       {
          $list_Ingredientes.add($v1.getText());
          $unidade_Medidas.add($v2.unidade_medida);
          $_numero.add($v4.qnt_numero);
-         $list_Ingredientes.addAll($v3.list_Ingredientes);
-         $unidade_Medidas.addAll($v3.unidade_Medidas);
-         $_numero.addAll($v3._numero);
       }
     |
     ;
@@ -482,6 +484,7 @@ tempo returns [int _tempo, String _unidade_Tempo]
 ;
 
 unidade_de_tempo returns [String unidade_tempo]
+// regra retorna a unidade de tempo
 @init {$unidade_tempo = "";}
     : SEGUNDO {$unidade_tempo = "seg";}
     | MINUTO {$unidade_tempo = "min";}

@@ -1,0 +1,2 @@
+Linha: 7 - Identificador laranjas já declarado
+Fim da compilacao

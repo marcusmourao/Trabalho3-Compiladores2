@@ -1,0 +1,47 @@
+"Bolo de Laranja"
+iniciante
+
+ingredientes :
+
+3? unidade laranjas.
+3 xicaras(cha) de farinha.
+1 colher(sopa) de fermento.
+1 xicara(cha) de acucar.
+0.5 copo(americano) de oleo.
+3 unidades ovos.
+
+fim_ingredientes
+
+utensilios :
+
+colher.  
+tigela.
+liquidificador.
+espremedor.
+batedeira.
+forma.
+forno.
+
+fim_utensilios
+
+modo_preparo :
+
+bater(3, unidades, ovos). 
+espremer (3, unidades, laranjas).
+bater (3, unidades, ovos, 3, unidades, laranjas).
+bater (1, unidade, mistura, 1, xicara(cha), acucar).
+bater (1, unidade, mistura, 0.5, copo(americano), oleo).
+bater (1, unidade, mistura, 3, xicara(cha), farinha).
+bater(1, unidade, mistura, 1, colher(sopa), fermento).
+untar(forma).
+colocar(mistura, forma).
+fogo(forma, 40, min).
+
+fim_modo_preparo
+
+rendimento : 
+
+15
+
+fim_rendimento
+

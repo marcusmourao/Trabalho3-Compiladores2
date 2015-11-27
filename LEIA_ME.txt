@@ -1,4 +1,4 @@
-Construção de Compiladores 2 - Trabalho 1
+Construção de Compiladores 2 - Trabalho 3
 
 Grupo 2:
 Bruno Afonso Teixeira dos Santos - 379387
@@ -6,9 +6,33 @@ Eduardo Fernando Stenico - 379352
 Fernando Messias da Silva - 489450
 Marcus Marangon Mourão - 551740
 
-Execute o CorretorTrabalho1.jar por linha de comando passando os parâmetros adequados, o arquivo T1.jar (nosso programa) está localizado em T1\dist\T1.jar. Os casos de testes estao localizados em casosDeTesteT1.
-
 
 Utilizamos o NetBeans 7.4 como ambiente de desenvolvimento e a biblioteca antlr 4.5.1.complete.
-Este .zip é um projeto do NetBeans,  para compila-lo você pode gerar os arquivos "LA.tokens", "LABaseListener.java", "LALexer.java", "LALexer.tokens", "LAListener.java", "LAParser.java" por meio de um plugin do ANTLR no próprio NetBeans ou utilizar a ferramenta ANTLR Works (todos os arquivos devem pertencer ao "package t1").
+Este .zip é um projeto do NetBeans,  para compila-lo você pode gerar os arquivos "Receita.tokens", "ReceitaBaseListener.java", "ReceitaLexer.java", "ReceitaLexer.tokens", "ReceitaListener.java", "ReceitaParser.java" por meio de um plugin do ANTLR no próprio NetBeans ou utilizar a ferramenta ANTLR Works (todos os arquivos devem pertencer ao "package t3").
 
+
+Para executarmos o compilador utilize o NetBeans. Na classe TestaAnalizador.java:
+    na linha 17 informamos o diretório do arquivo .rec.
+    na linha 34 informamos o diretório do arquivo .html que deverá ser gerado.
+    na linha 46 informamos o diretório do arquivo .txt que informa o erro.
+
+
+Nome dos arquivos para os casos de teste sem extensão:
+    * ct1
+    * ct2
+    * ct3
+    * erro1-Simbolo-nao-identificado
+    * erro2-Comentario-nao-fechado
+    * erro3-sintatico
+    * erro4-sintatico
+    * erro5-sintatico
+    * erro6-Identificador-ja-declarado
+    * erro7-Identificador-ja-declarado
+    * erro8-Ingrediente-nao-declarado
+    * erro9-Utensilio-nao-declarado
+
+
+Localização dos arquivos:
+    * Arquivos .html gerados: raiz/HTML
+    * Arquivos casos de teste: raiz/T3/src/casosDeTeste
+    * Arquivos saída gerada: raiz/T3/src/saida
