@@ -14,8 +14,8 @@ public class TestaAnalisador {
 
     public static void main(String args[]) throws IOException, RecognitionException {
         SaidaParser out = new SaidaParser();
-        ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct3.rec"));
-        //ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(args[0]));
+        //ANTLRInputStream input = new ANTLRInputStream(TestaAnalisador.class.getResourceAsStream("../casosDeTeste/ct3.rec"));
+        ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(args[0]));
         ReceitaLexer lexer = new ReceitaLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ReceitaParser parser = new ReceitaParser(tokens);
@@ -31,7 +31,9 @@ public class TestaAnalisador {
             ReceitaParser.ReceitaContext raiz = parser.receita();
             ParseTreeWalker ptw = new ParseTreeWalker();
             ptw.walk(gdc, raiz);
-            PrintWriter pw = new PrintWriter(new File("../HTML/ct3.html"));
+           PrintWriter pw = new PrintWriter(new File(args[1]));
+
+           // PrintWriter pw = new PrintWriter(new File("../HTML/ct3.html"));
             pw.print(out.toString());
             pw.flush();
             pw.close();
@@ -43,7 +45,8 @@ public class TestaAnalisador {
             }
         }
 
-        PrintWriter pr = new PrintWriter(new File("src/saida/ct3.txt"));
+        //PrintWriter pr = new PrintWriter(new File("src/saida/ct1.txt"));
+        PrintWriter pr = new PrintWriter(new File(args[2]));
         pr.print(out.toString());
         pr.flush();
         pr.close();

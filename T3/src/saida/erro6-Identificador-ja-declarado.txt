@@ -1,2 +1,2 @@
-Linha: 7 - Identificador laranjas j√° declarado
+Linha: 7 - Identificador laranjas j· declarado
 Fim da compilacao

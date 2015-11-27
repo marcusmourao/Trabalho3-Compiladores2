@@ -1,4 +1,4 @@
-Linha: 35 - Utens√≠lio forma n√£o declarado
-Linha: 36 - Utenselio "forma" n√£o declarado
-Linha: 37 - Utens√≠lio forma n√£o declarado
+Linha: 35 - UtensÌlio forma n„o declarado
+Linha: 36 - UtensÌlio forma n„o declarado
+Linha: 37 - UtensÌlio forma n„o declarado
 Fim da compilacao

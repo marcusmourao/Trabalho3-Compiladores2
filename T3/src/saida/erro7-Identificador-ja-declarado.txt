@@ -1,2 +1,2 @@
-Linha: 18 - Identificador colher j√° declarado
+Linha: 18 - Identificador colher j· declarado
 Fim da compilacao
